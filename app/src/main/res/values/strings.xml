@@ -7,7 +7,7 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Sign out</string>
 
-    <string name="menu_profile">Profile</string>
+    <string name="menu_home">Profile</string>
     <string name="menu_gallery">Classes</string>
     <string name="menu_slideshow">Saved Courses</string>
 </resources>
