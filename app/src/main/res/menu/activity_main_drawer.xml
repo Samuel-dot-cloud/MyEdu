@@ -17,10 +17,12 @@
                 <group android:checkableBehavior="single">
                 <item
                     android:id="@+id/preschool"
-                    android:title="@string/preschool" />
+                    android:title="@string/preschool"
+                    android:icon="@drawable/ic_child"/>
                 <item
                     android:id="@+id/highSchool"
-                    android:title="@string/high_school" />
+                    android:title="@string/high_school"
+                    android:icon="@drawable/ic_school"/>
                 </group>
             </menu>
         </item>
