@@ -10,4 +10,6 @@
     <string name="menu_home">Profile</string>
     <string name="menu_gallery">Classes</string>
     <string name="menu_slideshow">Saved Courses</string>
+    <string name="preschool">Preschool</string>
+    <string name="high_school">High School</string>
 </resources>
