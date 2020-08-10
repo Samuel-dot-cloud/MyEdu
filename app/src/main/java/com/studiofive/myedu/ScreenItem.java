@@ -2,12 +2,12 @@ package com.studiofive.myedu;
 
 public class ScreenItem {
 String Title, Description;
-int Screening;
+int screenImg;
 
-    public ScreenItem(String title, String description, int screening) {
+    public ScreenItem(String title, String description, int screenImg) {
         Title = title;
         Description = description;
-        Screening = screening;
+        this.screenImg = screenImg;
     }
 
     public String getTitle() {
@@ -26,11 +26,11 @@ int Screening;
         Description = description;
     }
 
-    public int getScreening() {
-        return Screening;
+    public int getScreenImg() {
+        return screenImg;
     }
 
-    public void setScreening(int screening) {
-        Screening = screening;
+    public void setScreenImg(int screenImg) {
+        this.screenImg = screenImg;
     }
 }
