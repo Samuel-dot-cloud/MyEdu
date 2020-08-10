@@ -19,8 +19,8 @@ public class IntroActivity extends AppCompatActivity {
 
         //fill list screen
         List<ScreenItem> mList = new ArrayList<>();
-        mList.add(new ScreenItem("Preschool inclusive", "Contains well tailored content for children", R.drawable.pic1));
-        mList.add(new ScreenItem("High School inclusive", "Contains well tailored content for high school students", R.drawable.pic2));
+        mList.add(new ScreenItem("Preschool inclusive", "Contains content well tailored for children", R.drawable.pic1));
+        mList.add(new ScreenItem("High School inclusive", "Contains content well tailored for high school students", R.drawable.pic2));
         mList.add(new ScreenItem("Simply fun", "Through sound games and puzzles, it makes learning simply fun!", R.drawable.pic3));
 
         //setup viewpager
