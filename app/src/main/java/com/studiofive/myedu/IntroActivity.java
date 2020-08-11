@@ -20,6 +20,7 @@ public class IntroActivity extends AppCompatActivity {
     TabLayout tabIndicator;
     Button btnNext;
     int position = 0;
+    Button btnGetStarted;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,7 @@ public class IntroActivity extends AppCompatActivity {
         //initiate views
         btnNext = findViewById(R.id.btn_next);
         tabIndicator = findViewById(R.id.tab_indicator);
+        btnGetStarted = findViewById(R.id.btn_get_started);
 
 
         //fill list screen
@@ -63,8 +65,18 @@ public class IntroActivity extends AppCompatActivity {
                     position++;
                     screenPager.setCurrentItem(position);
                 }
+
+                if (position == mList.size()-1){
+                    loadLastScreen();
+                }
             }
         });
 
+    }
+
+    private void loadLastScreen() {
+        btnNext.setVisibility(View.INVISIBLE);
+        tabIndicator.setVisibility(View.INVISIBLE);
+        btnGetStarted.setVisibility(View.VISIBLE);
     }
 }
