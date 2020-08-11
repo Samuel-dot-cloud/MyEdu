@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -16,6 +18,8 @@ public class IntroActivity extends AppCompatActivity {
     private ViewPager screenPager;
     IntroViewPagerAdapter introViewPagerAdapter;
     TabLayout tabIndicator;
+    Button btnNext;
+    int position = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,16 +31,17 @@ public class IntroActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_intro);
 
-<<<<<<< HEAD
+
         //Hide the action bar
         getSupportActionBar().hide();
-=======
+
         //initiate views
+        btnNext = findViewById(R.id.btn_next);
         tabIndicator = findViewById(R.id.tab_indicator);
->>>>>>> master
+
 
         //fill list screen
-        List<ScreenItem> mList = new ArrayList<>();
+        final List<ScreenItem> mList = new ArrayList<>();
         mList.add(new ScreenItem("Preschool inclusive", "Contains content well tailored for children", R.drawable.pic1));
         mList.add(new ScreenItem("High School inclusive", "Contains content well tailored for high school students", R.drawable.pic2));
         mList.add(new ScreenItem("Simply fun", "Through sound games and puzzles, it makes learning simply fun!", R.drawable.pic3));
@@ -49,6 +54,17 @@ public class IntroActivity extends AppCompatActivity {
         //setup tablayout with viewpager
         tabIndicator.setupWithViewPager(screenPager);
 
+        //Next button click listener
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                position = screenPager.getCurrentItem();
+                if (position < mList.size()){
+                    position++;
+                    screenPager.setCurrentItem(position);
+                }
+            }
+        });
 
     }
 }
