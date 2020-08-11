@@ -7,12 +7,15 @@ import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.google.android.material.tabs.TabLayout;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class IntroActivity extends AppCompatActivity {
     private ViewPager screenPager;
     IntroViewPagerAdapter introViewPagerAdapter;
+    TabLayout tabIndicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,19 +27,27 @@ public class IntroActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_intro);
 
+<<<<<<< HEAD
         //Hide the action bar
         getSupportActionBar().hide();
+=======
+        //initiate views
+        tabIndicator = findViewById(R.id.tab_indicator);
+>>>>>>> master
 
         //fill list screen
         List<ScreenItem> mList = new ArrayList<>();
-        mList.add(new ScreenItem("Preschool inclusive", "Contains well tailored content for children", R.drawable.pic1));
-        mList.add(new ScreenItem("High School inclusive", "Contains well tailored content for high school students", R.drawable.pic2));
+        mList.add(new ScreenItem("Preschool inclusive", "Contains content well tailored for children", R.drawable.pic1));
+        mList.add(new ScreenItem("High School inclusive", "Contains content well tailored for high school students", R.drawable.pic2));
         mList.add(new ScreenItem("Simply fun", "Through sound games and puzzles, it makes learning simply fun!", R.drawable.pic3));
 
         //setup viewpager
         screenPager = findViewById(R.id.screen_viewpager);
         introViewPagerAdapter = new IntroViewPagerAdapter(this, mList);
         screenPager.setAdapter(introViewPagerAdapter);
+
+        //setup tablayout with viewpager
+        tabIndicator.setupWithViewPager(screenPager);
 
 
     }
