@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
 import com.google.android.material.tabs.TabLayout;
@@ -21,6 +23,7 @@ public class IntroActivity extends AppCompatActivity {
     Button btnNext;
     int position = 0;
     Button btnGetStarted;
+    Animation btnAnim;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,7 @@ public class IntroActivity extends AppCompatActivity {
         btnNext = findViewById(R.id.btn_next);
         tabIndicator = findViewById(R.id.tab_indicator);
         btnGetStarted = findViewById(R.id.btn_get_started);
+        btnAnim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.button_animation);
 
 
         //fill list screen
@@ -92,11 +96,16 @@ public class IntroActivity extends AppCompatActivity {
             }
         });
 
+        //getStartedButton click listener
+
+
     }
 
     private void loadLastScreen() {
         btnNext.setVisibility(View.INVISIBLE);
         tabIndicator.setVisibility(View.INVISIBLE);
         btnGetStarted.setVisibility(View.VISIBLE);
+        //setup animation
+        btnGetStarted.setAnimation(btnAnim);
     }
 }
