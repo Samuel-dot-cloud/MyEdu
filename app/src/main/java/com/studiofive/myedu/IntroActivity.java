@@ -72,6 +72,26 @@ public class IntroActivity extends AppCompatActivity {
             }
         });
 
+        // tablayout add on change listener
+        tabIndicator.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                if (tab.getPosition() == mList.size() - 1){
+                    loadLastScreen();
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
     }
 
     private void loadLastScreen() {
