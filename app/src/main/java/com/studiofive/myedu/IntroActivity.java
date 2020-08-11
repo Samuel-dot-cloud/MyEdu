@@ -12,6 +12,7 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -26,6 +27,7 @@ public class IntroActivity extends AppCompatActivity {
     int position = 0;
     Button btnGetStarted;
     Animation btnAnim;
+    TextView tvSkip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +55,7 @@ public class IntroActivity extends AppCompatActivity {
         tabIndicator = findViewById(R.id.tab_indicator);
         btnGetStarted = findViewById(R.id.btn_get_started);
         btnAnim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.button_animation);
+        tvSkip = findViewById(R.id.tv_skip);
 
 
         //fill list screen
@@ -113,6 +116,13 @@ public class IntroActivity extends AppCompatActivity {
                 startActivity(intent);
                 savePrefsData();
                 finish();
+            }
+        });
+
+        tvSkip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                screenPager.setCurrentItem(mList.size());
             }
         });
 
