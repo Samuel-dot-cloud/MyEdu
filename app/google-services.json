@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1039428296123",
+    "firebase_url": "https://myedu-454ab.firebaseio.com",
+    "project_id": "myedu-454ab",
+    "storage_bucket": "myedu-454ab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1039428296123:android:626889be7744c5aa1a789e",
+        "android_client_info": {
+          "package_name": "com.studiofive.myedu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1039428296123-mk1ad8qpqvbj8hjklpmc9c14pc9qig2n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArqs2zPENSCp7pq336jBr1DLTiYaPavs0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1039428296123-mk1ad8qpqvbj8hjklpmc9c14pc9qig2n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
