@@ -145,6 +145,7 @@ public class IntroActivity extends AppCompatActivity {
         btnNext.setVisibility(View.INVISIBLE);
         tabIndicator.setVisibility(View.INVISIBLE);
         btnGetStarted.setVisibility(View.VISIBLE);
+        tvSkip.setVisibility(View.INVISIBLE);
         //setup animation
         btnGetStarted.setAnimation(btnAnim);
     }

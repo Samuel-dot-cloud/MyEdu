@@ -12,4 +12,15 @@
     <string name="menu_slideshow">Saved Courses</string>
     <string name="preschool">Preschool</string>
     <string name="high_school">High School</string>
+    <string name="top_icon">top icon</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">LOGIN</string>
+    <string name="or">OR</string>
+    <string name="google_icon">Google icon</string>
+    <string name="facebook_icon">Facebook icon</string>
+    <string name="new_user_sign_up_now">New User? Sign Up Now</string>
+    <string name="already_have_an_account">Already Have an Account?</string>
+    <string name="don_t_yet_have_an_account">Don\'t Yet Have An Account?</string>
+    <string name="sign_up">SIGN UP</string>
 </resources>
