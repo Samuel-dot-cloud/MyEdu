@@ -5,8 +5,28 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import butterknife.BindView;
 
 public class LoginActivity extends AppCompatActivity {
+    @BindView(R.id.inputEmailLogin)
+    EditText mEmailLogin;
+    @BindView(R.id.inputPasswordLogin)
+    EditText mPasswordLogin;
+    @BindView(R.id.btnLogin)
+    Button mBtnLogin;
+    @BindView(R.id.forgotPassword)
+    TextView mForgotPassword;
+    @BindView(R.id.googleLogin)
+    ImageView mGoogleLogin;
+    @BindView(R.id.facebookLogin)
+    ImageView mFacebookLogin;
+    @BindView(R.id.goToSignUp)
+    TextView mGoToSignUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

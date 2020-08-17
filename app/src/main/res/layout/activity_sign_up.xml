@@ -128,7 +128,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView7">
 
         <ImageView
-            android:id="@+id/googleLogin"
+            android:id="@+id/googleSignUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -136,7 +136,7 @@
             android:contentDescription="@string/google_icon" />
 
         <ImageView
-            android:id="@+id/facebookLogin"
+            android:id="@+id/facebookSignUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

@@ -53,7 +53,7 @@
         android:layout_marginLeft="32dp" />
 
     <EditText
-        android:id="@+id/inputEmail"
+        android:id="@+id/inputEmailLogin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -71,7 +71,7 @@
         android:drawableLeft="@drawable/ic_email" />
 
     <EditText
-        android:id="@+id/inputPassword"
+        android:id="@+id/inputPasswordLogin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -86,7 +86,7 @@
         android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputEmail"
+        app:layout_constraintTop_toBottomOf="@+id/inputEmailLogin"
         android:drawableLeft="@drawable/ic_lock" />
 
 
@@ -104,7 +104,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/inputPasswordLogin" />
 
     <TextView
         android:id="@+id/forgotPassword"
@@ -113,7 +113,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
-        android:text="FORGOT PASSWORD?"
+        android:text="@string/forgot_password"
         android:textColor="@color/colorPrimary"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -160,7 +160,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/gotoRegister"
+        android:id="@+id/goToSignUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"

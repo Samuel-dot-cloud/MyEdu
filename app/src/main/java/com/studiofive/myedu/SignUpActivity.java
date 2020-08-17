@@ -19,9 +19,9 @@ public class SignUpActivity extends AppCompatActivity {
     EditText mInputPassword;
     @BindView(R.id.btnSignUp)
     Button mBtnSignUp;
-    @BindView(R.id.googleLogin)
+    @BindView(R.id.googleSignUp)
     ImageView mGoogleLogin;
-    @BindView(R.id.facebookLogin)
+    @BindView(R.id.facebookSignUp)
     ImageView mFacebookLogin;
     @BindView(R.id.goToLogin)
     TextView mGoToLogin;
