@@ -2,6 +2,7 @@ package com.studiofive.myedu;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +12,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,6 +33,10 @@ public class SignUpActivity extends AppCompatActivity {
     @BindView(R.id.goToLogin)
     TextView mGoToLogin;
 
+    private FirebaseAuth mAuth;
+    private ProgressDialog mProgressDialog;
+    private FirebaseFirestore mFireStore;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +44,10 @@ public class SignUpActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_sign_up);
         ButterKnife.bind(this);
+
+        mAuth = FirebaseAuth.getInstance();
+        mProgressDialog = new ProgressDialog(this);
+        mFireStore = FirebaseFirestore.getInstance();
 
         mGoToLogin.setOnClickListener(new View.OnClickListener() {
             @Override
