@@ -82,7 +82,7 @@ public class SignUpActivity extends AppCompatActivity {
         String email = mInputEmail.getText().toString();
         String password = mInputPassword.getText().toString();
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)){
-            Toasty.error(this, "Please enter valid details!!", Toast.LENGTH_SHORT, true).show();
+            Toasty.warning(this, "Please enter valid details!!", Toast.LENGTH_SHORT, true).show();
         }else {
             mProgressDialog.setTitle("Creating New Account");
             mProgressDialog.setMessage("Please wait...");
