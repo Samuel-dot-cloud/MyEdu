@@ -91,18 +91,14 @@ public class SignUpActivity extends AppCompatActivity {
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful()){
-                                 FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(new OnSuccessListener<InstanceIdResult>() {
-                                    @Override
-                                    public void onSuccess(InstanceIdResult instanceIdResult) {
-                                        String deviceToken = instanceIdResult.getToken();
-                                        String uid = mAuth.getCurrentUser().getUid();
-                                        mReference.child("Users").child(uid).setValue("");
+                            if (task.isSuccessful()) {
+                                String deviceToken = FirebaseInstanceId.getInstance().getToken();
+                                String uid = mAuth.getCurrentUser().getUid();
+                                mReference.child("Users").child(uid).setValue("");
 
-                                        mReference.child("Users").child(uid).child("device_token")
-                                                .setValue(deviceToken);
-                                    }
-                                });
+                                mReference.child("Users").child(uid).child("device_token")
+                                        .setValue(deviceToken);
+
                                  sendUserToMainActivity();
                                 Toasty.success(SignUpActivity.this, "Account created successfully.", Toast.LENGTH_SHORT, true).show();
 
