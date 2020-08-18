@@ -61,6 +61,13 @@ public class SignUpActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mProgressDialog = new ProgressDialog(this);
 
+        mBtnSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createNewUserDefault();
+            }
+        });
+
         mGoToLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
