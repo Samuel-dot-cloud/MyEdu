@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class SignUpActivity extends AppCompatActivity {
     @BindView(R.id.inputEmail)
@@ -34,6 +35,7 @@ public class SignUpActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_sign_up);
+        ButterKnife.bind(this);
 
         mGoToLogin.setOnClickListener(new View.OnClickListener() {
             @Override
