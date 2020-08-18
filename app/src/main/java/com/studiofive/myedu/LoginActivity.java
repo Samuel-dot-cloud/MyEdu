@@ -56,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
     private ProgressDialog mProgressDialog;
     private DatabaseReference mReference;
     private GoogleSignInClient mGoogleSignInClient;
-    private final static int RC_SIGN_IN = 555;
+    private final static int RC_SIGN_IN = 123;
 
 //    @Override
 //    protected void onStart() {
