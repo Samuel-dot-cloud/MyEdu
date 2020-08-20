@@ -45,10 +45,10 @@ public class LoginActivity extends AppCompatActivity {
     Button mBtnLogin;
     @BindView(R.id.forgotPassword)
     TextView mForgotPassword;
-    @BindView(R.id.googleLogin)
-    ImageView mGoogleLogin;
-    @BindView(R.id.facebookLogin)
-    ImageView mFacebookLogin;
+//    @BindView(R.id.googleLogin)
+//    ImageView mGoogleLogin;
+//    @BindView(R.id.facebookLogin)
+//    ImageView mFacebookLogin;
     @BindView(R.id.goToSignUp)
     TextView mGoToSignUp;
 
