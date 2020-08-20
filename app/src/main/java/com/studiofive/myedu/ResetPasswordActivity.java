@@ -8,12 +8,14 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 
 import butterknife.BindView;
@@ -23,10 +25,11 @@ import es.dmoral.toasty.Toasty;
 public class ResetPasswordActivity extends AppCompatActivity {
     @BindView(R.id.reset_password_button)
     Button mResetPasswordButton;
-    @BindView(R.id.reset_password_editText)
-    TextInputEditText mResetEditText;
+    @BindView(R.id.resetPasswordEmailField)
+    EditText mEmailField;
     @BindView(R.id.arrow_back_reset)
     ImageView mBackReset;
+
 
     private FirebaseAuth mAuth;
 
@@ -54,7 +57,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
     }
 
     private void resetPassword(){
-        String userEmail = mResetEditText.getText().toString();
+        String userEmail = mEmailField.getText().toString();
         if (TextUtils.isEmpty(userEmail)){
             Toasty.warning(ResetPasswordActivity.this, "Please enter a valid email address", Toast.LENGTH_SHORT, true).show();
         }else {
