@@ -44,6 +44,13 @@ public class ResetPasswordActivity extends AppCompatActivity {
                 resetPassword();
             }
         });
+
+        mBackReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendUserToLoginActivity();
+            }
+        });
     }
 
     private void resetPassword(){
@@ -64,5 +71,10 @@ public class ResetPasswordActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    private void sendUserToLoginActivity() {
+        Intent intent = new Intent(ResetPasswordActivity.this, LoginActivity.class);
+        startActivity(intent);
     }
 }

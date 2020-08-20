@@ -84,6 +84,13 @@ public class LoginActivity extends AppCompatActivity {
                 sendUserToSignUpActivity();
             }
         });
+
+        mForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendUserToResetPasswordActivity();
+            }
+        });
     }
 
     private void LoginDefault(){
@@ -138,6 +145,11 @@ public class LoginActivity extends AppCompatActivity {
 
     private void sendUserToSignUpActivity() {
         Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+        startActivity(intent);
+    }
+
+    private void sendUserToResetPasswordActivity() {
+        Intent intent = new Intent(LoginActivity.this, ResetPasswordActivity.class);
         startActivity(intent);
     }
 
