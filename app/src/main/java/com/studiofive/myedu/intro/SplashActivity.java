@@ -18,7 +18,7 @@ import butterknife.ButterKnife;
 import pl.droidsonroids.gif.GifImageView;
 
 public class SplashActivity extends AppCompatActivity {
-    private static int SPLASH_TIMER = 5000;
+    private static int SPLASH_TIMER = 3000;
 
     @BindView(R.id.background_image)
     GifImageView mBackgroundImage;
