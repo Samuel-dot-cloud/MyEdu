@@ -1,4 +1,4 @@
-package com.studiofive.myedu;
+package com.studiofive.myedu.authentication;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,9 +14,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.studiofive.myedu.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

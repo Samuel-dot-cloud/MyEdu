@@ -1,25 +1,27 @@
-package com.studiofive.myedu;
+package com.studiofive.myedu.intro;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.studiofive.myedu.MainActivity;
+import com.studiofive.myedu.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import pl.droidsonroids.gif.GifImageView;
 
 public class SplashActivity extends AppCompatActivity {
     private static int SPLASH_TIMER = 5000;
 
     @BindView(R.id.background_image)
-    ImageView mBackgroundImage;
+    GifImageView mBackgroundImage;
     @BindView(R.id.powered_by_line)
     TextView mPoweredBy;
 

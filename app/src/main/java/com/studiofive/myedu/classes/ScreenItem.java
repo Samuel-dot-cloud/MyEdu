@@ -1,4 +1,4 @@
-package com.studiofive.myedu;
+package com.studiofive.myedu.classes;
 
 public class ScreenItem {
 String Title, Description;

@@ -10,7 +10,7 @@ public class GalleryViewModel extends ViewModel {
 
     public GalleryViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is classes fragment");
+        mText.setValue("This is com.studiofive.myedu.classes fragment");
     }
 
     public LiveData<String> getText() {

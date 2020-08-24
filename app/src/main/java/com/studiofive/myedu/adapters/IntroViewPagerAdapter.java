@@ -1,4 +1,4 @@
-package com.studiofive.myedu;
+package com.studiofive.myedu.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
+
+import com.studiofive.myedu.R;
+import com.studiofive.myedu.classes.ScreenItem;
 
 import java.util.List;
 

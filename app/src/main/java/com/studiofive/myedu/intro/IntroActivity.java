@@ -1,10 +1,9 @@
-package com.studiofive.myedu;
+package com.studiofive.myedu.intro;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -15,6 +14,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
+import com.studiofive.myedu.adapters.IntroViewPagerAdapter;
+import com.studiofive.myedu.R;
+import com.studiofive.myedu.classes.ScreenItem;
+import com.studiofive.myedu.authentication.SignUpActivity;
 
 import java.util.ArrayList;
 import java.util.List;
