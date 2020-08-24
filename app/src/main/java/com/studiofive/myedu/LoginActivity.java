@@ -119,12 +119,12 @@ public class LoginActivity extends AppCompatActivity {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if (task.isSuccessful()){
-                                                    sendUserToMainActivity();
+                                                    sendUserToSplashActivity();
                                                     Toasty.success(LoginActivity.this, "Logged in Successfully!!", Toast.LENGTH_SHORT, true).show();
                                                 }
                                             }
                                         });
-                                sendUserToMainActivity();
+                                sendUserToSplashActivity();
                                 Toasty.success(LoginActivity.this, "Logged in Successfully!!", Toast.LENGTH_SHORT, true).show();
                             }else {
                                 String message = task.getException().toString();
@@ -136,8 +136,8 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void sendUserToMainActivity() {
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+    private void sendUserToSplashActivity() {
+        Intent intent = new Intent(LoginActivity.this, SplashActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
