@@ -7,13 +7,24 @@
     tools:context=".SplashActivity"
     android:background="#EF5350">
 
-    <pl.droidsonroids.gif.GifImageView
-        android:id="@+id/gifImageView"
+   <ImageView
+       android:id="@+id/background_image"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:src="@drawable/logo"/>
+
+    <TextView
+        android:id="@+id/powered_by_line"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:src="@drawable/logo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="wrap_content"
+        android:layout_marginStart="110dp"
+        android:layout_marginEnd="111dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/fredoka_one"
+        android:text="@string/powered_by"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/background_image"
+        app:layout_constraintStart_toStartOf="@id/background_image" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

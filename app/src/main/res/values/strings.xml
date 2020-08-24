@@ -26,4 +26,5 @@
     <string name="forgot_password">FORGOT PASSWORD?</string>
     <string name="provide_your_account_s_email_for_which_you_want_to_reset_your_password">Provide your account\'s email for which you want to reset your password!</string>
     <string name="reset_password">RESET PASSWORD</string>
+    <string name="powered_by">Powered By Studio Five</string>
 </resources>
