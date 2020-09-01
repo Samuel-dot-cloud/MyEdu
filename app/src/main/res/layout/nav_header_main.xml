@@ -26,7 +26,7 @@
         android:fontFamily="@font/baloo"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:text="@string/nav_header_title"
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView
@@ -34,6 +34,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/aclonica"
-        android:textSize="14sp"
+        android:textSize="10sp"
         android:text="@string/nav_header_subtitle" />
 </LinearLayout>
