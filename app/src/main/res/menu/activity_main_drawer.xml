@@ -11,10 +11,10 @@
     </group>
 
 
-    <group android:checkableBehavior="single">
-        <item android:title="@string/classes">
+    <item android:title="@string/classes">
 
-            <menu>
+        <menu>
+            <group android:checkableBehavior="single">
                 <item
                     android:id="@+id/preschool"
                     android:icon="@drawable/ic_child"
@@ -23,14 +23,14 @@
                     android:id="@+id/highSchool"
                     android:icon="@drawable/ic_school"
                     android:title="@string/high_school" />
-            </menu>
-        </item>
+            </group>
+        </menu>
+    </item>
 
-    </group>
 
-    <group android:checkableBehavior="single">
-        <item android:title="@string/options">
-            <menu>
+    <item android:title="@string/options">
+        <menu>
+            <group android:checkableBehavior="single">
                 <item
                     android:id="@+id/nav_slideshow"
                     android:icon="@drawable/ic_menu_slideshow"
@@ -39,8 +39,9 @@
                     android:id="@+id/nav_logout"
                     android:icon="@drawable/ic_sign_out"
                     android:title="@string/sign_out" />
-            </menu>
-        </item>
-    </group>
+            </group>
+        </menu>
+    </item>
+
 
 </menu>
