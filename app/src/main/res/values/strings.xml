@@ -29,4 +29,7 @@
     <string name="powered_by">Powered By Studio Five</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="classes">Classes</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="options">Options</string>
 </resources>

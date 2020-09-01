@@ -8,29 +8,39 @@
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_profile"
             android:title="@string/menu_home" />
-        <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_classes"
-            android:title="@string/menu_gallery">
+    </group>
+
+
+    <group android:checkableBehavior="single">
+        <item android:title="@string/classes">
 
             <menu>
-                <group android:checkableBehavior="single">
                 <item
                     android:id="@+id/preschool"
-                    android:title="@string/preschool"
-                    android:icon="@drawable/ic_child"/>
+                    android:icon="@drawable/ic_child"
+                    android:title="@string/preschool" />
                 <item
                     android:id="@+id/highSchool"
-                    android:title="@string/high_school"
-                    android:icon="@drawable/ic_school"/>
-                </group>
+                    android:icon="@drawable/ic_school"
+                    android:title="@string/high_school" />
             </menu>
         </item>
 
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow"/>
-
     </group>
+
+    <group android:checkableBehavior="single">
+        <item android:title="@string/options">
+            <menu>
+                <item
+                    android:id="@+id/nav_slideshow"
+                    android:icon="@drawable/ic_menu_slideshow"
+                    android:title="@string/menu_slideshow" />
+                <item
+                    android:id="@+id/nav_logout"
+                    android:icon="@drawable/ic_sign_out"
+                    android:title="@string/sign_out" />
+            </menu>
+        </item>
+    </group>
+
 </menu>
