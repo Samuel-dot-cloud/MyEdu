@@ -7,28 +7,28 @@
 
 
     <fragment
-        android:id="@+id/homeFragment"
+        android:id="@+id/nav_home"
         android:name="com.studiofive.myedu.fragments.HomeFragment"
-        android:label="fragment_home"
+        android:label="Home"
         tools:layout="@layout/fragment_home" />
     <fragment
-        android:id="@+id/profileFragment"
+        android:id="@+id/nav_profile"
         android:name="com.studiofive.myedu.fragments.ProfileFragment"
-        android:label="fragment_profile"
+        android:label="Profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
-        android:id="@+id/preschoolFragment"
+        android:id="@+id/preschool"
         android:name="com.studiofive.myedu.fragments.PreschoolFragment"
-        android:label="fragment_preschool"
+        android:label="Preschool"
         tools:layout="@layout/fragment_preschool" />
     <fragment
-        android:id="@+id/highSchoolFragment"
+        android:id="@+id/highSchool"
         android:name="com.studiofive.myedu.fragments.HighSchoolFragment"
-        android:label="fragment_high_school"
+        android:label="High School"
         tools:layout="@layout/fragment_high_school" />
     <fragment
-        android:id="@+id/savedCoursesFragment"
+        android:id="@+id/nav_saved_course"
         android:name="com.studiofive.myedu.fragments.SavedCoursesFragment"
-        android:label="fragment_saved_courses"
+        android:label="Saved Courses"
         tools:layout="@layout/fragment_saved_courses" />
 </navigation>
