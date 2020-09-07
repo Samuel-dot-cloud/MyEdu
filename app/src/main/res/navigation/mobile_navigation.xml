@@ -5,21 +5,30 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/nav_home">
 
+
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.studiofive.myedu.ui.home.HomeFragment"
-        android:label="@string/menu_home"
+        android:name="com.studiofive.myedu.fragments.HomeFragment"
+        android:label="Home"
         tools:layout="@layout/fragment_home" />
-
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.studiofive.myedu.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
-
+        android:id="@+id/nav_profile"
+        android:name="com.studiofive.myedu.fragments.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile" />
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.studiofive.myedu.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/preschool"
+        android:name="com.studiofive.myedu.fragments.PreschoolFragment"
+        android:label="Preschool"
+        tools:layout="@layout/fragment_preschool" />
+    <fragment
+        android:id="@+id/highSchool"
+        android:name="com.studiofive.myedu.fragments.HighSchoolFragment"
+        android:label="High School"
+        tools:layout="@layout/fragment_high_school" />
+    <fragment
+        android:id="@+id/nav_saved_course"
+        android:name="com.studiofive.myedu.fragments.SavedCoursesFragment"
+        android:label="Saved Courses"
+        tools:layout="@layout/fragment_saved_courses" />
 </navigation>
