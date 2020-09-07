@@ -12,10 +12,10 @@ import com.studiofive.myedu.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ClassesFragment#newInstance} factory method to
+ * Use the {@link PreschoolFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ClassesFragment extends Fragment {
+public class PreschoolFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +26,7 @@ public class ClassesFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public ClassesFragment() {
+    public PreschoolFragment() {
         // Required empty public constructor
     }
 
@@ -39,8 +39,8 @@ public class ClassesFragment extends Fragment {
      * @return A new instance of fragment ClassesFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ClassesFragment newInstance(String param1, String param2) {
-        ClassesFragment fragment = new ClassesFragment();
+    public static PreschoolFragment newInstance(String param1, String param2) {
+        PreschoolFragment fragment = new PreschoolFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,6 +61,6 @@ public class ClassesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_classes, container, false);
+        return inflater.inflate(R.layout.fragment_preschool, container, false);
     }
 }
