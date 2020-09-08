@@ -88,10 +88,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             SavedCoursesFragment savedCoursesFragment = new SavedCoursesFragment();
             Functions.changeMainFragment(MainActivity.this, savedCoursesFragment);
         }else if(id == R.id.nav_logout){
-            Toasty.info(this, "Logging out action", Toast.LENGTH_SHORT, true).show();
+            Toasty.info(this, "Signing out action", Toast.LENGTH_SHORT, true).show();
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    protected void onStart() {
+        HomeFragment homeFragment = new HomeFragment();
+        Functions.changeMainFragment(MainActivity.this, homeFragment);
+        super.onStart();
     }
 }
