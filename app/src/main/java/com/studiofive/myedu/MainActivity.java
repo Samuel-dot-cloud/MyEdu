@@ -95,10 +95,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        HomeFragment homeFragment = new HomeFragment();
-        Functions.changeMainFragment(MainActivity.this, homeFragment);
-    }
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        HomeFragment homeFragment = new HomeFragment();
+//        Functions.changeMainFragment(MainActivity.this, homeFragment);
+//    }
 }
