@@ -80,7 +80,7 @@
 
                 </LinearLayout>
                 <View
-                    android:layout_width="1px"
+                    android:layout_width="2dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="20px"
                     android:layout_marginRight="20px"
@@ -108,7 +108,7 @@
 
                 </LinearLayout>
                 <View
-                    android:layout_width="1px"
+                    android:layout_width="2dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="20px"
                     android:layout_marginRight="20px"
