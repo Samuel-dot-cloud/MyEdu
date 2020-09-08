@@ -18,7 +18,9 @@
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:background="@drawable/first_layer">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_marginTop="50px"
@@ -26,6 +28,22 @@
                     android:layout_width="300px"
                     android:layout_height="300px"
                     android:src="@drawable/profile_pic"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:text="@string/profile_name"
+                    android:textColor="@color/colorAccent"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:text="50,000 XP"
+                    android:textColor="@color/intro_description_color"
+                    android:layout_marginBottom="50px"
+                    android:layout_marginTop="5px"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
