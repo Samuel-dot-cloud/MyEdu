@@ -34,4 +34,12 @@
     <string name="options">Options</string>
     <string name="home">Home</string>
     <string name="profile_name">Profile name</string>
+    <string name="username_title">Username</string>
+    <string name="username">username</string>
+    <string name="personal_mantra">Personal Mantra</string>
+    <string name="personal_mantra_small">personal mantra</string>
+    <string name="xp">XP</string>
+    <string name="_50_000">50,000</string>
+    <string name="friends">Friends</string>
+    <string name="_100">100</string>
 </resources>
