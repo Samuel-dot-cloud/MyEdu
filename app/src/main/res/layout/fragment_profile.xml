@@ -267,22 +267,7 @@
         app:layout_constraintStart_toEndOf="@+id/circular_photo"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
-    <TextView
-        android:id="@+id/txt_bio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:padding="16dp"
-        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/circular_photo"
-        app:layout_constraintVertical_bias="0.072" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -291,7 +276,8 @@
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
         android:layout_marginTop="20dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/circular_photo">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -347,7 +333,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/email_title"
+                    android:text="@string/email"
                     style="@style/TextBlackTitle"/>
 
                 <TextView
@@ -371,7 +357,7 @@
                 android:layout_height="50dp"
                 android:padding="4dp"
                 android:layout_marginEnd="10dp"
-                android:src="@drawable/ic_address"/>
+                android:src="@drawable/ic_goal"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -381,13 +367,13 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/address_title"
+                    android:text="@string/personal_mantra"
                     style="@style/TextBlackTitle"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/address"
+                    android:text="@string/personal_mantra_small"
                     style="@style/TextDescription"/>
 
             </LinearLayout>

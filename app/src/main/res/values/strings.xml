@@ -36,4 +36,6 @@
     <string name="profile_name">Profile name</string>
     <string name="username_title">Username</string>
     <string name="username">username</string>
+    <string name="personal_mantra">Personal Mantra</string>
+    <string name="personal_mantra_small">personal mantra</string>
 </resources>
