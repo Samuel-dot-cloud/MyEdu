@@ -1,4 +1,4 @@
 package com.studiofive.myedu.classes;
 
-public class users {
+public class Users {
 }
