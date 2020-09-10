@@ -30,12 +30,12 @@
         android:src="@drawable/profile_pic" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/friend_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="13K"
+        android:text="100"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.106"
@@ -43,26 +43,26 @@
         app:layout_constraintTop_toBottomOf="@+id/cover" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/friend_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Followers"
+        android:text="Friends"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.138"
         app:layout_constraintStart_toEndOf="@+id/circular_photo"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/friend_count" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/score_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="400"
+        android:text="50,000"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.594"
@@ -70,17 +70,19 @@
         app:layout_constraintTop_toBottomOf="@+id/cover" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/score_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="25dp"
         android:layout_marginTop="8dp"
-        android:text="following"
+        android:layout_marginEnd="8dp"
+        android:text="XP"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.732"
         app:layout_constraintStart_toEndOf="@+id/circular_photo"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/score_count"
+        style="@style/TextBlackTitle"/>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -116,6 +118,7 @@
                     style="@style/TextBlackTitle"/>
 
                 <TextView
+                    android:id="@+id/profile_username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/username"
@@ -150,6 +153,7 @@
                     style="@style/TextBlackTitle"/>
 
                 <TextView
+                    android:id="@+id/profile_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/email"
@@ -184,6 +188,7 @@
                     style="@style/TextBlackTitle"/>
 
                 <TextView
+                    android:id="@id/personal_mantra"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/personal_mantra_small"
@@ -194,5 +199,6 @@
         </LinearLayout>
 
     </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
