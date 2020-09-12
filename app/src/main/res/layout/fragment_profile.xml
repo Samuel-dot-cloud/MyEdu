@@ -87,6 +87,7 @@
 
 
     <LinearLayout
+        android:id="@+id/linear1"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.6"
@@ -97,23 +98,27 @@
         app:layout_constraintTop_toBottomOf="@+id/circular_photo">
 
         <LinearLayout
+            android:id="@+id/linear2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="14dp">
 
             <ImageView
+                android:id="@+id/pic1"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginEnd="10dp"
                 android:src="@drawable/ic_profile"/>
 
             <LinearLayout
+                android:id="@+id/linear3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/text1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/username_title"
@@ -131,12 +136,14 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/linear4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="14dp">
 
             <ImageView
+                android:id="@+id/pic2"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:padding="4dp"
@@ -144,11 +151,13 @@
                 android:src="@drawable/ic_email"/>
 
             <LinearLayout
+                android:id="@+id/linear5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/text3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/email"
@@ -166,12 +175,14 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/linear6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="14dp">
 
             <ImageView
+                android:id="@+id/pic3"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:padding="4dp"
@@ -179,11 +190,13 @@
                 android:src="@drawable/ic_goal"/>
 
             <LinearLayout
+                android:id="@+id/linear7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/text4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/personal_mantra"
