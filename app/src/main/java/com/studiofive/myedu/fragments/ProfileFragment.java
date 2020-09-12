@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
+import androidx.transition.TransitionManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.studiofive.myedu.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnItemClick;
 import butterknife.Unbinder;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -29,13 +31,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ProfileFragment extends Fragment {
     private boolean isOpen = false;
     private ConstraintSet layout1, layout2;
-    private ConstraintLayout constraintLayout;
     private Unbinder unbinder;
 
     @BindView(R.id.circular_photo)
     CircleImageView circlePhoto;
-//    @BindView(R.id.constraint_layout)
-//    ConstraintLayout constraintLayout;
+    @BindView(R.id.constraint_layout)
+    ConstraintLayout constraintLayout;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -69,15 +70,26 @@ public class ProfileFragment extends Fragment {
 
         layout1 = new ConstraintSet();
         layout2 = new ConstraintSet();
+        layout2.clone(getContext(), R.layout.profile_expanded);
+        layout1.clone(constraintLayout);
 
-
+        circlePhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!isOpen){
+                    TransitionManager.beginDelayedTransition(constraintLayout);
+                    layout2.applyTo(constraintLayout);
+                    isOpen = !isOpen;
+                }else{
+                    TransitionManager.beginDelayedTransition(constraintLayout);
+                    layout1.applyTo(constraintLayout);
+                    isOpen = !isOpen;
+                }
+            }
+        });
         return view;
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
 
     @Override
     public void onDestroyView() {
