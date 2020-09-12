@@ -1,5 +1,6 @@
 package com.studiofive.myedu.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -32,6 +33,7 @@ public class ProfileFragment extends Fragment {
     private boolean isOpen = false;
     private ConstraintSet layout1, layout2;
     private Unbinder unbinder;
+    private Context mContext;
 
     @BindView(R.id.circular_photo)
     CircleImageView circlePhoto;
@@ -58,6 +60,12 @@ public class ProfileFragment extends Fragment {
     }
 
     @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        mContext=context;
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -70,7 +78,7 @@ public class ProfileFragment extends Fragment {
 
         layout1 = new ConstraintSet();
         layout2 = new ConstraintSet();
-        layout2.clone(getContext(), R.layout.profile_expanded);
+        layout2.clone(mContext.getApplicationContext(), R.layout.profile_expanded);
         layout1.clone(constraintLayout);
 
         circlePhoto.setOnClickListener(new View.OnClickListener() {
@@ -89,7 +97,6 @@ public class ProfileFragment extends Fragment {
         });
         return view;
     }
-
 
     @Override
     public void onDestroyView() {
