@@ -116,7 +116,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (mFirebaseUser == null){
             sendUserToLoginActivity();
         }else{
-           sendUserToSplashActivity();
+//           sendUserToSplashActivity();
+//            Toasty.info(this, "Logged in successfully", Toast.LENGTH_SHORT, true).show();
         }
     }
 
