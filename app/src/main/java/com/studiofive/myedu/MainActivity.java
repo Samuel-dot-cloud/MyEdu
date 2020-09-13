@@ -85,6 +85,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
          super.onOptionsItemSelected(item);
+        if (item.getItemId() == R.id.profile_settings){
+            sendUserToSettingsActivity();
+
+        }
          return true;
     }
 
@@ -133,5 +137,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
+    }
+
+    private void sendUserToSettingsActivity() {
+
     }
 }
