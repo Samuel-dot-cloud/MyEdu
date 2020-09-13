@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 
 import com.studiofive.myedu.R;
 
@@ -39,6 +40,8 @@ public class ProfileFragment extends Fragment {
     CircleImageView circlePhoto;
     @BindView(R.id.constraint_layout)
     ConstraintLayout constraintLayout;
+    @BindView(R.id.cover)
+    ImageView mCoverImage;
 
     public ProfileFragment() {
         // Required empty public constructor
