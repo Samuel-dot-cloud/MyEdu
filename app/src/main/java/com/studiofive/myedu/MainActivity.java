@@ -18,6 +18,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
+import com.studiofive.myedu.activities.SettingsActivity;
 import com.studiofive.myedu.authentication.LoginActivity;
 import com.studiofive.myedu.fragments.HighSchoolFragment;
 import com.studiofive.myedu.fragments.HomeFragment;
@@ -87,7 +88,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
          super.onOptionsItemSelected(item);
         if (item.getItemId() == R.id.profile_settings){
             sendUserToSettingsActivity();
-
         }
          return true;
     }
@@ -140,6 +140,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void sendUserToSettingsActivity() {
-
+        Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+        startActivity(intent);
     }
 }
