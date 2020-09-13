@@ -2,6 +2,7 @@ package com.studiofive.myedu;
 
 import android.content.Intent;
 import android.os.Bundle;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -116,20 +117,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (mFirebaseUser == null){
             sendUserToLoginActivity();
         }else{
-//           sendUserToSplashActivity();
-//            Toasty.info(this, "Logged in successfully", Toast.LENGTH_SHORT, true).show();
+
         }
     }
 
     private void sendUserToLoginActivity() {
         Intent intent = new Intent(this, LoginActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-        finish();
-    }
-
-    private void sendUserToSplashActivity() {
-        Intent intent = new Intent(MainActivity.this, SplashActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
