@@ -46,12 +46,12 @@
                         android:layout_height="wrap_content"
                         android:textSize="20sp"
                         android:textColor="@android:color/black"
-                        android:text="Username"/>
+                        android:text="@string/username_title"/>
                     <TextView
                         android:id="@+id/tv_bio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Hey there's I am using WhatsApp"/>
+                        android:text="@string/personal_mantra"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -119,12 +119,12 @@
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
                         android:textColor="@android:color/black"
-                        android:text="Chats"/>
+                        android:text="Notes and Chats"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="14sp"
-                        android:text="Thems, wallpapers, chat history"/>
+                        android:text="Manage notes, chat history"/>
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
@@ -157,7 +157,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="14sp"
-                        android:text="Message, group , call tones"/>
+                        android:text="Message tones"/>
                 </LinearLayout>
             </LinearLayout>
 <!--            <LinearLayout-->
