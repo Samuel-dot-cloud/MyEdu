@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,11 +7,10 @@
     android:orientation="vertical"
     tools:context=".activities.SettingsActivity">
 
-<!--    <include-->
-<!--        layout="@layout/app_bar_main"-->
-<!--        android:id="@+id/profile_settings_toolbar">-->
-
-<!--    </include>-->
+    <include
+        layout="@layout/app_bar_main"
+        android:id="@+id/settings_toolbar">
+    </include>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -19,7 +18,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginTop="50dp">
 
             <LinearLayout
                 android:id="@+id/ln_profile"
@@ -90,7 +90,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="14sp"
-                        android:text="Privacy, security, change number"/>
+                        android:text="Privacy, security, change email address"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -267,7 +267,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="5dp"
                 android:textColor="@color/colorAccent"
-                android:text="@string/s_t_u_d_i_o_f_i_v_e"/>
+                android:text="S T U D I O  F I V E"/>
         </LinearLayout>
     </ScrollView>
-</LinearLayout>
+</RelativeLayout>
