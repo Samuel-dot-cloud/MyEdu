@@ -16,13 +16,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.studiofive.myedu.R;
+import com.studiofive.myedu.classes.Users;
 import com.studiofive.myedu.intro.SplashActivity;
 
 import butterknife.BindView;
@@ -48,6 +53,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private ProgressDialog mProgressDialog;
     private DatabaseReference mReference;
+    private FirebaseFirestore mFirestore;
 
 
     @Override
@@ -60,6 +66,7 @@ public class LoginActivity extends AppCompatActivity {
 
         mAuth =FirebaseAuth.getInstance();
         mReference = FirebaseDatabase.getInstance().getReference().child("Users");
+        mFirestore = FirebaseFirestore.getInstance();
         mProgressDialog = new ProgressDialog(this);
 
 
@@ -92,7 +99,7 @@ public class LoginActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
             Toasty.warning(this, "Please enter valid details!!", Toast.LENGTH_SHORT, true).show();
         } else {
-            mProgressDialog.setTitle("Signing In");
+            mProgressDialog.setTitle("Logging In");
             mProgressDialog.setMessage("Please wait...");
             mProgressDialog.setCanceledOnTouchOutside(true);
             mProgressDialog.show();
@@ -103,22 +110,44 @@ public class LoginActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()){
 
-                                String currentUserId =mAuth.getCurrentUser().getUid();
-                                String deviceToken = FirebaseInstanceId.getInstance().getToken();
-
-                                mReference.child(currentUserId).child("device_token")
-                                        .setValue(deviceToken)
-                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                if (task.isSuccessful()){
-                                                    sendUserToSplashActivity();
+//                                String currentUserId =mAuth.getCurrentUser().getUid();
+                                FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                                if (firebaseUser!=null){
+                                    String userID = firebaseUser.getUid();
+                                    Users users = new Users(userID, "", "", "", "", mEmailLogin.getText().toString());
+                                    mFirestore.collection("Users").document(firebaseUser.getUid()).set(users)
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void aVoid) {
+                                                    mProgressDialog.dismiss();
                                                     Toasty.success(LoginActivity.this, "Logged in Successfully!!", Toast.LENGTH_SHORT, true).show();
+                                                    sendUserToSplashActivity();
                                                 }
-                                            }
-                                        });
-                                sendUserToSplashActivity();
-                                Toasty.success(LoginActivity.this, "Logged in Successfully!!", Toast.LENGTH_SHORT, true).show();
+                                            }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+
+                                            String message = task.getException().toString();
+                                            Toasty.error(LoginActivity.this, "Error: " + message, Toast.LENGTH_SHORT, true).show();
+                                        }
+                                    });
+                                    mProgressDialog.dismiss();
+                                }
+//                                String deviceToken = FirebaseInstanceId.getInstance().getToken();
+//
+//                                mReference.child(currentUserId).child("device_token")
+//                                        .setValue(deviceToken)
+//                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                            @Override
+//                                            public void onComplete(@NonNull Task<Void> task) {
+//                                                if (task.isSuccessful()){
+//                                                    sendUserToSplashActivity();
+//                                                    Toasty.success(LoginActivity.this, "Logged in Successfully!!", Toast.LENGTH_SHORT, true).show();
+//                                                }
+//                                            }
+//                                        });
+//                                sendUserToSplashActivity();
+//                                Toasty.success(LoginActivity.this, "Logged in Successfully!!", Toast.LENGTH_SHORT, true).show();
                             }else {
                                 String message = task.getException().toString();
                                 Toasty.error(LoginActivity.this, "Error: " + message, Toast.LENGTH_SHORT, true).show();
