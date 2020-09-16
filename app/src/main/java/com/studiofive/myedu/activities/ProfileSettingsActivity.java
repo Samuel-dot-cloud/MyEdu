@@ -91,6 +91,33 @@ public class ProfileSettingsActivity extends AppCompatActivity {
         initActionClick();
     }
 
+    private void initActionClick() {
+        cameraButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/*");
+                startActivityForResult(Intent.createChooser(intent, "Select Image"), GALLERY_PIC);
+            }
+        });
+
+        mUserName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showBottomSheetEditName();
+            }
+        });
+
+        mPersonalMantra.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showBottomSheetEditMantra();
+            }
+        });
+    }
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -146,31 +173,6 @@ public class ProfileSettingsActivity extends AppCompatActivity {
         }
     }
 
-    private void initActionClick() {
-        cameraButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                intent.setType("image/*");
-                startActivityForResult(Intent.createChooser(intent, "Select Image"), GALLERY_PIC);
-            }
-        });
-
-        mUserName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showBottomSheetEditName();
-            }
-        });
-
-        mPersonalMantra.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showBottomSheetEditMantra();
-            }
-        });
-    }
 
     private void showBottomSheetEditMantra() {
         @SuppressLint("InflateParams") View view = getLayoutInflater().inflate(R.layout.bottom_sheet_edit_mantra, null);
