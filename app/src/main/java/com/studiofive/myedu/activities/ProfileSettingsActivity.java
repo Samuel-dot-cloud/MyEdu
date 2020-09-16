@@ -98,7 +98,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
                 Intent intent = new Intent();
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 intent.setType("image/*");
-                startActivityForResult(Intent.createChooser(intent, "Select Image"), GALLERY_PIC);
+                startActivityForResult(intent, GALLERY_PIC);
             }
         });
 
@@ -204,7 +204,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 String userName = documentSnapshot.getString("userName");
-                String personalMantra = documentSnapshot.getString("personal_mantra");
+                String personalMantra = documentSnapshot.getString("personalMantra");
                 String imageProfile = documentSnapshot.getString("profileImage");
 
                 mUserName.setText(userName);
@@ -296,7 +296,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
     }
 
     private void updatePersonalMantra(String newMantra){
-        mFirestore.collection("Users").document(mFirebaseUser.getUid()).update("personal_mantra", newMantra).addOnSuccessListener(new OnSuccessListener<Void>() {
+        mFirestore.collection("Users").document(mFirebaseUser.getUid()).update("personalMantra", newMantra).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 Toasty.success(getApplicationContext(), "Update successful", Toast.LENGTH_SHORT, true).show();
