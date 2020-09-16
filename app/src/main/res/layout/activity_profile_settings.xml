@@ -6,11 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".activities.ProfileSettingsActivity">
 
-    <include
-        layout="@layout/app_bar_main"
-        android:id="@+id/profile_settings_toolbar">
 
-    </include>
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/set_profile_image"
