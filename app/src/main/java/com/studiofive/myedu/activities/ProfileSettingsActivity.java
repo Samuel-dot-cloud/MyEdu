@@ -8,6 +8,7 @@ import android.os.Bundle;
 import com.studiofive.myedu.R;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class ProfileSettingsActivity extends AppCompatActivity {
     @BindView(R.id.toolbar)
@@ -17,6 +18,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_settings);
+        ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
