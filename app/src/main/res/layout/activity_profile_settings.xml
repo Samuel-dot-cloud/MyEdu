@@ -40,7 +40,7 @@
         android:layout_marginTop="30dp"/>
 
     <EditText
-        android:id="@+id/set_profile_status"
+        android:id="@+id/set_personal_mantra"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/set_user_name"
@@ -60,7 +60,7 @@
         android:id="@+id/update_settings_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/set_profile_status"
+        android:layout_below="@id/set_personal_mantra"
         android:text="Update"
         android:textColor="@android:color/background_light"
         android:textAlignment="center"
