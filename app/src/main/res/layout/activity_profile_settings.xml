@@ -7,8 +7,8 @@
     tools:context=".activities.ProfileSettingsActivity">
 
     <include
-        layout="@layout/app_bar_main"
-        android:id="@+id/profile_settings_toolbar">
+        android:id="@+id/profile_settings_toolbar"
+        layout="@layout/app_bar_main">
 
     </include>
 
@@ -22,6 +22,17 @@
         android:layout_marginTop="70dp"
         app:civ_border_width="5dp"
         app:civ_border_color="#FF000000"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_camera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerInside"
+        android:elevation="1dp"
+        android:src="@drawable/ic_camera"
+        android:layout_alignBottom="@id/set_profile_image"
+        android:layout_alignEnd="@id/set_profile_image"
+        android:tint="@android:color/white"/>
 
     <EditText
         android:id="@+id/set_user_name"
