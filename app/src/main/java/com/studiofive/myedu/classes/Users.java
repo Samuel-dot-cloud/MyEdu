@@ -1,15 +1,16 @@
 package com.studiofive.myedu.classes;
 
 public class Users {
-    public  String name, personalMantra, image;
+    public  String name, personalMantra, image, gender;
 
     public Users() {
     }
 
-    public Users(String name, String personalMantra, String image) {
+    public Users(String name, String personalMantra, String image, String gender) {
         this.name = name;
         this.personalMantra = personalMantra;
         this.image = image;
+        this.gender = gender;
     }
 
     public String getName() {
@@ -34,5 +35,13 @@ public class Users {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 }
