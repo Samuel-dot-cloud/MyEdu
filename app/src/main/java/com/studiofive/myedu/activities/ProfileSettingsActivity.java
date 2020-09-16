@@ -55,8 +55,8 @@ public class ProfileSettingsActivity extends AppCompatActivity {
     EditText mUserName;
     @BindView(R.id.set_personal_mantra)
     EditText mPersonalMantra;
-    @BindView(R.id.update_settings_button)
-    Button mUpdateProfileSettings;
+//    @BindView(R.id.update_settings_button)
+//    Button mUpdateProfileSettings;
     @BindView(R.id.fab_camera)
     FloatingActionButton cameraButton;
 
