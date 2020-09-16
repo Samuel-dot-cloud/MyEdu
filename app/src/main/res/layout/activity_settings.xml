@@ -22,10 +22,11 @@
             android:layout_marginTop="50dp">
 
             <LinearLayout
-                android:id="@+id/ln_profile"
+                android:id="@+id/profile_surface"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="15sp"
+                android:clickable="true"
                 android:orientation="horizontal">
 
                 <de.hdodenhof.circleimageview.CircleImageView

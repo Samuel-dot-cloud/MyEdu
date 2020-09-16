@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.studiofive.myedu.MainActivity;
@@ -17,6 +18,8 @@ import butterknife.ButterKnife;
 public class SettingsActivity extends AppCompatActivity {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindView(R.id.profile_surface)
+    LinearLayout mProfileSurface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,20 +30,15 @@ public class SettingsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-//        getSupportActionBar().setDisplayShowCustomEnabled(true);
         getSupportActionBar().setTitle("Settings");
 
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        mProfileSurface.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SettingsActivity.this, MainActivity.class));
+                Intent intent = new Intent(SettingsActivity.this, ProfileSettingsActivity.class);
+                startActivity(intent);
             }
         });
-    }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
     }
 }
