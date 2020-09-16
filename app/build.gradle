@@ -69,6 +69,8 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.3'
     //Gif image view
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.19'
+    //PhotoView with zoom and scroll
+    implementation 'com.github.chrisbanes:PhotoView:2.3.0'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
