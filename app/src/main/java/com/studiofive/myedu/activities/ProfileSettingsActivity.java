@@ -117,63 +117,6 @@ public class ProfileSettingsActivity extends AppCompatActivity {
         });
     }
 
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == GALLERY_PIC && resultCode == RESULT_OK && data != null && data.getData() != null){
-             imageUri = data.getData();
-
-            // start picker to get image for cropping and then use the image in cropping activity
-            CropImage.activity()
-                    .setGuidelines(CropImageView.Guidelines.ON)
-                    .setAspectRatio(1, 1)
-                    .start(this);
-        }
-        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-            if (resultCode == RESULT_OK) {
-                mProgressDialog.setTitle("Setting Profile Image:");
-                mProgressDialog.setMessage("Please wait while profile image is updating...");
-                mProgressDialog.setCanceledOnTouchOutside(false);
-                mProgressDialog.show();
-
-                final Uri resultUri = result.getUri();
-                StorageReference filePath = mImageRef.child(System.currentTimeMillis()+"."+ getFileExtension(resultUri));
-                filePath.putFile(resultUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        Task<Uri> urlTask = taskSnapshot.getStorage().getDownloadUrl();
-                        while(!urlTask.isSuccessful());
-                        Uri downloadUrl = urlTask.getResult();
-
-                        final String downloadPic_url = String.valueOf(downloadUrl);
-
-                        HashMap<String, Object> hashMap = new HashMap<>();
-                        hashMap.put("profileImage", downloadPic_url);
-
-                        mProgressDialog.dismiss();
-                        mFirestore.collection("Users").document(mFirebaseUser.getUid()).update(hashMap)
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-                                        Toasty.success(getApplicationContext(), "Upload successful", Toast.LENGTH_SHORT, true).show();
-                                        getInfo();
-                                    }
-                                });
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toasty.error(getApplicationContext(), "Upload failed!!", Toast.LENGTH_SHORT).show();
-                        mProgressDialog.dismiss();
-                    }
-                });
-            }
-        }
-    }
-
-
     private void showBottomSheetEditMantra() {
         @SuppressLint("InflateParams") View view = getLayoutInflater().inflate(R.layout.bottom_sheet_edit_mantra, null);
 
@@ -256,7 +199,6 @@ public class ProfileSettingsActivity extends AppCompatActivity {
         bottomSheetEditName.show();
     }
 
-
     private void getInfo() {
         mFirestore.collection("Users").document(mFirebaseUser.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
@@ -277,6 +219,65 @@ public class ProfileSettingsActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == GALLERY_PIC && resultCode == RESULT_OK && data != null && data.getData() != null){
+             imageUri = data.getData();
+
+            // start picker to get image for cropping and then use the image in cropping activity
+            CropImage.activity()
+                    .setGuidelines(CropImageView.Guidelines.ON)
+                    .setAspectRatio(1, 1)
+                    .start(this);
+        }
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if (resultCode == RESULT_OK) {
+                mProgressDialog.setTitle("Setting Profile Image:");
+                mProgressDialog.setMessage("Please wait while profile image is updating...");
+                mProgressDialog.setCanceledOnTouchOutside(false);
+                mProgressDialog.show();
+
+                final Uri resultUri = result.getUri();
+                StorageReference filePath = mImageRef.child(System.currentTimeMillis()+"."+ getFileExtension(resultUri));
+                filePath.putFile(resultUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        Task<Uri> urlTask = taskSnapshot.getStorage().getDownloadUrl();
+                        while(!urlTask.isSuccessful());
+                        Uri downloadUrl = urlTask.getResult();
+
+                        final String downloadPic_url = String.valueOf(downloadUrl);
+
+                        HashMap<String, Object> hashMap = new HashMap<>();
+                        hashMap.put("profileImage", downloadPic_url);
+
+                        mProgressDialog.dismiss();
+                        mFirestore.collection("Users").document(mFirebaseUser.getUid()).update(hashMap)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Toasty.success(getApplicationContext(), "Upload successful", Toast.LENGTH_SHORT, true).show();
+                                        getInfo();
+                                    }
+                                });
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toasty.error(getApplicationContext(), "Upload failed!!", Toast.LENGTH_SHORT).show();
+                        mProgressDialog.dismiss();
+                    }
+                });
+            }
+        }
+    }
+
+
+
 
     private String getFileExtension(Uri uri){
         ContentResolver contentResolver = getContentResolver();
