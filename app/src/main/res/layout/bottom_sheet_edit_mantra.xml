@@ -32,14 +32,14 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <Button
-            android:id="@+id/btn_cancel"
+            android:id="@+id/btn_cancel_mantra"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorPrimary"
             android:background="@android:color/transparent"
             android:text="Cancel"/>
         <Button
-            android:id="@+id/btn_save"
+            android:id="@+id/btn_save_mantra"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorPrimary"
