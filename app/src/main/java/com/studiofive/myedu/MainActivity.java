@@ -2,9 +2,10 @@ package com.studiofive.myedu;
 
 import android.content.Intent;
 import android.os.Bundle;
-
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -14,10 +15,14 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.studiofive.myedu.activities.SettingsActivity;
 import com.studiofive.myedu.authentication.LoginActivity;
 import com.studiofive.myedu.fragments.HighSchoolFragment;
@@ -25,11 +30,13 @@ import com.studiofive.myedu.fragments.HomeFragment;
 import com.studiofive.myedu.fragments.PreschoolFragment;
 import com.studiofive.myedu.fragments.ProfileFragment;
 import com.studiofive.myedu.fragments.SavedCoursesFragment;
-import com.studiofive.myedu.intro.SplashActivity;
 import com.studiofive.myedu.utils.Functions;
+
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import de.hdodenhof.circleimageview.CircleImageView;
 import es.dmoral.toasty.Toasty;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -39,8 +46,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     NavigationView navigationView;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    private FirebaseAuth mAuth;
-    private DatabaseReference mRef;
+
+    private FirebaseUser mFirebaseUser;
+    private FirebaseFirestore mFirestore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +56,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        mAuth = FirebaseAuth.getInstance();
+        mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        mFirestore = FirebaseFirestore.getInstance();
 
         //Toolbar
         setSupportActionBar(toolbar);
@@ -113,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Functions.changeMainFragment(MainActivity.this, savedCoursesFragment);
         }else if(id == R.id.nav_logout){
             Toasty.info(this, "Signing out", Toast.LENGTH_SHORT, true).show();
-            mAuth.signOut();
+            FirebaseAuth.getInstance().signOut();
             sendUserToLoginActivity();
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -124,12 +133,36 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onStart() {
         super.onStart();
-        FirebaseUser mFirebaseUser = mAuth.getCurrentUser();
         if (mFirebaseUser == null){
             sendUserToLoginActivity();
         }else{
-
+            getNavInfo();
         }
+    }
+
+    private void getNavInfo() {
+        View headerView = navigationView.getHeaderView(0);
+        TextView navUserName = headerView.findViewById(R.id.navHeaderTitle);
+        TextView navMantra = headerView.findViewById(R.id.navHeaderText);
+        CircleImageView navProfilePhoto = headerView.findViewById(R.id.navHeaderImageView);
+
+        mFirestore.collection("Users").document(mFirebaseUser.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                String userName = Objects.requireNonNull(documentSnapshot.get("userName")).toString();
+                String profileImage = documentSnapshot.getString("profileImage");
+                String personalMantra = Objects.requireNonNull(documentSnapshot.get("personalMantra")).toString();
+                navUserName.setText(userName);
+                navMantra.setText(personalMantra);
+                Glide.with(MainActivity.this).load(profileImage).into(navProfilePhoto);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toasty.error(MainActivity.this, "Something went wrong!!", Toast.LENGTH_SHORT, true).show();
+            }
+        });
+
     }
 
     private void sendUserToLoginActivity() {
