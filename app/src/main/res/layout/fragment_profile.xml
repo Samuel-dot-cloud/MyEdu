@@ -203,7 +203,7 @@
                     style="@style/TextBlackTitle"/>
 
                 <TextView
-                    android:id="@+id/personal_mantra"
+                    android:id="@+id/profile_personal_mantra"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/personal_mantra_small"

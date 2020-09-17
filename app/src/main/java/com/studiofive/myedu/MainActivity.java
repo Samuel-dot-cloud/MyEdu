@@ -46,12 +46,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     NavigationView navigationView;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-//    @BindView(R.id.navHeaderImageView)
-//    CircleImageView navImage;
-//    @BindView(R.id.navHeaderTitle)
-//    TextView navTitle;
-//    @BindView(R.id.navHeaderText)
-//    TextView navText;
 
     private FirebaseUser mFirebaseUser;
     private FirebaseFirestore mFirestore;

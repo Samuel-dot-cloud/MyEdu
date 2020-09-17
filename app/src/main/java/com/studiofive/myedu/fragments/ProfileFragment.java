@@ -2,28 +2,37 @@ package com.studiofive.myedu.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
-import androidx.fragment.app.Fragment;
-import androidx.transition.TransitionManager;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.fragment.app.Fragment;
+import androidx.transition.TransitionManager;
+
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.studiofive.myedu.R;
+
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnItemClick;
 import butterknife.Unbinder;
 import de.hdodenhof.circleimageview.CircleImageView;
+import es.dmoral.toasty.Toasty;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -42,6 +51,16 @@ public class ProfileFragment extends Fragment {
     ConstraintLayout constraintLayout;
     @BindView(R.id.cover)
     ImageView mCoverImage;
+    @BindView(R.id.profile_username)
+    TextView profileUserName;
+    @BindView(R.id.profile_email)
+    TextView profileEmail;
+    @BindView(R.id.profile_personal_mantra)
+    TextView profileMantra;
+
+
+    private FirebaseUser mFirebaseUser;
+    private FirebaseFirestore mFirestore;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -57,10 +76,10 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-
-        }
+        getProfileInfo();
     }
+
+
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -84,6 +103,15 @@ public class ProfileFragment extends Fragment {
         layout2.clone(mContext.getApplicationContext(), R.layout.profile_expanded);
         layout1.clone(constraintLayout);
 
+        mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        mFirestore = FirebaseFirestore.getInstance();
+
+        initActionClick();
+
+        return view;
+    }
+
+    private void initActionClick() {
         circlePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,7 +126,28 @@ public class ProfileFragment extends Fragment {
                 }
             }
         });
-        return view;
+    }
+
+    private void getProfileInfo() {
+        mFirestore.collection("Users").document(mFirebaseUser.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                String userName = Objects.requireNonNull(documentSnapshot.get("userName")).toString();
+                String email = Objects.requireNonNull(documentSnapshot.get("email")).toString();
+                String profileImage = documentSnapshot.getString("profileImage");
+                String personalMantra = Objects.requireNonNull(documentSnapshot.get("personalMantra")).toString();
+                profileUserName.setText(userName);
+                profileMantra.setText(personalMantra);
+                profileEmail.setText(email);
+                Glide.with(mContext).load(profileImage).into(mCoverImage);
+                Glide.with(mContext).load(profileImage).into(circlePhoto);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toasty.error(mContext, "Something went wrong!!", Toast.LENGTH_SHORT, true).show();
+            }
+        });
     }
 
     @Override

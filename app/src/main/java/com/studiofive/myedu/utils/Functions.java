@@ -1,13 +1,9 @@
 package com.studiofive.myedu.utils;
 
-import android.content.Context;
-import android.content.Intent;
-
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import com.studiofive.myedu.R;
-import com.studiofive.myedu.authentication.LoginActivity;
 
 public class Functions {
     public static void changeMainFragment(FragmentActivity fragmentActivity, Fragment fragment){
