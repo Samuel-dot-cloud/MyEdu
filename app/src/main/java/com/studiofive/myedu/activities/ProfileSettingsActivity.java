@@ -88,11 +88,15 @@ public class ProfileSettingsActivity extends AppCompatActivity {
         mImageRef = FirebaseStorage.getInstance().getReference().child("Profile Images");
         mProgressDialog = new ProgressDialog(this);
 
+        initActionClick();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         if (mFirebaseUser!=null){
             getInfo();
         }
-
-        initActionClick();
     }
 
     private void initActionClick() {
