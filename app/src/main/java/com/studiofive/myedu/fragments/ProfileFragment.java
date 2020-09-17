@@ -76,7 +76,6 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getProfileInfo();
     }
 
 
@@ -107,6 +106,7 @@ public class ProfileFragment extends Fragment {
         mFirestore = FirebaseFirestore.getInstance();
 
         initActionClick();
+        getProfileInfo();
 
         return view;
     }
