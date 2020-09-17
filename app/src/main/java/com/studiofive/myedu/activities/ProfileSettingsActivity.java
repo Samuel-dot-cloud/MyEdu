@@ -292,6 +292,9 @@ public class ProfileSettingsActivity extends AppCompatActivity {
                         mProgressDialog.dismiss();
                     }
                 });
+            }else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                Exception error = result.getError();
+                Toasty.error(getApplicationContext(), "Error: " + error.toString(), Toast.LENGTH_SHORT).show();
             }
         }
     }
