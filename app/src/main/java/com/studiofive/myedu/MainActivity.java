@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,12 +49,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     NavigationView navigationView;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @BindView(R.id.navHeaderImageView)
-    CircleImageView navImage;
-    @BindView(R.id.navHeaderTitle)
-    TextView navTitle;
-    @BindView(R.id.navHeaderText)
-    TextView navText;
+//    @BindView(R.id.navHeaderImageView)
+//    CircleImageView navImage;
+//    @BindView(R.id.navHeaderTitle)
+//    TextView navTitle;
+//    @BindView(R.id.navHeaderText)
+//    TextView navText;
 
     private FirebaseUser mFirebaseUser;
     private FirebaseFirestore mFirestore;
@@ -144,20 +145,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (mFirebaseUser == null){
             sendUserToLoginActivity();
         }else{
-            getInfo();
+            getNavInfo();
         }
     }
 
-    private void getInfo() {
+    private void getNavInfo() {
+        View headerView = navigationView.getHeaderView(0);
+        TextView navUserName = headerView.findViewById(R.id.navHeaderTitle);
+        TextView navMantra = headerView.findViewById(R.id.navHeaderText);
+        CircleImageView navProfilePhoto = headerView.findViewById(R.id.navHeaderImageView);
+
         mFirestore.collection("Users").document(mFirebaseUser.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 String userName = Objects.requireNonNull(documentSnapshot.get("userName")).toString();
                 String profileImage = documentSnapshot.getString("profileImage");
                 String personalMantra = Objects.requireNonNull(documentSnapshot.get("personalMantra")).toString();
-                navTitle.setText(userName);
-                navText.setText(personalMantra);
-                Glide.with(MainActivity.this).load(profileImage).into(navImage);
+                navUserName.setText(userName);
+                navMantra.setText(personalMantra);
+                Glide.with(MainActivity.this).load(profileImage).into(navProfilePhoto);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -165,6 +171,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Toasty.error(MainActivity.this, "Something went wrong!!", Toast.LENGTH_SHORT, true).show();
             }
         });
+
     }
 
     private void sendUserToLoginActivity() {
