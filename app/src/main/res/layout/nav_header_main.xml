@@ -13,7 +13,7 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imageView"
+        android:id="@+id/navHeaderImageView"
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:contentDescription="@string/nav_header_desc"
@@ -22,6 +22,7 @@
         android:src="@drawable/logo" />
 
     <TextView
+        android:id="@+id/navHeaderTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/baloo"
@@ -31,7 +32,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/navHeaderText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/aclonica"
