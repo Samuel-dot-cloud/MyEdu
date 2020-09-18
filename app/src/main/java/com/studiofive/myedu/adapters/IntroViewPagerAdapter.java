@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.studiofive.myedu.R;
-import com.studiofive.myedu.classes.ScreenItem;
+import com.studiofive.myedu.classes.helper_class.ScreenItem;
 
 import java.util.List;
 

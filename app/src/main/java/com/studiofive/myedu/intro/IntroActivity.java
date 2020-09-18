@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.google.android.material.tabs.TabLayout;
 import com.studiofive.myedu.adapters.IntroViewPagerAdapter;
 import com.studiofive.myedu.R;
-import com.studiofive.myedu.classes.ScreenItem;
+import com.studiofive.myedu.classes.helper_class.ScreenItem;
 import com.studiofive.myedu.authentication.SignUpActivity;
 
 import java.util.ArrayList;
