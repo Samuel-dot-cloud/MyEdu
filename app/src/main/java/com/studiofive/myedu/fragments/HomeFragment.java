@@ -77,7 +77,7 @@ public class HomeFragment extends Fragment {
 
         ArrayList<FeaturedHelperClass> featuredTopics = new ArrayList<>();
         featuredTopics.add(new FeaturedHelperClass(R.drawable.calculus, "Calculus", "The wonderful world of calculus", 4));
-        featuredTopics.add(new FeaturedHelperClass(R.drawable.design, "Drawing And Design", "The wonderful world of Drawing and Design", 4));
+        featuredTopics.add(new FeaturedHelperClass(R.drawable.design, "Drawing And Design", "The wonderful world of  Design", 4));
         featuredTopics.add(new FeaturedHelperClass(R.drawable.computer, "Computer Studies", "The wonderful world of computer studies", 3));
         featuredTopics.add(new FeaturedHelperClass(R.drawable.chemistry, "Chemistry", "The wonderful world of chemistry", 5));
 
