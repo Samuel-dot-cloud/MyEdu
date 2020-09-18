@@ -48,4 +48,7 @@
     <string name="notes_section">Notes</string>
     <string name="featured_topics">Featured Topics</string>
     <string name="featured_topics_desc">These are the featured topics that are in demand!</string>
+    <string name="most_viewed_topics">Most Viewed</string>
+    <string name="view_all">View All</string>
+    <string name="categories">Categories</string>
 </resources>
