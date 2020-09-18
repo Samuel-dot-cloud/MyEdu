@@ -12,6 +12,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.studiofive.myedu.R;
+import com.studiofive.myedu.adapters.FeaturedAdapter;
+import com.studiofive.myedu.classes.helper_class.FeaturedHelperClass;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,6 +32,7 @@ public class HomeFragment extends Fragment {
 
     private Unbinder unbinder;
     private Context mContext;
+    RecyclerView.Adapter adapter;
 
 
     public HomeFragment() {
@@ -69,6 +74,15 @@ public class HomeFragment extends Fragment {
     private void featuredRecyclerMethod() {
         featuredRecycler.setHasFixedSize(true);
         featuredRecycler.setLayoutManager(new LinearLayoutManager(mContext.getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
+
+        ArrayList<FeaturedHelperClass> featuredTopics = new ArrayList<>();
+        featuredTopics.add(new FeaturedHelperClass(R.drawable.calculus, "Calculus", "The wonderful world of calculus", 4));
+        featuredTopics.add(new FeaturedHelperClass(R.drawable.design, "Drawing And Design", "The wonderful world of Drawing and Design", 4));
+        featuredTopics.add(new FeaturedHelperClass(R.drawable.computer, "Computer Studies", "The wonderful world of computer studies", 3));
+        featuredTopics.add(new FeaturedHelperClass(R.drawable.chemistry, "Chemistry", "The wonderful world of chemistry", 5));
+
+        adapter = new FeaturedAdapter(featuredTopics);
+        featuredRecycler.setAdapter(adapter);
     }
 
     @Override
