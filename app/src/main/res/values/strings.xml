@@ -43,4 +43,8 @@
     <string name="friends">Friends</string>
     <string name="_100">100</string>
     <string name="s_t_u_d_i_o_f_i_v_e">S T U D I O  F I V E</string>
+    <string name="app_name">MyEdu</string>
+    <string name="search_text">Search...</string>
+    <string name="profile_section">Profile</string>
+    <string name="notes_section">Notes</string>
 </resources>
