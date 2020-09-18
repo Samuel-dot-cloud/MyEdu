@@ -204,10 +204,11 @@
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/featured_recycler"
                     android:layout_width="match_parent"
                     android:layout_height="280dp"
                     android:layout_toRightOf="@id/featured_topics"
-                    android:background="@color/home_background"/>
+                    android:background="@color/home_background" />
 
             </RelativeLayout>
 
