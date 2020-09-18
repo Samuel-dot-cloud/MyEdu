@@ -63,7 +63,7 @@
             <RelativeLayout
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:background="@drawable/card"
+                android:background="@drawable/card1"
                 android:elevation="8dp"
                 android:layout_margin="10dp">
 
@@ -89,7 +89,7 @@
             <RelativeLayout
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:background="@drawable/card"
+                android:background="@drawable/card2"
                 android:elevation="8dp"
                 android:layout_margin="10dp">
 
@@ -97,7 +97,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_centerInParent="true"
-                    android:src="@drawable/ic_profile" />
+                    android:src="@drawable/ic_child" />
 
             </RelativeLayout>
             <TextView
@@ -115,7 +115,7 @@
             <RelativeLayout
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:background="@drawable/card"
+                android:background="@drawable/card3"
                 android:elevation="8dp"
                 android:layout_margin="10dp">
 
@@ -123,7 +123,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_centerInParent="true"
-                    android:src="@drawable/ic_profile" />
+                    android:src="@drawable/ic_school" />
 
             </RelativeLayout>
             <TextView
@@ -141,7 +141,7 @@
             <RelativeLayout
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:background="@drawable/card"
+                android:background="@drawable/card4"
                 android:elevation="8dp"
                 android:layout_margin="10dp">
 
@@ -149,7 +149,8 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_centerInParent="true"
-                    android:src="@drawable/ic_profile" />
+                    android:src="@drawable/ic_chats"
+                    android:tint="@android:color/black"/>
 
             </RelativeLayout>
             <TextView
