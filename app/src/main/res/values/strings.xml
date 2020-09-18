@@ -46,4 +46,6 @@
     <string name="search_text">Search...</string>
     <string name="profile_section">Profile</string>
     <string name="notes_section">Notes</string>
+    <string name="featured_topics">Featured Topics</string>
+    <string name="featured_topics_desc">These are the featured topics that are in demand!</string>
 </resources>

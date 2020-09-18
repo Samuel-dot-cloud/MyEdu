@@ -18,7 +18,7 @@
             android:layout_centerHorizontal="true"
             android:fontFamily="@font/bangers"
             android:text="@string/app_name"
-            android:textSize="24sp" />
+            android:textSize="28sp" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -149,7 +149,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_centerInParent="true"
-                    android:src="@drawable/ic_chats"
+                    android:src="@drawable/ic_notes"
                     android:tint="@android:color/black"/>
 
             </RelativeLayout>
@@ -161,5 +161,45 @@
         </LinearLayout>
 
     </LinearLayout>
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:background="@color/banner_background_light">
+        
+        <LinearLayout
+            android:id="@+id/featured_topics"
+            android:layout_width="170dp"
+            android:layout_height="280dp"
+            android:background="@color/banner_background"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/featured_topics"
+                android:textSize="25sp"
+                android:textColor="@color/colorAccent"
+                android:layout_marginTop="50dp"
+                android:textAllCaps="true"
+                android:layout_marginLeft="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="@string/featured_topics_desc"/>
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="280dp"
+            android:layout_toRightOf="@id/featured_topics"
+            android:background="@color/home_background"/>
+
+    </RelativeLayout>
 
 </LinearLayout>
