@@ -46,7 +46,7 @@ public class MostViewedAdapter extends RecyclerView.Adapter<MostViewedAdapter.Mo
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mostViewedTopics.size();
     }
 
     public static class MostViewedViewHolder extends RecyclerView.ViewHolder{

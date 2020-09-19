@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.studiofive.myedu.R;
 import com.studiofive.myedu.adapters.FeaturedAdapter;
+import com.studiofive.myedu.adapters.MostViewedAdapter;
 import com.studiofive.myedu.classes.helper_class.FeaturedHelperClass;
 
 import java.util.ArrayList;
@@ -29,6 +30,10 @@ import butterknife.Unbinder;
 public class HomeFragment extends Fragment {
     @BindView(R.id.featured_recycler)
     RecyclerView featuredRecycler;
+    @BindView(R.id.most_viewed_recyclerview)
+    RecyclerView mostViewedRecycler;
+    @BindView(R.id.categories_recyclerview)
+    RecyclerView categoriesRecycler;
 
     private Unbinder unbinder;
     private Context mContext;
@@ -67,6 +72,7 @@ public class HomeFragment extends Fragment {
         unbinder = ButterKnife.bind(this, view);
 
         featuredRecyclerMethod();
+        mostViewedRecyclerMethod();
 
         return view;
     }
@@ -83,6 +89,20 @@ public class HomeFragment extends Fragment {
 
         adapter = new FeaturedAdapter(featuredTopics);
         featuredRecycler.setAdapter(adapter);
+    }
+
+    private void mostViewedRecyclerMethod() {
+        mostViewedRecycler.setHasFixedSize(true);
+        mostViewedRecycler.setLayoutManager(new LinearLayoutManager(mContext.getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
+
+        ArrayList<FeaturedHelperClass> mostViewedTopics = new ArrayList<>();
+        mostViewedTopics.add(new FeaturedHelperClass(R.drawable.calculus, "Calculus", "The wonderful world of calculus", 4));
+        mostViewedTopics.add(new FeaturedHelperClass(R.drawable.design, "Drawing And Design", "The wonderful world of  Design", 4));
+        mostViewedTopics.add(new FeaturedHelperClass(R.drawable.computer, "Computer Studies", "The wonderful world of computer studies", 4));
+        mostViewedTopics.add(new FeaturedHelperClass(R.drawable.chemistry, "Chemistry", "The wonderful world of chemistry", 4));
+
+        adapter = new MostViewedAdapter(mostViewedTopics);
+        mostViewedRecycler.setAdapter(adapter);
     }
 
     @Override
