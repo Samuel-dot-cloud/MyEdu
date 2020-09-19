@@ -1,6 +1,7 @@
 package com.studiofive.myedu.fragments;
 
 import android.content.Context;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,11 +13,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.studiofive.myedu.R;
+import com.studiofive.myedu.adapters.CategoriesAdapter;
 import com.studiofive.myedu.adapters.FeaturedAdapter;
 import com.studiofive.myedu.adapters.MostViewedAdapter;
+import com.studiofive.myedu.classes.helper_class.CategoriesHelperClass;
 import com.studiofive.myedu.classes.helper_class.FeaturedHelperClass;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -71,8 +75,13 @@ public class HomeFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_home, container, false);
         unbinder = ButterKnife.bind(this, view);
 
+        Random r = new Random();
+        int[] colors = new int[]{0xFF616261,0xFF131313, 0xFF125FF8, 0xFFFFEA00, 0xFF5D4037};
+
+//        getRandom(r, colors);
         featuredRecyclerMethod();
         mostViewedRecyclerMethod();
+        categoriesRecyclerMethod();
 
         return view;
     }
@@ -104,6 +113,26 @@ public class HomeFragment extends Fragment {
         adapter = new MostViewedAdapter(mostViewedTopics);
         mostViewedRecycler.setAdapter(adapter);
     }
+
+    private void categoriesRecyclerMethod(){
+        categoriesRecycler.setHasFixedSize(true);
+        categoriesRecycler.setLayoutManager(new LinearLayoutManager(mContext.getApplicationContext(), LinearLayoutManager.VERTICAL, false));
+
+        ArrayList<CategoriesHelperClass> categories = new ArrayList<>();
+        categories.add(new CategoriesHelperClass(R.drawable.chemistry, "Chemistry"));
+        categories.add(new CategoriesHelperClass(R.drawable.calculus, "Calculus"));
+        categories.add(new CategoriesHelperClass(R.drawable.design, "Design"));
+        categories.add(new CategoriesHelperClass(R.drawable.computer, "Computer"));
+
+        GradientDrawable drawable = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, new int[] {0xFFFFEA00, 0xFF5D4037});
+
+        adapter = new CategoriesAdapter(categories);
+        categoriesRecycler.setAdapter(adapter);
+    }
+
+//    public void getRandom(Random random, int[] colors) {
+//        return random.nextInt(colors.length);
+//    }
 
     @Override
     public void onDestroyView() {
