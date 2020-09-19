@@ -93,7 +93,7 @@ public class HomeFragment extends Fragment {
 
     private void mostViewedRecyclerMethod() {
         mostViewedRecycler.setHasFixedSize(true);
-        mostViewedRecycler.setLayoutManager(new LinearLayoutManager(mContext.getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
+        mostViewedRecycler.setLayoutManager(new LinearLayoutManager(mContext.getApplicationContext(), LinearLayoutManager.VERTICAL, false));
 
         ArrayList<FeaturedHelperClass> mostViewedTopics = new ArrayList<>();
         mostViewedTopics.add(new FeaturedHelperClass(R.drawable.calculus, "Calculus", "The wonderful world of calculus", 4));
