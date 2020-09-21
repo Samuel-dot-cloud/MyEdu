@@ -49,7 +49,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import es.dmoral.toasty.Toasty;
 
 public class ProfileSettingsActivity extends AppCompatActivity {
-    @BindView(R.id.profile_settings_toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.set_profile_image)
     CircleImageView mProfileImage;
