@@ -1,8 +1,5 @@
 package com.studiofive.myedu.authentication;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +12,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -25,7 +25,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.iid.FirebaseInstanceId;
 import com.studiofive.myedu.R;
 import com.studiofive.myedu.classes.Users;
 import com.studiofive.myedu.intro.SplashActivity;
@@ -109,8 +108,6 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()){
-
-//                                String currentUserId =mAuth.getCurrentUser().getUid();
                                 FirebaseUser firebaseUser = mAuth.getCurrentUser();
                                 if (firebaseUser!=null){
                                     String userID = firebaseUser.getUid();
@@ -133,21 +130,6 @@ public class LoginActivity extends AppCompatActivity {
                                     });
                                     mProgressDialog.dismiss();
                                 }
-//                                String deviceToken = FirebaseInstanceId.getInstance().getToken();
-//
-//                                mReference.child(currentUserId).child("device_token")
-//                                        .setValue(deviceToken)
-//                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                            @Override
-//                                            public void onComplete(@NonNull Task<Void> task) {
-//                                                if (task.isSuccessful()){
-//                                                    sendUserToSplashActivity();
-//                                                    Toasty.success(LoginActivity.this, "Logged in Successfully!!", Toast.LENGTH_SHORT, true).show();
-//                                                }
-//                                            }
-//                                        });
-//                                sendUserToSplashActivity();
-//                                Toasty.success(LoginActivity.this, "Logged in Successfully!!", Toast.LENGTH_SHORT, true).show();
                             }else {
                                 String message = task.getException().toString();
                                 Toasty.error(LoginActivity.this, "Error: " + message, Toast.LENGTH_SHORT, true).show();

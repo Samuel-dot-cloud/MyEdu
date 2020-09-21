@@ -180,7 +180,7 @@
 
                 <LinearLayout
                     android:id="@+id/featured_topics"
-                    android:layout_width="170dp"
+                    android:layout_width="140dp"
                     android:layout_height="280dp"
                     android:background="@color/banner_background"
                     android:layout_margin="10dp"
@@ -243,7 +243,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/most_viewed_recyclerview"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"/>
+                    android:layout_height="180dp"/>
             </LinearLayout>
 
             <LinearLayout
