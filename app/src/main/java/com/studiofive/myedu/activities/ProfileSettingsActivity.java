@@ -1,18 +1,14 @@
 package com.studiofive.myedu.activities;
 
-import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.WindowManager;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,7 +40,6 @@ import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.util.HashMap;
-import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -72,6 +67,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
     private StorageReference mImageRef;
     private BottomSheetDialog bottomSheetMantra, bottomSheetEditName;
     private static final int GALLERY_PIC = 5;
+    private String currentUserId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +82,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
 
         mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         mFirestore = FirebaseFirestore.getInstance();
+        currentUserId = mFirebaseUser.getUid();
         mImageRef = FirebaseStorage.getInstance().getReference().child("Profile Images");
         mProgressDialog = new ProgressDialog(this);
 
@@ -108,6 +105,13 @@ public class ProfileSettingsActivity extends AppCompatActivity {
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 intent.setType("image/*");
                 startActivityForResult(intent, GALLERY_PIC);
+            }
+        });
+
+        mUpdateProfileSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateTextFields();
             }
         });
 //
@@ -263,7 +267,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
                 mProgressDialog.show();
 
                 final Uri resultUri = result.getUri();
-                StorageReference filePath = mImageRef.child(System.currentTimeMillis()+"."+ getFileExtension(resultUri));
+                StorageReference filePath = mImageRef.child(currentUserId +"."+ getFileExtension(resultUri));
                 filePath.putFile(resultUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
