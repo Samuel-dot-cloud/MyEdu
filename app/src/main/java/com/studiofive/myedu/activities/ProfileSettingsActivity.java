@@ -2,6 +2,7 @@ package com.studiofive.myedu.activities;
 
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -39,6 +40,7 @@ import com.studiofive.myedu.classes.Common;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
+import java.io.File;
 import java.util.HashMap;
 
 import butterknife.BindView;
@@ -114,20 +116,6 @@ public class ProfileSettingsActivity extends AppCompatActivity {
                 updateTextFields();
             }
         });
-//
-//        mUserName.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showBottomSheetEditName();
-//            }
-//        });
-//
-//        mPersonalMantra.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showBottomSheetEditMantra();
-//            }
-//        });
 
         mProfileImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,88 +129,6 @@ public class ProfileSettingsActivity extends AppCompatActivity {
             }
         });
     }
-
-//    private void showBottomSheetEditMantra() {
-//        @SuppressLint("InflateParams") View view = getLayoutInflater().inflate(R.layout.bottom_sheet_edit_mantra, null);
-//
-//        ((View) view.findViewById(R.id.btn_cancel_mantra)).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                bottomSheetMantra.dismiss();
-//            }
-//        });
-//
-//        final EditText editPersonalMantra = view.findViewById(R.id.ed_personal_mantra);
-//
-//        ((View) view.findViewById(R.id.btn_save_mantra)).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (TextUtils.isEmpty(editPersonalMantra.getText().toString())){
-//                    Toasty.warning(getApplicationContext(), "Personal mantra cannot be blank", Toast.LENGTH_SHORT);
-//                }else{
-//                    updatePersonalMantra(editPersonalMantra.getText().toString());
-//                    bottomSheetMantra.dismiss();
-//                }
-//            }
-//        });
-//
-//        bottomSheetMantra = new BottomSheetDialog(this);
-//        bottomSheetMantra.setContentView(view);
-//
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-//            Objects.requireNonNull(bottomSheetMantra.getWindow()).addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-//        }
-//
-//        bottomSheetMantra.setOnDismissListener(new DialogInterface.OnDismissListener() {
-//            @Override
-//            public void onDismiss(DialogInterface dialog) {
-//                bottomSheetMantra = null;
-//            }
-//        });
-//
-//        bottomSheetMantra.show();
-//    }
-
-//    private void showBottomSheetEditName() {
-//        @SuppressLint("InflateParams") View view = getLayoutInflater().inflate(R.layout.bottom_sheet_edit_name, null);
-//
-//        ((View) view.findViewById(R.id.btn_cancel)).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                bottomSheetEditName.dismiss();
-//            }
-//        });
-//
-//        final EditText editUserName = view.findViewById(R.id.ed_username);
-//
-//        ((View) view.findViewById(R.id.btn_save)).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (TextUtils.isEmpty(editUserName.getText().toString())){
-//                    Toasty.warning(getApplicationContext(), "Name cannot be blank", Toast.LENGTH_SHORT);
-//                }else{
-//                    updateName(editUserName.getText().toString());
-//                    bottomSheetEditName.dismiss();
-//                }
-//            }
-//        });
-//
-//        bottomSheetEditName = new BottomSheetDialog(this);
-//        bottomSheetEditName.setContentView(view);
-//
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-//            Objects.requireNonNull(bottomSheetEditName.getWindow()).addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-//        }
-//
-//        bottomSheetEditName.setOnDismissListener(new DialogInterface.OnDismissListener() {
-//            @Override
-//            public void onDismiss(DialogInterface dialog) {
-//                bottomSheetEditName = null;
-//            }
-//        });
-//
-//        bottomSheetEditName.show();
-//    }
 
     private void getInfo() {
         mFirestore.collection("Users").document(mFirebaseUser.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -267,7 +173,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
                 mProgressDialog.show();
 
                 final Uri resultUri = result.getUri();
-                StorageReference filePath = mImageRef.child(currentUserId +"."+ getFileExtension(resultUri));
+                StorageReference filePath = mImageRef.child(currentUserId +"."+ getMimeType(getApplicationContext(), resultUri));
                 filePath.putFile(resultUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -304,8 +210,22 @@ public class ProfileSettingsActivity extends AppCompatActivity {
         }
     }
 
+    public static String getMimeType(Context context, Uri uri) {
+        String extension;
+        //Check uri format to avoid null
+        if (uri.getScheme().equals(ContentResolver.SCHEME_CONTENT)) {
+            //If scheme is a content
+            final MimeTypeMap mime = MimeTypeMap.getSingleton();
+            extension = mime.getExtensionFromMimeType(context.getContentResolver().getType(uri));
+        } else {
+            //If scheme is a File
+            //This will replace white spaces with %20 and also other special characters. This will avoid returning null values on file name with spaces and special characters.
+            extension = MimeTypeMap.getFileExtensionFromUrl(Uri.fromFile(new File(uri.getPath())).toString());
 
+        }
 
+        return extension;
+    }
 
     private String getFileExtension(Uri uri){
         ContentResolver contentResolver = getContentResolver();
@@ -313,25 +233,6 @@ public class ProfileSettingsActivity extends AppCompatActivity {
         return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
     }
 
-//    private void updateName(String newName){
-//        mFirestore.collection("Users").document(mFirebaseUser.getUid()).update("userName", newName).addOnSuccessListener(new OnSuccessListener<Void>() {
-//            @Override
-//            public void onSuccess(Void aVoid) {
-//                Toasty.success(getApplicationContext(), "Update successful", Toast.LENGTH_SHORT, true).show();
-//                getInfo();
-//            }
-//        });
-//    }
-//
-//    private void updatePersonalMantra(String newMantra){
-//        mFirestore.collection("Users").document(mFirebaseUser.getUid()).update("personalMantra", newMantra).addOnSuccessListener(new OnSuccessListener<Void>() {
-//            @Override
-//            public void onSuccess(Void aVoid) {
-//                Toasty.success(getApplicationContext(), "Update successful", Toast.LENGTH_SHORT, true).show();
-//                getInfo();
-//            }
-//        });
-//    }
 
     private void updateTextFields(){
         String setName = mUserName.getText().toString();
