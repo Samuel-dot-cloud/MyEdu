@@ -63,6 +63,11 @@ public class SignUpActivity extends AppCompatActivity {
         mFirestore = FirebaseFirestore.getInstance();
         mProgressDialog = new ProgressDialog(this);
 
+        initActionClick();
+
+    }
+
+    private void initActionClick() {
         mBtnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
