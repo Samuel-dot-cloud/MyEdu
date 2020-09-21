@@ -14,6 +14,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
 import android.webkit.MimeTypeMap;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -59,8 +60,8 @@ public class ProfileSettingsActivity extends AppCompatActivity {
     EditText mUserName;
     @BindView(R.id.set_personal_mantra)
     EditText mPersonalMantra;
-//    @BindView(R.id.update_settings_button)
-//    Button mUpdateProfileSettings;
+    @BindView(R.id.update_settings_button)
+    Button mUpdateProfileSettings;
     @BindView(R.id.fab_camera)
     FloatingActionButton cameraButton;
 
@@ -109,20 +110,20 @@ public class ProfileSettingsActivity extends AppCompatActivity {
                 startActivityForResult(intent, GALLERY_PIC);
             }
         });
-
-        mUserName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showBottomSheetEditName();
-            }
-        });
-
-        mPersonalMantra.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showBottomSheetEditMantra();
-            }
-        });
+//
+//        mUserName.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                showBottomSheetEditName();
+//            }
+//        });
+//
+//        mPersonalMantra.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                showBottomSheetEditMantra();
+//            }
+//        });
 
         mProfileImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,87 +138,87 @@ public class ProfileSettingsActivity extends AppCompatActivity {
         });
     }
 
-    private void showBottomSheetEditMantra() {
-        @SuppressLint("InflateParams") View view = getLayoutInflater().inflate(R.layout.bottom_sheet_edit_mantra, null);
+//    private void showBottomSheetEditMantra() {
+//        @SuppressLint("InflateParams") View view = getLayoutInflater().inflate(R.layout.bottom_sheet_edit_mantra, null);
+//
+//        ((View) view.findViewById(R.id.btn_cancel_mantra)).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                bottomSheetMantra.dismiss();
+//            }
+//        });
+//
+//        final EditText editPersonalMantra = view.findViewById(R.id.ed_personal_mantra);
+//
+//        ((View) view.findViewById(R.id.btn_save_mantra)).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (TextUtils.isEmpty(editPersonalMantra.getText().toString())){
+//                    Toasty.warning(getApplicationContext(), "Personal mantra cannot be blank", Toast.LENGTH_SHORT);
+//                }else{
+//                    updatePersonalMantra(editPersonalMantra.getText().toString());
+//                    bottomSheetMantra.dismiss();
+//                }
+//            }
+//        });
+//
+//        bottomSheetMantra = new BottomSheetDialog(this);
+//        bottomSheetMantra.setContentView(view);
+//
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+//            Objects.requireNonNull(bottomSheetMantra.getWindow()).addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+//        }
+//
+//        bottomSheetMantra.setOnDismissListener(new DialogInterface.OnDismissListener() {
+//            @Override
+//            public void onDismiss(DialogInterface dialog) {
+//                bottomSheetMantra = null;
+//            }
+//        });
+//
+//        bottomSheetMantra.show();
+//    }
 
-        ((View) view.findViewById(R.id.btn_cancel_mantra)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                bottomSheetMantra.dismiss();
-            }
-        });
-
-        final EditText editPersonalMantra = view.findViewById(R.id.ed_personal_mantra);
-
-        ((View) view.findViewById(R.id.btn_save_mantra)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (TextUtils.isEmpty(editPersonalMantra.getText().toString())){
-                    Toasty.warning(getApplicationContext(), "Personal mantra cannot be blank", Toast.LENGTH_SHORT);
-                }else{
-                    updatePersonalMantra(editPersonalMantra.getText().toString());
-                    bottomSheetMantra.dismiss();
-                }
-            }
-        });
-
-        bottomSheetMantra = new BottomSheetDialog(this);
-        bottomSheetMantra.setContentView(view);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-            Objects.requireNonNull(bottomSheetMantra.getWindow()).addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        }
-
-        bottomSheetMantra.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-                bottomSheetMantra = null;
-            }
-        });
-
-        bottomSheetMantra.show();
-    }
-
-    private void showBottomSheetEditName() {
-        @SuppressLint("InflateParams") View view = getLayoutInflater().inflate(R.layout.bottom_sheet_edit_name, null);
-
-        ((View) view.findViewById(R.id.btn_cancel)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                bottomSheetEditName.dismiss();
-            }
-        });
-
-        final EditText editUserName = view.findViewById(R.id.ed_username);
-
-        ((View) view.findViewById(R.id.btn_save)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (TextUtils.isEmpty(editUserName.getText().toString())){
-                    Toasty.warning(getApplicationContext(), "Name cannot be blank", Toast.LENGTH_SHORT);
-                }else{
-                    updateName(editUserName.getText().toString());
-                    bottomSheetEditName.dismiss();
-                }
-            }
-        });
-
-        bottomSheetEditName = new BottomSheetDialog(this);
-        bottomSheetEditName.setContentView(view);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-            Objects.requireNonNull(bottomSheetEditName.getWindow()).addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        }
-
-        bottomSheetEditName.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-                bottomSheetEditName = null;
-            }
-        });
-
-        bottomSheetEditName.show();
-    }
+//    private void showBottomSheetEditName() {
+//        @SuppressLint("InflateParams") View view = getLayoutInflater().inflate(R.layout.bottom_sheet_edit_name, null);
+//
+//        ((View) view.findViewById(R.id.btn_cancel)).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                bottomSheetEditName.dismiss();
+//            }
+//        });
+//
+//        final EditText editUserName = view.findViewById(R.id.ed_username);
+//
+//        ((View) view.findViewById(R.id.btn_save)).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (TextUtils.isEmpty(editUserName.getText().toString())){
+//                    Toasty.warning(getApplicationContext(), "Name cannot be blank", Toast.LENGTH_SHORT);
+//                }else{
+//                    updateName(editUserName.getText().toString());
+//                    bottomSheetEditName.dismiss();
+//                }
+//            }
+//        });
+//
+//        bottomSheetEditName = new BottomSheetDialog(this);
+//        bottomSheetEditName.setContentView(view);
+//
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+//            Objects.requireNonNull(bottomSheetEditName.getWindow()).addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+//        }
+//
+//        bottomSheetEditName.setOnDismissListener(new DialogInterface.OnDismissListener() {
+//            @Override
+//            public void onDismiss(DialogInterface dialog) {
+//                bottomSheetEditName = null;
+//            }
+//        });
+//
+//        bottomSheetEditName.show();
+//    }
 
     private void getInfo() {
         mFirestore.collection("Users").document(mFirebaseUser.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -308,23 +309,46 @@ public class ProfileSettingsActivity extends AppCompatActivity {
         return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
     }
 
-    private void updateName(String newName){
-        mFirestore.collection("Users").document(mFirebaseUser.getUid()).update("userName", newName).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                Toasty.success(getApplicationContext(), "Update successful", Toast.LENGTH_SHORT, true).show();
-                getInfo();
-            }
-        });
+//    private void updateName(String newName){
+//        mFirestore.collection("Users").document(mFirebaseUser.getUid()).update("userName", newName).addOnSuccessListener(new OnSuccessListener<Void>() {
+//            @Override
+//            public void onSuccess(Void aVoid) {
+//                Toasty.success(getApplicationContext(), "Update successful", Toast.LENGTH_SHORT, true).show();
+//                getInfo();
+//            }
+//        });
+//    }
+//
+//    private void updatePersonalMantra(String newMantra){
+//        mFirestore.collection("Users").document(mFirebaseUser.getUid()).update("personalMantra", newMantra).addOnSuccessListener(new OnSuccessListener<Void>() {
+//            @Override
+//            public void onSuccess(Void aVoid) {
+//                Toasty.success(getApplicationContext(), "Update successful", Toast.LENGTH_SHORT, true).show();
+//                getInfo();
+//            }
+//        });
+//    }
+
+    private void updateTextFields(){
+        String setName = mUserName.getText().toString();
+        String setMantra = mPersonalMantra.getText().toString();
+
+        if (TextUtils.isEmpty(setName) || TextUtils.isEmpty(setMantra)){
+            Toasty.warning(ProfileSettingsActivity.this, "Please input profile details!!", Toast.LENGTH_SHORT, true).show();
+        } else {
+            HashMap<String, Object> profileMap = new HashMap<>();
+            profileMap.put("userName", setName);
+            profileMap.put("personalMantra", setMantra);
+
+            mFirestore.collection("Users").document(mFirebaseUser.getUid()).update(profileMap)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toasty.success(getApplicationContext(), "Update successful", Toast.LENGTH_SHORT, true).show();
+                            getInfo();
+                        }
+                    });
+        }
     }
 
-    private void updatePersonalMantra(String newMantra){
-        mFirestore.collection("Users").document(mFirebaseUser.getUid()).update("personalMantra", newMantra).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                Toasty.success(getApplicationContext(), "Update successful", Toast.LENGTH_SHORT, true).show();
-                getInfo();
-            }
-        });
-    }
 }
