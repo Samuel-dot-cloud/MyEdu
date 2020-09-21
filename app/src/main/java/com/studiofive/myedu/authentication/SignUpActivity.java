@@ -1,8 +1,5 @@
 package com.studiofive.myedu.authentication;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,15 +12,20 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.studiofive.myedu.MainActivity;
 import com.studiofive.myedu.R;
+import com.studiofive.myedu.classes.Users;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,7 +38,7 @@ public class SignUpActivity extends AppCompatActivity {
     EditText mInputPassword;
     @BindView(R.id.btnSignUp)
     Button mBtnSignUp;
-//    @BindView(R.idn in .googleSignUp)
+    //    @BindView(R.idn in .googleSignUp)
 //    ImageView mGoogleLogin;
 //    @BindView(R.id.facebookSignUp)
 //    ImageView mFacebookLogin;
@@ -45,9 +47,10 @@ public class SignUpActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private ProgressDialog mProgressDialog;
-//    private FirebaseFirestore mFireStore;
-//    private DocumentReference mDocRef;
-    private DatabaseReference mReference;
+    private FirebaseFirestore mFirestore;
+    private Users users;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,9 +60,14 @@ public class SignUpActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         mAuth = FirebaseAuth.getInstance();
-        mReference = FirebaseDatabase.getInstance().getReference();
+        mFirestore = FirebaseFirestore.getInstance();
         mProgressDialog = new ProgressDialog(this);
 
+        initActionClick();
+
+    }
+
+    private void initActionClick() {
         mBtnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,12 +83,12 @@ public class SignUpActivity extends AppCompatActivity {
         });
     }
 
-    private void createNewUserDefault(){
+    private void createNewUserDefault() {
         String email = mInputEmail.getText().toString();
         String password = mInputPassword.getText().toString();
-        if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)){
+        if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
             Toasty.warning(this, "Please enter valid details!!", Toast.LENGTH_SHORT, true).show();
-        }else {
+        } else {
             mProgressDialog.setTitle("Creating New Account");
             mProgressDialog.setMessage("Please wait...");
             mProgressDialog.setCanceledOnTouchOutside(true);
@@ -91,18 +99,29 @@ public class SignUpActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                String deviceToken = FirebaseInstanceId.getInstance().getToken();
-                                String uid = mAuth.getCurrentUser().getUid();
-                                mReference.child("Users").child(uid).setValue("");
+                                FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                                if (firebaseUser != null) {
+                                    String userID = firebaseUser.getUid();
+                                    users = new Users(userID, "", "", "", "", mInputEmail.getText().toString());
+                                    mFirestore.collection("Users").document(firebaseUser.getUid()).set(users)
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void aVoid) {
+                                                    mProgressDialog.dismiss();
+                                                    Toasty.success(SignUpActivity.this, "Account created successfully.", Toast.LENGTH_SHORT, true).show();
+                                                    sendUserToMainActivity();
+                                                }
+                                            }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            String message = task.getException().toString();
+                                            Toasty.error(SignUpActivity.this, "Error: " + message, Toast.LENGTH_SHORT, true).show();
+                                        }
+                                    });
+                                    mProgressDialog.dismiss();
+                                }
 
-                                mReference.child("Users").child(uid).child("device_token")
-                                        .setValue(deviceToken);
-
-                                 sendUserToMainActivity();
-                                Toasty.success(SignUpActivity.this, "Account created successfully.", Toast.LENGTH_SHORT, true).show();
-
-
-                            } else{
+                            } else {
                                 String message = task.getException().toString();
                                 Toasty.error(SignUpActivity.this, "Error: " + message, Toast.LENGTH_SHORT, true).show();
                             }
