@@ -19,9 +19,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.studiofive.myedu.R;
-import com.studiofive.myedu.classes.Users;
 import com.studiofive.myedu.intro.SplashActivity;
 
 import butterknife.BindView;
@@ -46,8 +44,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private ProgressDialog mProgressDialog;
-    private FirebaseFirestore mFirestore;
-    private Users users;
 
 
     @Override
@@ -59,10 +55,14 @@ public class LoginActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         mAuth = FirebaseAuth.getInstance();
-        mFirestore = FirebaseFirestore.getInstance();
         mProgressDialog = new ProgressDialog(this);
 
 
+        initActionClick();
+
+    }
+
+    private void initActionClick() {
         mBtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,29 +101,6 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-//                                FirebaseUser firebaseUser = mAuth.getCurrentUser();
-//                                if (firebaseUser!=null){
-//                                    String userID = firebaseUser.getUid();
-//                                  users = new Users(userID, users.getUserName(), users.getPersonalMantra(), users.getProfileImage(), users.getGender(), users.getEmail());
-//                                    mFirestore.collection("Users").document(firebaseUser.getUid()).set(users)
-//                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                                                @Override
-//                                                public void onSuccess(Void aVoid) {
-//                                                    mProgressDialog.dismiss();
-//                                                    Toasty.success(LoginActivity.this, "Logged in Successfully!!", Toast.LENGTH_SHORT, true).show();
-//                                                    sendUserToSplashActivity();
-//                                                }
-//                                            }).addOnFailureListener(new OnFailureListener() {
-//                                        @Override
-//                                        public void onFailure(@NonNull Exception e) {
-//
-//                                            String message = task.getException().toString();
-//                                            Toasty.error(LoginActivity.this, "Error: " + message, Toast.LENGTH_SHORT, true).show();
-//                                        }
-//                                    });
-//                                    mProgressDialog.dismiss();
-//                                }
-
                                 mProgressDialog.dismiss();
                                 Toasty.success(LoginActivity.this, "Logged in Successfully!!", Toast.LENGTH_SHORT, true).show();
                                 sendUserToSplashActivity();
