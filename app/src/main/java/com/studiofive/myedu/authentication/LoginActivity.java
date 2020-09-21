@@ -22,8 +22,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.studiofive.myedu.R;
 import com.studiofive.myedu.classes.Users;
@@ -51,7 +49,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private ProgressDialog mProgressDialog;
-    private DatabaseReference mReference;
     private FirebaseFirestore mFirestore;
     private Users users;
 
@@ -65,7 +62,6 @@ public class LoginActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         mAuth =FirebaseAuth.getInstance();
-        mReference = FirebaseDatabase.getInstance().getReference().child("Users");
         mFirestore = FirebaseFirestore.getInstance();
         mProgressDialog = new ProgressDialog(this);
 
