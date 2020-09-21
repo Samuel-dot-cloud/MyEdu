@@ -16,12 +16,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.studiofive.myedu.R;
 import com.studiofive.myedu.classes.Users;
@@ -40,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
     Button mBtnLogin;
     @BindView(R.id.forgotPassword)
     TextView mForgotPassword;
-//    @BindView(R.id.googleLogin)
+    //    @BindView(R.id.googleLogin)
 //    ImageView mGoogleLogin;
 //    @BindView(R.id.facebookLogin)
 //    ImageView mFacebookLogin;
@@ -61,10 +58,9 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
-        mAuth =FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
         mFirestore = FirebaseFirestore.getInstance();
         mProgressDialog = new ProgressDialog(this);
-
 
 
         mBtnLogin.setOnClickListener(new View.OnClickListener() {
@@ -89,7 +85,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void LoginDefault(){
+    private void LoginDefault() {
         String email = mEmailLogin.getText().toString();
         String password = mPasswordLogin.getText().toString();
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
@@ -104,30 +100,34 @@ public class LoginActivity extends AppCompatActivity {
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()){
-                                FirebaseUser firebaseUser = mAuth.getCurrentUser();
-                                if (firebaseUser!=null){
-                                    String userID = firebaseUser.getUid();
-                                    users = new Users(userID, users.getUserName(), users.getPersonalMantra(), users.getProfileImage(), users.getGender(), users.getEmail());
-                                    mFirestore.collection("Users").document(firebaseUser.getUid()).set(users)
-                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                @Override
-                                                public void onSuccess(Void aVoid) {
-                                                    mProgressDialog.dismiss();
-                                                    Toasty.success(LoginActivity.this, "Logged in Successfully!!", Toast.LENGTH_SHORT, true).show();
-                                                    sendUserToSplashActivity();
-                                                }
-                                            }).addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
+                            if (task.isSuccessful()) {
+//                                FirebaseUser firebaseUser = mAuth.getCurrentUser();
+//                                if (firebaseUser!=null){
+//                                    String userID = firebaseUser.getUid();
+//                                  users = new Users(userID, users.getUserName(), users.getPersonalMantra(), users.getProfileImage(), users.getGender(), users.getEmail());
+//                                    mFirestore.collection("Users").document(firebaseUser.getUid()).set(users)
+//                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                                                @Override
+//                                                public void onSuccess(Void aVoid) {
+//                                                    mProgressDialog.dismiss();
+//                                                    Toasty.success(LoginActivity.this, "Logged in Successfully!!", Toast.LENGTH_SHORT, true).show();
+//                                                    sendUserToSplashActivity();
+//                                                }
+//                                            }).addOnFailureListener(new OnFailureListener() {
+//                                        @Override
+//                                        public void onFailure(@NonNull Exception e) {
+//
+//                                            String message = task.getException().toString();
+//                                            Toasty.error(LoginActivity.this, "Error: " + message, Toast.LENGTH_SHORT, true).show();
+//                                        }
+//                                    });
+//                                    mProgressDialog.dismiss();
+//                                }
 
-                                            String message = task.getException().toString();
-                                            Toasty.error(LoginActivity.this, "Error: " + message, Toast.LENGTH_SHORT, true).show();
-                                        }
-                                    });
-                                    mProgressDialog.dismiss();
-                                }
-                            }else {
+                                mProgressDialog.dismiss();
+                                Toasty.success(LoginActivity.this, "Logged in Successfully!!", Toast.LENGTH_SHORT, true).show();
+                                sendUserToSplashActivity();
+                            } else {
                                 String message = task.getException().toString();
                                 Toasty.error(LoginActivity.this, "Error: " + message, Toast.LENGTH_SHORT, true).show();
                             }
