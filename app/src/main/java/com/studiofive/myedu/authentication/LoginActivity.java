@@ -53,6 +53,7 @@ public class LoginActivity extends AppCompatActivity {
     private ProgressDialog mProgressDialog;
     private DatabaseReference mReference;
     private FirebaseFirestore mFirestore;
+    private Users users;
 
 
     @Override
@@ -111,7 +112,7 @@ public class LoginActivity extends AppCompatActivity {
                                 FirebaseUser firebaseUser = mAuth.getCurrentUser();
                                 if (firebaseUser!=null){
                                     String userID = firebaseUser.getUid();
-                                    Users users = new Users(userID, "", "", "", "", mEmailLogin.getText().toString());
+                                    users = new Users(userID, users.getUserName(), users.getPersonalMantra(), users.getProfileImage(), users.getGender(), users.getEmail());
                                     mFirestore.collection("Users").document(firebaseUser.getUid()).set(users)
                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
