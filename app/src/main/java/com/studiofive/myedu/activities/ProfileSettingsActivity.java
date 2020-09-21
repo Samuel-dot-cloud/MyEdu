@@ -49,7 +49,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import es.dmoral.toasty.Toasty;
 
 public class ProfileSettingsActivity extends AppCompatActivity {
-    @BindView(R.id.toolbar)
+    @BindView(R.id.profile_settings_toolbar)
     Toolbar toolbar;
     @BindView(R.id.set_profile_image)
     CircleImageView mProfileImage;
@@ -80,6 +80,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
         getSupportActionBar().setTitle("Profile Settings");
 
         mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -221,16 +222,8 @@ public class ProfileSettingsActivity extends AppCompatActivity {
             //If scheme is a File
             //This will replace white spaces with %20 and also other special characters. This will avoid returning null values on file name with spaces and special characters.
             extension = MimeTypeMap.getFileExtensionFromUrl(Uri.fromFile(new File(uri.getPath())).toString());
-
         }
-
         return extension;
-    }
-
-    private String getFileExtension(Uri uri){
-        ContentResolver contentResolver = getContentResolver();
-        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
-        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
     }
 
 
