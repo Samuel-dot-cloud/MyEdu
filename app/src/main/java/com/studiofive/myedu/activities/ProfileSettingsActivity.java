@@ -1,19 +1,17 @@
 package com.studiofive.myedu.activities;
 
-import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
-import android.content.DialogInterface;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.WindowManager;
 import android.webkit.MimeTypeMap;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -42,8 +40,8 @@ import com.studiofive.myedu.classes.Common;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
+import java.io.File;
 import java.util.HashMap;
-import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -59,8 +57,8 @@ public class ProfileSettingsActivity extends AppCompatActivity {
     EditText mUserName;
     @BindView(R.id.set_personal_mantra)
     EditText mPersonalMantra;
-//    @BindView(R.id.update_settings_button)
-//    Button mUpdateProfileSettings;
+    @BindView(R.id.update_settings_button)
+    Button mUpdateProfileSettings;
     @BindView(R.id.fab_camera)
     FloatingActionButton cameraButton;
 
@@ -71,6 +69,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
     private StorageReference mImageRef;
     private BottomSheetDialog bottomSheetMantra, bottomSheetEditName;
     private static final int GALLERY_PIC = 5;
+    private String currentUserId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,10 +80,12 @@ public class ProfileSettingsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
         getSupportActionBar().setTitle("Profile Settings");
 
         mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         mFirestore = FirebaseFirestore.getInstance();
+        currentUserId = mFirebaseUser.getUid();
         mImageRef = FirebaseStorage.getInstance().getReference().child("Profile Images");
         mProgressDialog = new ProgressDialog(this);
 
@@ -110,17 +111,10 @@ public class ProfileSettingsActivity extends AppCompatActivity {
             }
         });
 
-        mUserName.setOnClickListener(new View.OnClickListener() {
+        mUpdateProfileSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showBottomSheetEditName();
-            }
-        });
-
-        mPersonalMantra.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showBottomSheetEditMantra();
+                updateTextFields();
             }
         });
 
@@ -135,88 +129,6 @@ public class ProfileSettingsActivity extends AppCompatActivity {
                 startActivity(intent, activityOptionsCompat.toBundle());
             }
         });
-    }
-
-    private void showBottomSheetEditMantra() {
-        @SuppressLint("InflateParams") View view = getLayoutInflater().inflate(R.layout.bottom_sheet_edit_mantra, null);
-
-        ((View) view.findViewById(R.id.btn_cancel_mantra)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                bottomSheetMantra.dismiss();
-            }
-        });
-
-        final EditText editPersonalMantra = view.findViewById(R.id.ed_personal_mantra);
-
-        ((View) view.findViewById(R.id.btn_save_mantra)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (TextUtils.isEmpty(editPersonalMantra.getText().toString())){
-                    Toasty.warning(getApplicationContext(), "Personal mantra cannot be blank", Toast.LENGTH_SHORT);
-                }else{
-                    updatePersonalMantra(editPersonalMantra.getText().toString());
-                    bottomSheetMantra.dismiss();
-                }
-            }
-        });
-
-        bottomSheetMantra = new BottomSheetDialog(this);
-        bottomSheetMantra.setContentView(view);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-            Objects.requireNonNull(bottomSheetMantra.getWindow()).addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        }
-
-        bottomSheetMantra.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-                bottomSheetMantra = null;
-            }
-        });
-
-        bottomSheetMantra.show();
-    }
-
-    private void showBottomSheetEditName() {
-        @SuppressLint("InflateParams") View view = getLayoutInflater().inflate(R.layout.bottom_sheet_edit_name, null);
-
-        ((View) view.findViewById(R.id.btn_cancel)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                bottomSheetEditName.dismiss();
-            }
-        });
-
-        final EditText editUserName = view.findViewById(R.id.ed_username);
-
-        ((View) view.findViewById(R.id.btn_save)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (TextUtils.isEmpty(editUserName.getText().toString())){
-                    Toasty.warning(getApplicationContext(), "Name cannot be blank", Toast.LENGTH_SHORT);
-                }else{
-                    updateName(editUserName.getText().toString());
-                    bottomSheetEditName.dismiss();
-                }
-            }
-        });
-
-        bottomSheetEditName = new BottomSheetDialog(this);
-        bottomSheetEditName.setContentView(view);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-            Objects.requireNonNull(bottomSheetEditName.getWindow()).addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        }
-
-        bottomSheetEditName.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-                bottomSheetEditName = null;
-            }
-        });
-
-        bottomSheetEditName.show();
     }
 
     private void getInfo() {
@@ -262,7 +174,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
                 mProgressDialog.show();
 
                 final Uri resultUri = result.getUri();
-                StorageReference filePath = mImageRef.child(System.currentTimeMillis()+"."+ getFileExtension(resultUri));
+                StorageReference filePath = mImageRef.child(currentUserId +"."+ getMimeType(getApplicationContext(), resultUri));
                 filePath.putFile(resultUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -299,32 +211,42 @@ public class ProfileSettingsActivity extends AppCompatActivity {
         }
     }
 
-
-
-
-    private String getFileExtension(Uri uri){
-        ContentResolver contentResolver = getContentResolver();
-        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
-        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
+    public static String getMimeType(Context context, Uri uri) {
+        String extension;
+        //Check uri format to avoid null
+        if (uri.getScheme().equals(ContentResolver.SCHEME_CONTENT)) {
+            //If scheme is a content
+            final MimeTypeMap mime = MimeTypeMap.getSingleton();
+            extension = mime.getExtensionFromMimeType(context.getContentResolver().getType(uri));
+        } else {
+            //If scheme is a File
+            //This will replace white spaces with %20 and also other special characters. This will avoid returning null values on file name with spaces and special characters.
+            extension = MimeTypeMap.getFileExtensionFromUrl(Uri.fromFile(new File(uri.getPath())).toString());
+        }
+        return extension;
     }
 
-    private void updateName(String newName){
-        mFirestore.collection("Users").document(mFirebaseUser.getUid()).update("userName", newName).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                Toasty.success(getApplicationContext(), "Update successful", Toast.LENGTH_SHORT, true).show();
-                getInfo();
-            }
-        });
+
+    private void updateTextFields(){
+        String setName = mUserName.getText().toString();
+        String setMantra = mPersonalMantra.getText().toString();
+
+        if (TextUtils.isEmpty(setName) || TextUtils.isEmpty(setMantra)){
+            Toasty.warning(ProfileSettingsActivity.this, "Please input profile details!!", Toast.LENGTH_SHORT, true).show();
+        } else {
+            HashMap<String, Object> profileMap = new HashMap<>();
+            profileMap.put("userName", setName);
+            profileMap.put("personalMantra", setMantra);
+
+            mFirestore.collection("Users").document(mFirebaseUser.getUid()).update(profileMap)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toasty.success(getApplicationContext(), "Update successful", Toast.LENGTH_SHORT, true).show();
+                            getInfo();
+                        }
+                    });
+        }
     }
 
-    private void updatePersonalMantra(String newMantra){
-        mFirestore.collection("Users").document(mFirebaseUser.getUid()).update("personalMantra", newMantra).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                Toasty.success(getApplicationContext(), "Update successful", Toast.LENGTH_SHORT, true).show();
-                getInfo();
-            }
-        });
-    }
 }
