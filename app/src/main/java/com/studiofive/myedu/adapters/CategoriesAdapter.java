@@ -33,6 +33,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.categories_card_design, parent, false);
         CategoriesViewHolder categoriesViewHolder = new CategoriesViewHolder(view);
 
+
         return categoriesViewHolder;
     }
 
@@ -90,7 +91,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
         int i = new Random().nextInt(254);
 
         GradientDrawable shape = new GradientDrawable();
-        shape.setShape(GradientDrawable.RECTANGLE);
+        shape.setShape(GradientDrawable.OVAL);
         shape.setColor(Color.parseColor ("#"+mColors[i]));
         holder.title.setBackground(shape);
 
