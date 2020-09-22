@@ -1,7 +1,6 @@
 package com.studiofive.myedu.fragments;
 
 import android.content.Context;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -124,15 +123,13 @@ public class HomeFragment extends Fragment {
         categories.add(new CategoriesHelperClass(R.drawable.design, "Design"));
         categories.add(new CategoriesHelperClass(R.drawable.computer, "Computer"));
 
-        GradientDrawable drawable = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, new int[] {0xFFFFEA00, 0xFF5D4037});
+//        GradientDrawable drawable = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, new int[] {0xFFFFEA00, 0xFF5D4037});
 
         adapter = new CategoriesAdapter(categories);
         categoriesRecycler.setAdapter(adapter);
     }
 
-//    public void getRandom(Random random, int[] colors) {
-//        return random.nextInt(colors.length);
-//    }
+
 
     @Override
     public void onDestroyView() {
