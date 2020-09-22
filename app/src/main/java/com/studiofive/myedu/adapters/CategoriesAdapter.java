@@ -32,10 +32,20 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
     public CategoriesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.categories_card_design, parent, false);
         CategoriesViewHolder categoriesViewHolder = new CategoriesViewHolder(view);
+
+        return categoriesViewHolder;
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull CategoriesViewHolder holder, int position) {
+        CategoriesHelperClass categoriesHelperClass = categories.get(position);
+        holder.image.setImageResource(categoriesHelperClass.getImage());
+        holder.title.setText(categoriesHelperClass.getTitle());
+
         //  google's material design colours from    , 254 colors
 //  http://www.google.com/design/spec/style/color.html#color-ui-color-palette
 
-         String[] mColors = {
+        String[] mColors = {
                 "FFEBEE", "FFCDD2", "EF9A9A", "E57373", "EF5350", "F44336", "E53935",        //reds
                 "D32F2F", "C62828", "B71C1C", "FF8A80", "FF5252", "FF1744", "D50000",
                 "FCE4EC", "F8BBD0", "F48FB1", "F06292", "EC407A", "E91E63", "D81B60",        //pinks
@@ -80,18 +90,9 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
         int i = new Random().nextInt(254);
 
         GradientDrawable shape = new GradientDrawable();
-        shape.setShape(GradientDrawable.OVAL);
+        shape.setShape(GradientDrawable.RECTANGLE);
         shape.setColor(Color.parseColor ("#"+mColors[i]));
-        view.setBackground(shape);
-
-        return categoriesViewHolder;
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull CategoriesViewHolder holder, int position) {
-        CategoriesHelperClass categoriesHelperClass = categories.get(position);
-        holder.image.setImageResource(categoriesHelperClass.getImage());
-        holder.title.setText(categoriesHelperClass.getTitle());
+        holder.title.setBackground(shape);
 
 
     }
