@@ -1,13 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.PreschoolFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <pl.droidsonroids.gif.GifImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:id="@+id/preschool_gif"
+        android:layout_width="320dp"
+        android:layout_height="320dp"
+        android:src="@drawable/preschool"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/recycler_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="15dp"
+        android:padding="6dp"
+        android:layout_below="@id/preschool_gif"
+        android:layout_marginTop="30dp"
+        android:text="Train Your Skills"
+        android:textSize="25sp"
+        android:fontFamily="@font/bangers"
+        android:textColor="@color/intro_description_color"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@+id/preschool_gif"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:padding="6dp"
+        android:layout_marginTop="90dp"/>
+
+</RelativeLayout>
