@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.PreschoolFragment">
 
     <pl.droidsonroids.gif.GifImageView
@@ -22,19 +23,33 @@
         android:layout_marginEnd="15dp"
         android:padding="6dp"
         android:layout_below="@id/preschool_gif"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:text="Train Your Skills"
         android:textSize="25sp"
         android:fontFamily="@font/bangers"
         android:textColor="@color/intro_description_color"/>
 
     <androidx.viewpager.widget.ViewPager
+        android:id="@+id/learn_options_viewpager"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_below="@+id/preschool_gif"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
         android:padding="6dp"
-        android:layout_marginTop="90dp"/>
+        android:layout_marginTop="70dp"/>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/options_selector"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_below="@id/learn_options_viewpager"
+        android:layout_centerHorizontal="true"
+        app:tabBackground="@drawable/options_selector">
+    </com.google.android.material.tabs.TabLayout>
 
 </RelativeLayout>
