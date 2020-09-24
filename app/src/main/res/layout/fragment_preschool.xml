@@ -40,6 +40,7 @@
         android:layout_marginTop="90dp"/>
 
     <com.google.android.material.tabs.TabLayout
+        android:id="@+id/options_selector"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -49,6 +50,8 @@
         android:layout_marginBottom="16dp"
         android:layout_below="@id/learn_options_viewpager"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        app:tabBackground="@drawable/options_selector">
+    </com.google.android.material.tabs.TabLayout>
 
 </RelativeLayout>
