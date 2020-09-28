@@ -1,6 +1,7 @@
 package com.studiofive.myedu.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +36,18 @@ public class OptionsViewPagerAdapter extends PagerAdapter {
         imgSlide.setImageResource(mOptionsScreen.get(position).getImage());
         title.setText(mOptionsScreen.get(position).getTitle());
 
-        container.addView(optionsScreen);
+        optionsScreen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(position == 0){
+                    Log.d("Adapter", "Position 0");
+                }
+                if (position == 1){
+                    Log.d("Adapter", "Position 1");
+                }
+            }
+        });
+        container.addView(optionsScreen,0);
 
         return optionsScreen;
     }
