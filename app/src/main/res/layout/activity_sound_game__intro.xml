@@ -19,7 +19,7 @@
             android:orientation="vertical">
 
             <com.daimajia.slider.library.SliderLayout
-                android:layout_width="match_parent"
+                android:layout_width="fill_parent"
                 android:layout_height="250dp"
                 android:id="@+id/sliderLayout"/>
 

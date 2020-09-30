@@ -16,7 +16,7 @@ import java.util.HashMap;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SoundGame_Intro extends AppCompatActivity {
+public class SoundGame_Intro extends AppCompatActivity implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener {
     @BindView(R.id.sliderLayout)
     SliderLayout sliderLayout;
     
@@ -47,7 +47,7 @@ public class SoundGame_Intro extends AppCompatActivity {
                     .description(name)
                     .image(sliderImages.get(name))
                     .setScaleType(BaseSliderView.ScaleType.Fit)
-                    .setOnSliderClickListener((BaseSliderView.OnSliderClickListener) this);
+                    .setOnSliderClickListener(this);
             textSliderView.bundle(new Bundle());
             textSliderView.getBundle()
                     .putString("extra", name);
@@ -57,7 +57,27 @@ public class SoundGame_Intro extends AppCompatActivity {
         sliderLayout.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
         sliderLayout.setCustomAnimation(new DescriptionAnimation());
         sliderLayout.setDuration(3000);
-        sliderLayout.addOnPageChangeListener((ViewPagerEx.OnPageChangeListener) this);
+        sliderLayout.addOnPageChangeListener(this);
+    }
+
+    @Override
+    public void onSliderClick(BaseSliderView slider) {
+
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
     }
 
     @Override
@@ -65,4 +85,6 @@ public class SoundGame_Intro extends AppCompatActivity {
         sliderLayout.stopAutoCycle();
         super.onStop();
     }
+
+
 }
