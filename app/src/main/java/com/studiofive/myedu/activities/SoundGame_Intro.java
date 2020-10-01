@@ -1,14 +1,16 @@
 package com.studiofive.myedu.activities;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.daimajia.slider.library.Animations.DescriptionAnimation;
-import com.daimajia.slider.library.SliderLayout;
-import com.daimajia.slider.library.SliderTypes.BaseSliderView;
-import com.daimajia.slider.library.SliderTypes.TextSliderView;
-import com.daimajia.slider.library.Tricks.ViewPagerEx;
+import com.bumptech.glide.request.RequestOptions;
+import com.glide.slider.library.SliderLayout;
+import com.glide.slider.library.animations.DescriptionAnimation;
+import com.glide.slider.library.slidertypes.BaseSliderView;
+import com.glide.slider.library.slidertypes.TextSliderView;
+import com.glide.slider.library.tricks.ViewPagerEx;
 import com.studiofive.myedu.R;
 
 import java.util.HashMap;
@@ -28,11 +30,14 @@ public class SoundGame_Intro extends AppCompatActivity implements BaseSliderView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sound_game__intro);
         ButterKnife.bind(this);
-        
+
         setupSlider();
     }
 
     private void setupSlider() {
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.centerCrop();
+
         sliderImages = new HashMap<>();
         sliderImages.put("Doughnuts", R.drawable.food4);
         sliderImages.put("French Fries", R.drawable.food5);
@@ -46,7 +51,8 @@ public class SoundGame_Intro extends AppCompatActivity implements BaseSliderView
             textSliderView
                     .description(name)
                     .image(sliderImages.get(name))
-                    .setScaleType(BaseSliderView.ScaleType.Fit)
+                    .setRequestOption(requestOptions)
+                    .setProgressBarVisible(true)
                     .setOnSliderClickListener(this);
             textSliderView.bundle(new Bundle());
             textSliderView.getBundle()
@@ -62,7 +68,7 @@ public class SoundGame_Intro extends AppCompatActivity implements BaseSliderView
 
     @Override
     public void onSliderClick(BaseSliderView slider) {
-
+        Toast.makeText(this, slider.getBundle().get("extra") + "", Toast.LENGTH_SHORT).show();
     }
 
     @Override

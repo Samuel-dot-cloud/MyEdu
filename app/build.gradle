@@ -72,7 +72,7 @@ dependencies {
     //PhotoView with zoom and scroll
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'
     //Image Slider
-    implementation 'com.daimajia.slider:library:1.1.5@aar'
+//    implementation 'com.daimajia.slider:library:1.1.5@aar'
     implementation "com.github.firdausmaulan:GlideSlider:1.5.1"
     //Picasso
     implementation 'com.squareup.picasso:picasso:2.5.2'

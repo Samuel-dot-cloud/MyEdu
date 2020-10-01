@@ -18,7 +18,7 @@
             android:focusableInTouchMode="true"
             android:orientation="vertical">
 
-            <com.daimajia.slider.library.SliderLayout
+            <com.glide.slider.library.SliderLayout
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:id="@+id/sliderLayout"/>
