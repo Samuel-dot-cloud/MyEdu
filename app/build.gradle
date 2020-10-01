@@ -74,7 +74,7 @@ dependencies {
     //Image Slider
     implementation 'com.daimajia.slider:library:1.1.5@aar'
     //Picasso
-    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
     //Animation library
     implementation 'com.nineoldandroids:library:2.4.0'
 
