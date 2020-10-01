@@ -53,4 +53,5 @@
     <string name="categories">Categories</string>
     <string name="dummy_text_calculus">Calculus</string>
     <string name="dummy_desc_calculus">The wonderful world of calculus, with functions, mappings and all.</string>
+    <string name="sound_game">Sound Game</string>
 </resources>

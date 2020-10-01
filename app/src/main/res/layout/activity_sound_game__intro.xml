@@ -5,7 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/options_gradient_style"
     tools:context=".activities.SoundGame_Intro">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/sound_game"
+        android:textStyle="bold|italic"
+        android:gravity="center"
+        android:textColor="@color/intro_description_color"
+        android:padding="5dp"
+        android:fontFamily="@font/raleway_bold"
+        android:layout_margin="5dp"
+        android:textSize="36sp" />
+
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
