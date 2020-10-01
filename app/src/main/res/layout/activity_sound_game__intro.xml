@@ -15,9 +15,9 @@
         android:text="@string/sound_game"
         android:textStyle="bold|italic"
         android:gravity="center"
-        android:textColor="@color/intro_description_color"
+        android:textColor="@color/card2"
         android:padding="5dp"
-        android:fontFamily="@font/raleway_bold"
+        android:fontFamily="@font/bangers"
         android:layout_margin="5dp"
         android:textSize="36sp" />
 
@@ -40,5 +40,82 @@
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="wrap_content">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/drinks"
+                android:layout_margin="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_image"
+                android:padding="3dp"
+                android:src="@drawable/drinks1"
+                android:contentDescription="@string/category1" />
+
+            <ImageView
+                android:id="@+id/foods"
+                android:layout_margin="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_image"
+                android:padding="3dp"
+                android:src="@drawable/foods1"
+                android:contentDescription="@string/category2" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="match_parent">
+            <Button
+                android:id="@+id/drinksBtn"
+                android:layout_margin="10dp"
+                android:padding="5dp"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:background="@drawable/btn_gradient_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/category1"
+                android:onClick="clickButton"
+                tools:ignore="ButtonStyle" />
+
+            <Button
+                android:id="@+id/foodsBtn"
+                android:layout_margin="10dp"
+                android:padding="5dp"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:background="@drawable/btn_gradient_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/category2"
+                android:onClick="clickButton"
+                tools:ignore="ButtonStyle" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="match_parent" />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="match_parent" />
+    </TableLayout>
 
 </LinearLayout>
