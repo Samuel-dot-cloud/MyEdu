@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.studiofive.myedu.R;
-import com.studiofive.myedu.activities.SoundGame_Intro;
+import com.studiofive.myedu.activities.SoundGameActivity;
 import com.studiofive.myedu.classes.helper_class.OptionItem;
 
 import java.util.List;
@@ -42,7 +42,7 @@ public class OptionsViewPagerAdapter extends PagerAdapter {
             @Override
             public void onClick(View v) {
                 if(position == 0){
-                    Intent intent = new Intent(mContext.getApplicationContext(), SoundGame_Intro.class);
+                    Intent intent = new Intent(mContext.getApplicationContext(), SoundGameActivity.class);
                     mContext.startActivity(intent);
                 }
                 if (position == 1){
