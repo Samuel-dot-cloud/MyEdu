@@ -3,6 +3,11 @@
     <string name="category1">Drinks</string>
     <string name="category2">Foods</string>
     <string name="category3">Fruits</string>
+    <string name="category4">Animals</string>
+    <string name="category5">Places</string>
+    <string name="category6">Common objects</string>
+    <string name="category7">Electronics</string>
+    <string name="category8">Clothing</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">MyEdu</string>
