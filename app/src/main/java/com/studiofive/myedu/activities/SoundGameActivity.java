@@ -1,5 +1,9 @@
 package com.studiofive.myedu.activities;
 
+import android.app.Activity;
+import android.content.Context;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -20,11 +24,18 @@ import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import es.dmoral.toasty.Toasty;
 
-public class SoundGame_Intro extends AppCompatActivity implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener {
+public class SoundGameActivity extends AppCompatActivity implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener {
     @BindView(R.id.sliderLayout)
     SliderLayout sliderLayout;
-    
+
+    public static Integer goBackCounter = 0;
+    public Context mContext;
+    private MediaPlayer musicFile;
+    private AudioManager audio;
+    private Activity mActivity;
+    private static final String TAG = "MainActivity";
     private HashMap<String, Integer> sliderImages;
     
 
@@ -32,9 +43,12 @@ public class SoundGame_Intro extends AppCompatActivity implements BaseSliderView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //Activates context
+        mContext = SoundGameActivity.this;
+        mActivity = SoundGameActivity.this;
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_sound_game__intro);
+        showMainScreen();
         ButterKnife.bind(this);
 
         setupSlider();
@@ -65,16 +79,52 @@ public class SoundGame_Intro extends AppCompatActivity implements BaseSliderView
                     .putString("extra", name);
             sliderLayout.addSlider(textSliderView);
         }
-        sliderLayout.setPresetTransformer(SliderLayout.Transformer.CubeIn);
+        sliderLayout.setPresetTransformer(SliderLayout.Transformer.FlipHorizontal);
         sliderLayout.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
         sliderLayout.setCustomAnimation(new DescriptionAnimation());
         sliderLayout.setDuration(3000);
         sliderLayout.addOnPageChangeListener(this);
     }
 
+    //Show various pages
+    private void showMainScreen(){
+        setContentView(R.layout.activity_sound_game);
+    }
+
+    private void showDrinksPage(){
+        setContentView(R.layout.drinks);
+        goBackCounter = 0;
+    }
+
+    private void showFoodsPage(){
+        setContentView(R.layout.foods);
+        goBackCounter = 0;
+    }
+
+    private void showAnimalsPage(){
+        setContentView(R.layout.animals);
+        goBackCounter = 0;
+    }
+    private void showPlacesPage(){
+        setContentView(R.layout.places);
+        goBackCounter = 0;
+    }
+    private void showCommonsPage(){
+        setContentView(R.layout.objects);
+        goBackCounter = 0;
+    }
+    private void showElectronicsPage(){
+        setContentView(R.layout.fruits);
+        goBackCounter = 0;
+    }
+    private void showClothingPage(){
+        setContentView(R.layout.clothes);
+        goBackCounter = 0;
+    }
+
     @Override
     public void onSliderClick(BaseSliderView slider) {
-        Toast.makeText(this, slider.getBundle().get("extra") + "", Toast.LENGTH_SHORT).show();
+        Toasty.info(this, slider.getBundle().get("extra") + "", Toast.LENGTH_SHORT, true).show();
     }
 
     @Override
@@ -96,6 +146,15 @@ public class SoundGame_Intro extends AppCompatActivity implements BaseSliderView
     protected void onStop() {
         sliderLayout.stopAutoCycle();
         super.onStop();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (goBackCounter == 2) {
+            if (!((Activity) mContext).isFinishing()) {
+                Toasty.success(mContext,  getResources().getString(R.string.exit), Toast.LENGTH_SHORT, true).show();
+            }
+        }
     }
 
 
