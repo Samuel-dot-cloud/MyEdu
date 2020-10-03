@@ -20,6 +20,7 @@ import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import es.dmoral.toasty.Toasty;
 
 public class SoundGame_Intro extends AppCompatActivity implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener {
     @BindView(R.id.sliderLayout)
@@ -65,7 +66,7 @@ public class SoundGame_Intro extends AppCompatActivity implements BaseSliderView
                     .putString("extra", name);
             sliderLayout.addSlider(textSliderView);
         }
-        sliderLayout.setPresetTransformer(SliderLayout.Transformer.CubeIn);
+        sliderLayout.setPresetTransformer(SliderLayout.Transformer.FlipHorizontal);
         sliderLayout.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
         sliderLayout.setCustomAnimation(new DescriptionAnimation());
         sliderLayout.setDuration(3000);
@@ -74,7 +75,7 @@ public class SoundGame_Intro extends AppCompatActivity implements BaseSliderView
 
     @Override
     public void onSliderClick(BaseSliderView slider) {
-        Toast.makeText(this, slider.getBundle().get("extra") + "", Toast.LENGTH_SHORT).show();
+        Toasty.info(this, slider.getBundle().get("extra") + "", Toast.LENGTH_SHORT, true).show();
     }
 
     @Override
