@@ -35,7 +35,6 @@ public class SoundGameActivity extends AppCompatActivity implements BaseSliderVi
     @BindView(R.id.sliderLayout)
     SliderLayout sliderLayout;
 
-    public static Integer goBackCounter = 0;
     public Context mContext;
     private MediaPlayer musicFile;
     private AudioManager audio;
@@ -101,42 +100,34 @@ public class SoundGameActivity extends AppCompatActivity implements BaseSliderVi
 
     private void showDrinksPage() {
         setContentView(R.layout.drinks);
-        goBackCounter = 0;
     }
 
     private void showFoodsPage() {
         setContentView(R.layout.foods);
-        goBackCounter = 0;
     }
 
     private void showFruitsPage() {
         setContentView(R.layout.fruits);
-        goBackCounter = 0;
     }
 
     private void showAnimalsPage() {
         setContentView(R.layout.animals);
-        goBackCounter = 0;
     }
 
     private void showPlacesPage() {
         setContentView(R.layout.places);
-        goBackCounter = 0;
     }
 
     private void showCommonsPage() {
         setContentView(R.layout.objects);
-        goBackCounter = 0;
     }
 
     private void showElectronicsPage() {
         setContentView(R.layout.fruits);
-        goBackCounter = 0;
     }
 
     private void showClothingPage() {
         setContentView(R.layout.clothes);
-        goBackCounter = 0;
     }
 
     public void clickButton(View view) {
@@ -234,13 +225,7 @@ public class SoundGameActivity extends AppCompatActivity implements BaseSliderVi
     //When clicking on the back key in the phone/tablet
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if ((keyCode == KeyEvent.KEYCODE_BACK) && (goBackCounter >= 3)) {
-            finish();
-            System.exit(0);
-        } else if ((keyCode == KeyEvent.KEYCODE_BACK) && (goBackCounter < 3)) {
-            goBackCounter++;
-            showMainScreen();
-        } else if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
+        if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
             audio.adjustStreamVolume(AudioManager.STREAM_MUSIC,
                     AudioManager.ADJUST_RAISE, AudioManager.FLAG_SHOW_UI);
             return true;
@@ -269,7 +254,7 @@ public class SoundGameActivity extends AppCompatActivity implements BaseSliderVi
 
     @Override
     public void onPageScrollStateChanged(int state) {
-        
+
     }
 
     @Override
@@ -282,15 +267,6 @@ public class SoundGameActivity extends AppCompatActivity implements BaseSliderVi
     protected void onDestroy() {
         super.onDestroy();
         releaseSound();
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (goBackCounter == 2) {
-            if (!((Activity) mContext).isFinishing()) {
-                Toasty.success(mContext, getResources().getString(R.string.exit), Toast.LENGTH_SHORT, true).show();
-            }
-        }
     }
 
 }
