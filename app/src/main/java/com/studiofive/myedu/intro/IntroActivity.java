@@ -1,9 +1,7 @@
 package com.studiofive.myedu.intro;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
-
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -13,11 +11,14 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+
 import com.google.android.material.tabs.TabLayout;
-import com.studiofive.myedu.adapters.IntroViewPagerAdapter;
 import com.studiofive.myedu.R;
+import com.studiofive.myedu.adapters.IntroViewPagerAdapter;
+import com.studiofive.myedu.authentication.LoginActivity;
 import com.studiofive.myedu.classes.helper_class.ScreenItem;
-import com.studiofive.myedu.authentication.SignUpActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,11 +42,11 @@ public class IntroActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 
-//        if (restorePrefData()){
-//            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-//            startActivity(intent);
-//            finish();
-//        }
+        if (restorePrefData()){
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
 
         setContentView(R.layout.activity_intro);
 
@@ -115,9 +116,9 @@ public class IntroActivity extends AppCompatActivity {
         btnGetStarted.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
-//                savePrefsData();
+                savePrefsData();
                 finish();
             }
         });
@@ -131,18 +132,18 @@ public class IntroActivity extends AppCompatActivity {
 
     }
 
-//    private boolean restorePrefData(){
-//        SharedPreferences prefs = getApplicationContext().getSharedPreferences("myPrefs", MODE_PRIVATE);
-//        Boolean isIntroActivityOpenedBefore = prefs.getBoolean("isIntroOpened", false);
-//        return isIntroActivityOpenedBefore;
-//    }
-//
-//    private void savePrefsData() {
-//        SharedPreferences prefs = getApplicationContext().getSharedPreferences("myPrefs", MODE_PRIVATE);
-//        SharedPreferences.Editor editor = prefs.edit();
-//        editor.putBoolean("isIntroOpened", true);
-//        editor.commit();
-//    }
+    private boolean restorePrefData(){
+        SharedPreferences prefs = getApplicationContext().getSharedPreferences("myPrefs", MODE_PRIVATE);
+        Boolean isIntroActivityOpenedBefore = prefs.getBoolean("isIntroOpened", false);
+        return isIntroActivityOpenedBefore;
+    }
+
+    private void savePrefsData() {
+        SharedPreferences prefs = getApplicationContext().getSharedPreferences("myPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean("isIntroOpened", true);
+        editor.commit();
+    }
 
     private void loadLastScreen() {
         btnNext.setVisibility(View.INVISIBLE);
