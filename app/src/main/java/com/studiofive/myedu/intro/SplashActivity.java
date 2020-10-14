@@ -10,11 +10,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.studiofive.myedu.MainActivity;
 import com.studiofive.myedu.R;
-import com.studiofive.myedu.classes.Users;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,9 +26,6 @@ public class SplashActivity extends AppCompatActivity {
     TextView mPoweredBy;
 
     Animation sideAnim, bottomAnim;
-    private FirebaseAuth mAuth;
-    private FirebaseFirestore mFirestore;
-    private Users users;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +34,6 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         ButterKnife.bind(this);
 
-        mAuth = FirebaseAuth.getInstance();
-        mFirestore = FirebaseFirestore.getInstance();
 
         sideAnim = AnimationUtils.loadAnimation(this, R.anim.side_anim);
         bottomAnim = AnimationUtils.loadAnimation(this, R.anim.bottom_anim);
@@ -59,10 +51,6 @@ public class SplashActivity extends AppCompatActivity {
         }, SPLASH_TIMER);
     }
 
-//    private void verifyUserExistence(){
-//        String uid = mAuth.getCurrentUser().getUid();
-//        mFirestore.collection()
-//    }
 
     @Override
     protected void onStart() {
