@@ -30,6 +30,7 @@ import com.studiofive.myedu.fragments.HomeFragment;
 import com.studiofive.myedu.fragments.PreschoolFragment;
 import com.studiofive.myedu.fragments.ProfileFragment;
 import com.studiofive.myedu.fragments.SavedCoursesFragment;
+import com.studiofive.myedu.intro.IntroActivity;
 import com.studiofive.myedu.utils.Functions;
 
 import java.util.Objects;
@@ -134,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onStart() {
         super.onStart();
         if (mFirebaseUser == null){
-            sendUserToLoginActivity();
+            sendUserToIntroActivity();
         }else{
             getNavInfo();
         }
@@ -162,11 +163,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Toasty.error(MainActivity.this, "Something went wrong!!", Toast.LENGTH_SHORT, true).show();
             }
         });
-
     }
 
     private void sendUserToLoginActivity() {
         Intent intent = new Intent(this, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+    private void sendUserToIntroActivity() {
+        Intent intent = new Intent(this, IntroActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
