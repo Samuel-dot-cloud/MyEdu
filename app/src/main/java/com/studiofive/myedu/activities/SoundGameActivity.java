@@ -53,7 +53,7 @@ public class SoundGameActivity extends AppCompatActivity implements BaseSliderVi
         mActivity = SoundGameActivity.this;
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        showMainScreen();
+        setContentView(R.layout.activity_sound_game);
         ButterKnife.bind(this);
 
         //Initializes audio sound volume
@@ -269,7 +269,7 @@ public class SoundGameActivity extends AppCompatActivity implements BaseSliderVi
 
     @Override
     public void onPageScrollStateChanged(int state) {
-
+        
     }
 
     @Override
