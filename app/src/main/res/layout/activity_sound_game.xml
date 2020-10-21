@@ -57,8 +57,8 @@
 
                 <ImageView
                     android:id="@+id/drinks"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="150dp"
+                    android:layout_height="80dp"
                     android:layout_margin="10dp"
                     android:background="@drawable/border_image"
                     android:contentDescription="@string/category1"
@@ -67,8 +67,8 @@
 
                 <ImageView
                     android:id="@+id/foods"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="150dp"
+                    android:layout_height="80dp"
                     android:layout_margin="10dp"
                     android:background="@drawable/border_image"
                     android:contentDescription="@string/category2"
@@ -119,8 +119,8 @@
 
                 <ImageView
                     android:id="@+id/fruits"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="150dp"
+                    android:layout_height="80dp"
                     android:layout_margin="10dp"
                     android:background="@drawable/border_image"
                     android:contentDescription="@string/category3"
@@ -129,8 +129,8 @@
 
                 <ImageView
                     android:id="@+id/animals"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="150dp"
+                    android:layout_height="80dp"
                     android:layout_margin="10dp"
                     android:background="@drawable/border_image"
                     android:contentDescription="@string/category4"
@@ -185,8 +185,8 @@
 
                     <ImageView
                         android:id="@+id/places"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="150dp"
+                        android:layout_height="80dp"
                         android:layout_margin="10dp"
                         android:background="@drawable/border_image"
                         android:contentDescription="@string/category5"
@@ -195,8 +195,8 @@
 
                     <ImageView
                         android:id="@+id/common_objects"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="150dp"
+                        android:layout_height="80dp"
                         android:layout_margin="10dp"
                         android:background="@drawable/border_image"
                         android:contentDescription="@string/category6"
@@ -246,8 +246,8 @@
 
                     <ImageView
                         android:id="@+id/electronics"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="150dp"
+                        android:layout_height="80dp"
                         android:layout_margin="10dp"
                         android:background="@drawable/border_image"
                         android:contentDescription="@string/category7"
@@ -256,8 +256,8 @@
 
                     <ImageView
                         android:id="@+id/clothing"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="150dp"
+                        android:layout_height="80dp"
                         android:layout_margin="10dp"
                         android:background="@drawable/border_image"
                         android:contentDescription="@string/category8"
