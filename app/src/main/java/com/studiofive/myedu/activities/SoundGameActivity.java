@@ -23,6 +23,14 @@ import com.glide.slider.library.slidertypes.BaseSliderView;
 import com.glide.slider.library.slidertypes.TextSliderView;
 import com.glide.slider.library.tricks.ViewPagerEx;
 import com.studiofive.myedu.R;
+import com.studiofive.myedu.fragments.categories.AnimalsFragment;
+import com.studiofive.myedu.fragments.categories.ClothingFragment;
+import com.studiofive.myedu.fragments.categories.DrinksFragment;
+import com.studiofive.myedu.fragments.categories.ElectronicsFragment;
+import com.studiofive.myedu.fragments.categories.FoodsFragment;
+import com.studiofive.myedu.fragments.categories.FruitsFragment;
+import com.studiofive.myedu.fragments.categories.PlacesFragment;
+import com.studiofive.myedu.utils.Functions;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -93,63 +101,33 @@ public class SoundGameActivity extends AppCompatActivity implements BaseSliderVi
         sliderLayout.addOnPageChangeListener(this);
     }
 
-    //Show various pages
-    private void showMainScreen() {
-        setContentView(R.layout.activity_sound_game);
-    }
-
-    private void showDrinksPage() {
-        setContentView(R.layout.drinks);
-    }
-
-    private void showFoodsPage() {
-        setContentView(R.layout.foods);
-    }
-
-    private void showFruitsPage() {
-        setContentView(R.layout.fruits);
-    }
-
-    private void showAnimalsPage() {
-        setContentView(R.layout.animals);
-    }
-
-    private void showPlacesPage() {
-        setContentView(R.layout.places);
-    }
-
-    private void showCommonsPage() {
-        setContentView(R.layout.objects);
-    }
-
-    private void showElectronicsPage() {
-        setContentView(R.layout.fruits);
-    }
-
-    private void showClothingPage() {
-        setContentView(R.layout.clothes);
-    }
-
     public void clickButton(View view) {
         releaseSound();
 
         //Page Layouts
         if (view.getId() == R.id.drinksBtn) {
-            showDrinksPage();
+            DrinksFragment drinksFragment = new DrinksFragment();
+            Functions.changeMainFragment(SoundGameActivity.this, drinksFragment);
         } else if (view.getId() == R.id.foodsBtn) {
-            showFoodsPage();
+            FoodsFragment foodsFragment = new FoodsFragment();
+            Functions.changeMainFragment(SoundGameActivity.this, foodsFragment);
         } else if (view.getId() == R.id.fruitsBtn) {
-            showFruitsPage();
+            FruitsFragment fruitsFragment = new FruitsFragment();
+            Functions.changeMainFragment(SoundGameActivity.this, fruitsFragment);
         } else if (view.getId() == R.id.animalsBtn) {
-            showAnimalsPage();
+            AnimalsFragment animalsFragment = new AnimalsFragment();
+            Functions.changeMainFragment(SoundGameActivity.this, animalsFragment);
         } else if (view.getId() == R.id.placesBtn) {
-            showPlacesPage();
+            PlacesFragment placesFragment = new PlacesFragment();
+            Functions.changeMainFragment(SoundGameActivity.this, placesFragment);
         } else if (view.getId() == R.id.commonBtn) {
-            showCommonsPage();
+            Toasty.info(SoundGameActivity.this, "Coming soon", Toast.LENGTH_SHORT, true).show();
         } else if (view.getId() == R.id.electronicsBtn) {
-            showElectronicsPage();
+            ElectronicsFragment electronicsFragment = new ElectronicsFragment();
+            Functions.changeMainFragment(SoundGameActivity.this, electronicsFragment);
         } else if (view.getId() == R.id.clothingBtn) {
-            showClothingPage();
+            ClothingFragment clothingFragment = new ClothingFragment();
+            Functions.changeMainFragment(SoundGameActivity.this, clothingFragment);
         }
     }
 
