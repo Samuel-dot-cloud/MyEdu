@@ -2,6 +2,7 @@ package com.studiofive.myedu.activities;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
@@ -23,6 +24,13 @@ import com.glide.slider.library.slidertypes.BaseSliderView;
 import com.glide.slider.library.slidertypes.TextSliderView;
 import com.glide.slider.library.tricks.ViewPagerEx;
 import com.studiofive.myedu.R;
+import com.studiofive.myedu.fragments.categories.AnimalsFragment;
+import com.studiofive.myedu.fragments.categories.ClothingFragment;
+import com.studiofive.myedu.fragments.categories.DrinksFragment;
+import com.studiofive.myedu.fragments.categories.ElectronicsFragment;
+import com.studiofive.myedu.fragments.categories.FoodsFragment;
+import com.studiofive.myedu.fragments.categories.FruitsFragment;
+import com.studiofive.myedu.fragments.categories.PlacesFragment;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -41,6 +49,7 @@ public class SoundGameActivity extends AppCompatActivity implements BaseSliderVi
     private Activity mActivity;
     private static final String TAG = "MainActivity";
     private HashMap<String, Integer> sliderImages;
+    private Intent intent;
 
 
     @Override
@@ -57,6 +66,7 @@ public class SoundGameActivity extends AppCompatActivity implements BaseSliderVi
 
         //Initializes audio sound volume
         audio = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        intent = new Intent();
 
         setupSlider();
     }
@@ -66,12 +76,13 @@ public class SoundGameActivity extends AppCompatActivity implements BaseSliderVi
         requestOptions.centerCrop();
 
         sliderImages = new HashMap<>();
-        sliderImages.put("Doughnuts", R.drawable.food4);
-        sliderImages.put("French Fries", R.drawable.food5);
-        sliderImages.put("Cakes", R.drawable.food6);
-        sliderImages.put("Raspberry smoothie", R.drawable.drink5);
-        sliderImages.put("Chocolate milkshake", R.drawable.drink6);
-        sliderImages.put("Coca cola", R.drawable.drink7);
+        sliderImages.put("Cocktail", R.drawable.drink1);
+        sliderImages.put("Chocolate", R.drawable.food1);
+        sliderImages.put("Mango", R.drawable.fruit1);
+        sliderImages.put("Cat", R.drawable.animal1);
+        sliderImages.put("Church", R.drawable.place1);
+        sliderImages.put("Smart phone", R.drawable.elec1);
+        sliderImages.put("Gloves", R.drawable.clothe1);
 
         for (String name : sliderImages.keySet()) {
             TextSliderView textSliderView = new TextSliderView(this);
@@ -93,63 +104,33 @@ public class SoundGameActivity extends AppCompatActivity implements BaseSliderVi
         sliderLayout.addOnPageChangeListener(this);
     }
 
-    //Show various pages
-    private void showMainScreen() {
-        setContentView(R.layout.activity_sound_game);
-    }
-
-    private void showDrinksPage() {
-        setContentView(R.layout.drinks);
-    }
-
-    private void showFoodsPage() {
-        setContentView(R.layout.foods);
-    }
-
-    private void showFruitsPage() {
-        setContentView(R.layout.fruits);
-    }
-
-    private void showAnimalsPage() {
-        setContentView(R.layout.animals);
-    }
-
-    private void showPlacesPage() {
-        setContentView(R.layout.places);
-    }
-
-    private void showCommonsPage() {
-        setContentView(R.layout.objects);
-    }
-
-    private void showElectronicsPage() {
-        setContentView(R.layout.fruits);
-    }
-
-    private void showClothingPage() {
-        setContentView(R.layout.clothes);
-    }
-
     public void clickButton(View view) {
         releaseSound();
 
         //Page Layouts
         if (view.getId() == R.id.drinksBtn) {
-            showDrinksPage();
+            intent = new Intent(SoundGameActivity.this, DrinksFragment.class);
+            startActivity(intent);
         } else if (view.getId() == R.id.foodsBtn) {
-            showFoodsPage();
+            intent = new Intent(SoundGameActivity.this, FoodsFragment.class);
+            startActivity(intent);
         } else if (view.getId() == R.id.fruitsBtn) {
-            showFruitsPage();
+            intent = new Intent(SoundGameActivity.this, FruitsFragment.class);
+            startActivity(intent);
         } else if (view.getId() == R.id.animalsBtn) {
-            showAnimalsPage();
+            intent = new Intent(SoundGameActivity.this, AnimalsFragment.class);
+            startActivity(intent);
         } else if (view.getId() == R.id.placesBtn) {
-            showPlacesPage();
+            intent = new Intent(SoundGameActivity.this, PlacesFragment.class);
+            startActivity(intent);
         } else if (view.getId() == R.id.commonBtn) {
-            showCommonsPage();
+            Toasty.info(SoundGameActivity.this, "Coming soon", Toast.LENGTH_SHORT, true).show();
         } else if (view.getId() == R.id.electronicsBtn) {
-            showElectronicsPage();
+            intent = new Intent(SoundGameActivity.this, ElectronicsFragment.class);
+            startActivity(intent);
         } else if (view.getId() == R.id.clothingBtn) {
-            showClothingPage();
+            intent = new Intent(SoundGameActivity.this, ClothingFragment.class);
+            startActivity(intent);
         }
     }
 

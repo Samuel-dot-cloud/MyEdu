@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:background="@drawable/options_gradient_style"
     android:orientation="vertical"
-    tools:context=".activities.SoundGameActivity">
+    tools:context=".activities.SoundGameActivity"
+    android:id="@+id/sound_layout">
 
     <TextView
         android:id="@+id/title"
@@ -57,23 +58,23 @@
 
                 <ImageView
                     android:id="@+id/drinks"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="150dp"
+                    android:layout_height="80dp"
                     android:layout_margin="10dp"
                     android:background="@drawable/border_image"
                     android:contentDescription="@string/category1"
                     android:padding="3dp"
-                    android:src="@drawable/drinks1" />
+                    android:src="@drawable/drink1" />
 
                 <ImageView
                     android:id="@+id/foods"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="150dp"
+                    android:layout_height="80dp"
                     android:layout_margin="10dp"
                     android:background="@drawable/border_image"
                     android:contentDescription="@string/category2"
                     android:padding="3dp"
-                    android:src="@drawable/foods1" />
+                    android:src="@drawable/food1" />
 
             </TableRow>
 
@@ -119,23 +120,23 @@
 
                 <ImageView
                     android:id="@+id/fruits"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="150dp"
+                    android:layout_height="80dp"
                     android:layout_margin="10dp"
                     android:background="@drawable/border_image"
                     android:contentDescription="@string/category3"
                     android:padding="3dp"
-                    android:src="@drawable/fruits1" />
+                    android:src="@drawable/fruit1" />
 
                 <ImageView
                     android:id="@+id/animals"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="150dp"
+                    android:layout_height="80dp"
                     android:layout_margin="10dp"
                     android:background="@drawable/border_image"
                     android:contentDescription="@string/category4"
                     android:padding="3dp"
-                    android:src="@drawable/elephant" />
+                    android:src="@drawable/animal1" />
 
             </TableRow>
 
@@ -185,23 +186,23 @@
 
                     <ImageView
                         android:id="@+id/places"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="150dp"
+                        android:layout_height="80dp"
                         android:layout_margin="10dp"
                         android:background="@drawable/border_image"
                         android:contentDescription="@string/category5"
                         android:padding="3dp"
-                        android:src="@drawable/mountain" />
+                        android:src="@drawable/place1" />
 
                     <ImageView
                         android:id="@+id/common_objects"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="150dp"
+                        android:layout_height="80dp"
                         android:layout_margin="10dp"
                         android:background="@drawable/border_image"
                         android:contentDescription="@string/category6"
                         android:padding="3dp"
-                        android:src="@drawable/chair" />
+                        android:src="@drawable/chemistry" />
                 </TableRow>
 
                 <TableRow
@@ -246,23 +247,23 @@
 
                     <ImageView
                         android:id="@+id/electronics"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="150dp"
+                        android:layout_height="80dp"
                         android:layout_margin="10dp"
                         android:background="@drawable/border_image"
                         android:contentDescription="@string/category7"
                         android:padding="3dp"
-                        android:src="@drawable/electronics" />
+                        android:src="@drawable/elec1" />
 
                     <ImageView
                         android:id="@+id/clothing"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="150dp"
+                        android:layout_height="80dp"
                         android:layout_margin="10dp"
                         android:background="@drawable/border_image"
                         android:contentDescription="@string/category8"
                         android:padding="3dp"
-                        android:src="@drawable/clothing" />
+                        android:src="@drawable/clothe1" />
                 </TableRow>
 
                 <TableRow
