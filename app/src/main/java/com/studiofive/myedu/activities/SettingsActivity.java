@@ -1,9 +1,5 @@
 package com.studiofive.myedu.activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,15 +7,17 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.appbar.AppBarLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.studiofive.myedu.MainActivity;
 import com.studiofive.myedu.R;
 
 import java.util.Objects;
@@ -34,6 +32,8 @@ public class SettingsActivity extends AppCompatActivity {
     Toolbar toolbar;
     @BindView(R.id.profile_surface)
     LinearLayout mProfileSurface;
+    @BindView(R.id.ln_invite_friend)
+    LinearLayout mInviteSurface;
     @BindView(R.id.image_profile)
     CircleImageView mImageProfile;
     @BindView(R.id.text_username)
@@ -70,6 +70,13 @@ public class SettingsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        mInviteSurface.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showInviteFriends();
+            }
+        });
     }
 
     @Override
@@ -97,5 +104,21 @@ public class SettingsActivity extends AppCompatActivity {
                 Toasty.error(SettingsActivity.this, "Something went wrong!!", Toast.LENGTH_SHORT, true).show();
             }
         });
+    }
+
+    //Show invite friends message
+    public void showInviteFriends() {
+        //Define the GooglePlay share url
+        String playerShareURL = "https://play.google.com/store/apps/details?id=com.studiofive.myedu";
+
+        //Open sharing option
+        Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+
+        //What we going to share
+        String shareBody = getResources().getString(R.string.msg_invite1) + "\r\n" + playerShareURL;
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, getResources().getString(R.string.app_name));
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+        startActivity(Intent.createChooser(sharingIntent,getResources().getString(R.string.msg_invite2)));
     }
 }

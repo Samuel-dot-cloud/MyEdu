@@ -63,4 +63,7 @@
     <string name="dummy_desc_calculus">The wonderful world of calculus, with functions, mappings and all.</string>
     <string name="sound_game">Sound Game</string>
     <string name="exit">Thank you for visiting.</string>
+    <string name="msg_invite1">You are invited to download a cool educational application.</string>
+    <string name="msg_invite2">Share</string>
+    <string name="invite_a_friend">Invite a friend</string>
 </resources>

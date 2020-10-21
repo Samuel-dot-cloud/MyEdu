@@ -66,6 +66,7 @@ public class SoundGameActivity extends AppCompatActivity implements BaseSliderVi
 
         //Initializes audio sound volume
         audio = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        intent = new Intent();
 
         setupSlider();
     }
