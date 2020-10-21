@@ -1,5 +1,6 @@
 package com.studiofive.myedu.activities;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.AssetFileDescriptor;
@@ -15,6 +16,8 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import com.bumptech.glide.request.RequestOptions;
 import com.glide.slider.library.SliderLayout;
@@ -108,10 +111,10 @@ public class SoundGameActivity extends AppCompatActivity implements BaseSliderVi
         //Page Layouts
         if (view.getId() == R.id.drinksBtn) {
             DrinksFragment drinksFragment = new DrinksFragment();
-            Functions.changeMainFragment(SoundGameActivity.this, drinksFragment);
+            fragmentNavigation(SoundGameActivity.this, drinksFragment);
         } else if (view.getId() == R.id.foodsBtn) {
             FoodsFragment foodsFragment = new FoodsFragment();
-            Functions.changeMainFragment(SoundGameActivity.this, foodsFragment);
+            fragmentNavigation(SoundGameActivity.this, foodsFragment);
         } else if (view.getId() == R.id.fruitsBtn) {
             FruitsFragment fruitsFragment = new FruitsFragment();
             Functions.changeMainFragment(SoundGameActivity.this, fruitsFragment);
@@ -235,6 +238,15 @@ public class SoundGameActivity extends AppCompatActivity implements BaseSliderVi
     public void onPageScrollStateChanged(int state) {
 
     }
+
+    @SuppressLint("ResourceType")
+    private void fragmentNavigation(FragmentActivity fragmentActivity, Fragment fragment){
+        fragmentActivity.getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.layout.activity_sound_game, fragment)
+                .commit();
+    }
+
 
     @Override
     protected void onStop() {

@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:background="@drawable/options_gradient_style"
     android:orientation="vertical"
-    tools:context=".activities.SoundGameActivity">
+    tools:context=".activities.SoundGameActivity"
+    android:id="@+id/sound_layout">
 
     <TextView
         android:id="@+id/title"
