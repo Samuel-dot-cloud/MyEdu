@@ -74,13 +74,13 @@ public class SoundGameActivity extends AppCompatActivity implements BaseSliderVi
         requestOptions.centerCrop();
 
         sliderImages = new HashMap<>();
-        sliderImages.put("Doughnuts", R.drawable.drink1);
-        sliderImages.put("French Fries", R.drawable.food1);
-        sliderImages.put("Cakes", R.drawable.fruit1);
-        sliderImages.put("Raspberry smoothie", R.drawable.animal1);
-        sliderImages.put("Chocolate milkshake", R.drawable.place1);
-        sliderImages.put("Coca cola", R.drawable.elec1);
-        sliderImages.put("Coca cola", R.drawable.clothe1);
+        sliderImages.put("Cocktail", R.drawable.drink1);
+        sliderImages.put("Chocolate", R.drawable.food1);
+        sliderImages.put("Mango", R.drawable.fruit1);
+        sliderImages.put("Cat", R.drawable.animal1);
+        sliderImages.put("Church", R.drawable.place1);
+        sliderImages.put("Smart phone", R.drawable.elec1);
+        sliderImages.put("Gloves", R.drawable.clothe1);
 
         for (String name : sliderImages.keySet()) {
             TextSliderView textSliderView = new TextSliderView(this);
