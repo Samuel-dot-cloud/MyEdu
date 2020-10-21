@@ -1,8 +1,8 @@
 package com.studiofive.myedu.activities;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
@@ -16,8 +16,6 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 
 import com.bumptech.glide.request.RequestOptions;
 import com.glide.slider.library.SliderLayout;
@@ -33,7 +31,6 @@ import com.studiofive.myedu.fragments.categories.ElectronicsFragment;
 import com.studiofive.myedu.fragments.categories.FoodsFragment;
 import com.studiofive.myedu.fragments.categories.FruitsFragment;
 import com.studiofive.myedu.fragments.categories.PlacesFragment;
-import com.studiofive.myedu.utils.Functions;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -52,6 +49,7 @@ public class SoundGameActivity extends AppCompatActivity implements BaseSliderVi
     private Activity mActivity;
     private static final String TAG = "MainActivity";
     private HashMap<String, Integer> sliderImages;
+    private Intent intent;
 
 
     @Override
@@ -110,28 +108,28 @@ public class SoundGameActivity extends AppCompatActivity implements BaseSliderVi
 
         //Page Layouts
         if (view.getId() == R.id.drinksBtn) {
-            DrinksFragment drinksFragment = new DrinksFragment();
-            fragmentNavigation(SoundGameActivity.this, drinksFragment);
+            intent = new Intent(SoundGameActivity.this, DrinksFragment.class);
+            startActivity(intent);
         } else if (view.getId() == R.id.foodsBtn) {
-            FoodsFragment foodsFragment = new FoodsFragment();
-            fragmentNavigation(SoundGameActivity.this, foodsFragment);
+            intent = new Intent(SoundGameActivity.this, FoodsFragment.class);
+            startActivity(intent);
         } else if (view.getId() == R.id.fruitsBtn) {
-            FruitsFragment fruitsFragment = new FruitsFragment();
-            Functions.changeMainFragment(SoundGameActivity.this, fruitsFragment);
+            intent = new Intent(SoundGameActivity.this, FruitsFragment.class);
+            startActivity(intent);
         } else if (view.getId() == R.id.animalsBtn) {
-            AnimalsFragment animalsFragment = new AnimalsFragment();
-            Functions.changeMainFragment(SoundGameActivity.this, animalsFragment);
+            intent = new Intent(SoundGameActivity.this, AnimalsFragment.class);
+            startActivity(intent);
         } else if (view.getId() == R.id.placesBtn) {
-            PlacesFragment placesFragment = new PlacesFragment();
-            Functions.changeMainFragment(SoundGameActivity.this, placesFragment);
+            intent = new Intent(SoundGameActivity.this, PlacesFragment.class);
+            startActivity(intent);
         } else if (view.getId() == R.id.commonBtn) {
             Toasty.info(SoundGameActivity.this, "Coming soon", Toast.LENGTH_SHORT, true).show();
         } else if (view.getId() == R.id.electronicsBtn) {
-            ElectronicsFragment electronicsFragment = new ElectronicsFragment();
-            Functions.changeMainFragment(SoundGameActivity.this, electronicsFragment);
+            intent = new Intent(SoundGameActivity.this, ElectronicsFragment.class);
+            startActivity(intent);
         } else if (view.getId() == R.id.clothingBtn) {
-            ClothingFragment clothingFragment = new ClothingFragment();
-            Functions.changeMainFragment(SoundGameActivity.this, clothingFragment);
+            intent = new Intent(SoundGameActivity.this, ClothingFragment.class);
+            startActivity(intent);
         }
     }
 
@@ -238,15 +236,6 @@ public class SoundGameActivity extends AppCompatActivity implements BaseSliderVi
     public void onPageScrollStateChanged(int state) {
 
     }
-
-    @SuppressLint("ResourceType")
-    private void fragmentNavigation(FragmentActivity fragmentActivity, Fragment fragment){
-        fragmentActivity.getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.layout.activity_sound_game, fragment)
-                .commit();
-    }
-
 
     @Override
     protected void onStop() {
