@@ -97,7 +97,7 @@ public class SoundGameActivity extends AppCompatActivity implements BaseSliderVi
                     .putString("extra", name);
             sliderLayout.addSlider(textSliderView);
         }
-        sliderLayout.setPresetTransformer(SliderLayout.Transformer.FlipHorizontal);
+        sliderLayout.setPresetTransformer(SliderLayout.Transformer.FlipPage);
         sliderLayout.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
         sliderLayout.setCustomAnimation(new DescriptionAnimation());
         sliderLayout.setDuration(3000);
@@ -109,11 +109,11 @@ public class SoundGameActivity extends AppCompatActivity implements BaseSliderVi
 
         //Page Layouts
         if (view.getId() == R.id.drinksBtn) {
-            intent = new Intent(SoundGameActivity.this, DrinksFragment.class);
-            startActivity(intent);
+            intent = new Intent(mActivity, DrinksFragment.class);
+            mContext.startActivity(intent);
         } else if (view.getId() == R.id.foodsBtn) {
             intent = new Intent(SoundGameActivity.this, FoodsFragment.class);
-            startActivity(intent);
+            mContext.startActivity(intent);
         } else if (view.getId() == R.id.fruitsBtn) {
             intent = new Intent(SoundGameActivity.this, FruitsFragment.class);
             startActivity(intent);
