@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="120dp"
+    android:layout_height="190dp"
+    xmlns:cardView="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="5dp"
+    cardView:cardCornerRadius="4dp">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorAccent">
+
+        <ImageView
+            android:id="@+id/quiz_category_image"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/food2"/>
+
+        <TextView
+            android:id="@+id/quiz_category_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Food"
+            android:gravity="center"
+            android:textSize="15sp"
+            android:textColor="@color/intro_title_color"
+            android:fontFamily="@font/baloo"/>
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

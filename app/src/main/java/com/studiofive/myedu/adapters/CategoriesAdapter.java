@@ -1,7 +1,6 @@
 package com.studiofive.myedu.adapters;
 
 import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +30,9 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
     @Override
     public CategoriesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.categories_card_design, parent, false);
+        Random rnd = new Random();
+        int color = Color.argb(255, rnd.nextInt(255), rnd.nextInt(255), rnd.nextInt(255));
+        view.setBackgroundColor(color);
         CategoriesViewHolder categoriesViewHolder = new CategoriesViewHolder(view);
 
 
@@ -87,13 +89,13 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
                 "455A64", "37474F", "263238"
         };
 
-        // generate a random number
-        int i = new Random().nextInt(254);
-
-        GradientDrawable shape = new GradientDrawable();
-        shape.setShape(GradientDrawable.OVAL);
-        shape.setColor(Color.parseColor ("#"+mColors[i]));
-        holder.title.setBackground(shape);
+//        // generate a random number
+//        int i = new Random().nextInt(254);
+//
+//        GradientDrawable shape = new GradientDrawable();
+//        shape.setShape(GradientDrawable.OVAL);
+//        shape.setColor(Color.parseColor ("#"+mColors[i]));
+//        holder.title.setBackground(shape);
 
 
     }
