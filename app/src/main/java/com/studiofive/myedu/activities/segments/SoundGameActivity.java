@@ -1,4 +1,4 @@
-package com.studiofive.myedu.activities;
+package com.studiofive.myedu.activities.segments;
 
 import android.app.Activity;
 import android.content.Context;
