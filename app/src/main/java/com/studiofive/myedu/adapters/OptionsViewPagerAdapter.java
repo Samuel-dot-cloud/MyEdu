@@ -2,7 +2,6 @@ package com.studiofive.myedu.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.studiofive.myedu.R;
-import com.studiofive.myedu.activities.SoundGameActivity;
+import com.studiofive.myedu.activities.segments.PreQuizActivity;
+import com.studiofive.myedu.activities.segments.SoundGameActivity;
 import com.studiofive.myedu.classes.helper_class.OptionItem;
 
 import java.util.List;
@@ -46,7 +46,8 @@ public class OptionsViewPagerAdapter extends PagerAdapter {
                     mContext.startActivity(intent);
                 }
                 if (position == 1){
-                    Log.d("Adapter", "Position 1");
+                    Intent intent = new Intent(mContext.getApplicationContext(), PreQuizActivity.class);
+                    mContext.startActivity(intent);
                 }
             }
         });
