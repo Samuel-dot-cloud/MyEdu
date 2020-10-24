@@ -4,17 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.segments.PreQuizActivity">
+    tools:context=".activities.segments.PreQuizActivity"
+    android:padding="8dp">
 
-    <GridView
-        android:id="@+id/category_grid_view"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/quiz_categories"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:columnWidth="100dp"
-        android:numColumns="2"
-        tools:ignore="Suspicious0dp">
+        android:layout_height="match_parent">
 
-    </GridView>
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+
+
 </LinearLayout>
