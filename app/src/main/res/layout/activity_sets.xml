@@ -42,6 +42,9 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:horizontalSpacing="16dp"
+                android:verticalSpacing="16dp"
+                android:padding="16dp"
                 android:columnWidth="100dp"
                 android:numColumns="auto_fit">
 

@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.studiofive.myedu.R;
+import com.studiofive.myedu.adapters.SetsAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,5 +35,8 @@ public class SetsActivity extends AppCompatActivity {
 
         expandedTitle.setText(Title);
         expandedImage.setImageResource(image);
+
+        SetsAdapter setsAdapter = new SetsAdapter(6);
+        setsView.setAdapter(setsAdapter);
     }
 }
