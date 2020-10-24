@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/category_quiz_design"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
     android:layout_width="120dp"
     android:layout_height="190dp"
     xmlns:cardView="http://schemas.android.com/apk/res-auto"
@@ -8,10 +11,9 @@
     cardView:cardCornerRadius="4dp">
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorAccent">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/quiz_category_image"
