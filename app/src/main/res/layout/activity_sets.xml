@@ -36,6 +36,16 @@
                 android:textStyle="bold"
                 android:fontFamily="@font/baloo"/>
 
+            <GridView
+                android:id="@+id/sets_grid_view"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:columnWidth="100dp"
+                android:numColumns="auto_fit">
+
+            </GridView>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

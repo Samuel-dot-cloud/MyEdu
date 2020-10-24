@@ -2,6 +2,7 @@ package com.studiofive.myedu.activities.segments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,6 +18,8 @@ public class SetsActivity extends AppCompatActivity {
     ImageView expandedImage;
     @BindView(R.id.category_expanded_title)
     TextView expandedTitle;
+    @BindView(R.id.sets_grid_view)
+    GridView setsView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
