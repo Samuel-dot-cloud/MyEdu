@@ -45,6 +45,7 @@ public class QuestionsActivity extends AppCompatActivity implements View.OnClick
 
     private List<Question> questionsList;
     private int questionNum = 0;
+    private int score;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +55,8 @@ public class QuestionsActivity extends AppCompatActivity implements View.OnClick
 
         initActionClick();
         getQuestionsList();
+
+        score = 0;
     }
 
     private void initActionClick() {
@@ -139,6 +142,7 @@ public class QuestionsActivity extends AppCompatActivity implements View.OnClick
         if (selectedOption == questionsList.get(questionNum).getCorrectAns()){
             //Right answer
             ((Button)view).setBackgroundTintList(ColorStateList.valueOf(Color.GREEN));
+            score++;
         }else{
             //Wrong answer
             ((Button)view).setBackgroundTintList(ColorStateList.valueOf(Color.RED));
@@ -190,6 +194,7 @@ public class QuestionsActivity extends AppCompatActivity implements View.OnClick
         }else{
             // Go to score activity
             Intent intent = new Intent(QuestionsActivity.this, ScoreActivity.class);
+            intent.putExtra("SCORE", String.valueOf(score) + "/" + String.valueOf(questionsList.size()));
             startActivity(intent);
             QuestionsActivity.this.finish();
         }
