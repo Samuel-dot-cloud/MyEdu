@@ -1,5 +1,6 @@
 package com.studiofive.myedu.adapters;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.studiofive.myedu.R;
+import com.studiofive.myedu.activities.segments.QuestionsActivity;
 
 public class SetsAdapter extends BaseAdapter {
     private int numOfSets;
@@ -38,6 +40,14 @@ public class SetsAdapter extends BaseAdapter {
         }else {
             view = convertView;
         }
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(parent.getContext(), QuestionsActivity.class);
+                parent.getContext().startActivity(intent);
+            }
+        });
 
         ((TextView) view.findViewById(R.id.set_number)).setText(String.valueOf(position+1));
         return view;

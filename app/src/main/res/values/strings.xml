@@ -66,4 +66,6 @@
     <string name="msg_invite1">You are invited to download a cool educational application.</string>
     <string name="msg_invite2">Share</string>
     <string name="invite_a_friend">Invite a friend</string>
+    <string name="score">SCORE</string>
+    <string name="done">DONE</string>
 </resources>
