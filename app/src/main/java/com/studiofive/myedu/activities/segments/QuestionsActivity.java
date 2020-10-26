@@ -196,6 +196,7 @@ public class QuestionsActivity extends AppCompatActivity implements View.OnClick
 
                     }
 
+                    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         if (value == 0){
@@ -219,6 +220,10 @@ public class QuestionsActivity extends AppCompatActivity implements View.OnClick
                                 case 4:
                                     ((Button)view).setText(questionsList.get(questionNum).getOptionD());
                                     break;
+                            }
+
+                            if (viewNum != 0){
+                                ((Button)view).setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#E99c03")));
                             }
 
                             playAnim(view, 1, viewNum);
