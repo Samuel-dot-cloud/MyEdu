@@ -90,9 +90,10 @@ public class QuestionsActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void startTimer() {
-         countDownTimer = new CountDownTimer(10000, 1000) {
+         countDownTimer = new CountDownTimer(12000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
+                if (millisUntilFinished< 10000)
                 countdownTimer.setText(String.valueOf(millisUntilFinished / 1000));
             }
 
