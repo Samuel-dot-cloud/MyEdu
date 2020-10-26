@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
@@ -160,7 +161,13 @@ public class QuestionsActivity extends AppCompatActivity implements View.OnClick
             }
         }
 
-        changeQuestion();
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                changeQuestion();
+            }
+        }, 2000);
     }
 
     private void changeQuestion() {
