@@ -58,10 +58,6 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 //Load Preschool data first
                 loadData();
-
-                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
             }
         }, SPLASH_TIMER);
     }
@@ -82,6 +78,11 @@ public class SplashActivity extends AppCompatActivity {
                             categoryList.add(categoryName);
 
                         }
+
+                        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+
                     }else {
                         Toasty.error(SplashActivity.this, "Something went wrong", Toast.LENGTH_SHORT, true).show();
                         finish();
