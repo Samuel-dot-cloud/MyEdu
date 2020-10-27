@@ -4,15 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".activities.segments.PreQuizActivity"
     android:padding="8dp">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/quiz_categories"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/quiz_categories"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent">-->
 
-    </androidx.recyclerview.widget.RecyclerView>
+<!--    </androidx.recyclerview.widget.RecyclerView>-->
+
+    <GridView
+        android:id="@+id/categoryGridView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:columnWidth="100dp"
+        android:numColumns="2"
+        android:background="@drawable/category_border"
+        tools:ignore="Suspicious0dp">
+
+    </GridView>
 
 
 

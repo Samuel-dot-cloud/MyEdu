@@ -1,78 +1,68 @@
 package com.studiofive.myedu.adapters;
 
-import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.BaseAdapter;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.studiofive.myedu.R;
 import com.studiofive.myedu.activities.segments.SetsActivity;
-import com.studiofive.myedu.classes.Quiz;
 
 import java.util.List;
+import java.util.Random;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
+public class CategoryGridAdapter extends BaseAdapter {
 
-public class CategoryGridAdapter extends RecyclerView.Adapter<CategoryGridAdapter.MyViewHolder>{
-    private Context mContext;
-    private List<Quiz> mQuiz;
+    private List<String> categoryList;
 
-    public CategoryGridAdapter(Context mContext, List<Quiz> mQuiz) {
-        this.mContext = mContext;
-        this.mQuiz = mQuiz;
-    }
-
-    @NonNull
-    @Override
-    public CategoryGridAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.quiz_category, parent, false);
-        return new MyViewHolder(view);
+    public CategoryGridAdapter(List<String> categoryList) {
+        this.categoryList = categoryList;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CategoryGridAdapter.MyViewHolder holder, int position) {
-        holder.quiz_category_title.setText(mQuiz.get(position).getTitle());
-        holder.quiz_category_image.setImageResource(mQuiz.get(position).getImage());
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
+    public int getCount() {
+        return categoryList.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return null;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return 0;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        View view;
+
+        if (convertView == null){
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.quiz_category, parent, false);
+        }else {
+            view = convertView;
+        }
+
+        view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, SetsActivity.class);
-
-                // passing data to the book activity
-                intent.putExtra("Title",mQuiz.get(position).getTitle());
-                intent.putExtra("Image",mQuiz.get(position).getImage());
-                // start the activity
-                mContext.startActivity(intent);
+                Intent intent = new Intent(parent.getContext(), SetsActivity.class);
+                intent.putExtra("Category", categoryList.get(position));
+                intent.putExtra("category_ID", position + 1);
+                parent.getContext().startActivity(intent);
             }
         });
-    }
 
-    @Override
-    public int getItemCount() {
-        return mQuiz.size();
-    }
+        ((TextView)view.findViewById(R.id.quiz_category_text)).setText(categoryList.get(position));
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
-        @BindView(R.id.quiz_category_image)
-        ImageView quiz_category_image;
-        @BindView(R.id.quiz_category_text)
-        TextView quiz_category_title;
+        Random rnd = new Random();
+        int color = Color.argb(255, rnd.nextInt(255), rnd.nextInt(255), rnd.nextInt(255));
+        view.setBackgroundColor(color);
 
-        CardView cardView;
-
-        public MyViewHolder(@NonNull View itemView) {
-            super(itemView);
-            ButterKnife.bind(this, itemView);
-
-            cardView = itemView.findViewById(R.id.category_quiz_design);
-        }
+        return view;
     }
 }

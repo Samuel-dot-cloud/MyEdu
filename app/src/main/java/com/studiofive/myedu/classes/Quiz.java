@@ -1,22 +1,22 @@
 package com.studiofive.myedu.classes;
 
 public class Quiz {
-    private int image;
+    private String image;
     private String Title;
 
     public Quiz() {
     }
 
-    public Quiz(int image, String title) {
+    public Quiz(String image, String title) {
         this.image = image;
         Title = title;
     }
 
-    public int getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         this.image = image;
     }
 

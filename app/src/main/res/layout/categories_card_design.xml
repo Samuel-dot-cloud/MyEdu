@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:text="Chemistry"
             android:textSize="20sp"
-            android:fontFamily="@font/baloo"/>
+            android:fontFamily="@font/baloo" />
         
         <ImageView
             android:id="@+id/category_image"

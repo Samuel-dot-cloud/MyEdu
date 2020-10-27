@@ -1,6 +1,7 @@
 package com.studiofive.myedu.activities.segments;
 
 import android.animation.Animator;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -9,13 +10,21 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.studiofive.myedu.R;
 import com.studiofive.myedu.classes.Question;
 
@@ -24,6 +33,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import es.dmoral.toasty.Toasty;
+
+import static com.studiofive.myedu.activities.segments.SetsActivity.categoryId;
 
 public class QuestionsActivity extends AppCompatActivity implements View.OnClickListener{
     @BindView(R.id.quiz_questions_number)
@@ -46,12 +58,26 @@ public class QuestionsActivity extends AppCompatActivity implements View.OnClick
     private List<Question> questionsList;
     private int questionNum = 0;
     private int score;
+    private FirebaseFirestore mFireStore;
+    private int setNum;
+    private Dialog loadingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questions);
         ButterKnife.bind(this);
+
+        setNum = getIntent().getIntExtra("SetNo", 1);
+
+        loadingDialog = new Dialog(QuestionsActivity.this);
+        loadingDialog.setContentView(R.layout.loading_progressbar);
+        loadingDialog.setCancelable(false);
+        loadingDialog.getWindow().setBackgroundDrawableResource(R.drawable.progress_background);
+        loadingDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        loadingDialog.show();
+
+        mFireStore = FirebaseFirestore.getInstance();
 
         initActionClick();
         getQuestionsList();
@@ -68,13 +94,36 @@ public class QuestionsActivity extends AppCompatActivity implements View.OnClick
 
     private void getQuestionsList() {
         questionsList = new ArrayList<>();
-        questionsList.add(new Question("Who is the smartest guy i know?", "A", "Samuel Wahome", "C", "D", 2));
-        questionsList.add(new Question("Who is the smartest guy i know?(1)", "A", "Samuel Wahome", "C", "D", 2));
-        questionsList.add(new Question("Who is the smartest guy i know?(2)", "A", "Samuel Wahome", "C", "D", 2));
-        questionsList.add(new Question("Who is the smartest guy i know?(3)", "A", "Samuel Wahome", "C", "D", 2));
-        questionsList.add(new Question("Which is the best school in Kenya?", "Mang'u High", "Alliance High", "C", "D", 1));
 
-        setQuestion();
+        mFireStore.collection("PreQuiz").document("Cat" + String.valueOf(categoryId))
+                .collection("Set" + String.valueOf(setNum))
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    QuerySnapshot questions = task.getResult();
+                   for (QueryDocumentSnapshot doc: questions){
+                       questionsList.add(new Question(doc.getString("Question"),
+                               doc.getString("A"),
+                               doc.getString("B"),
+                               doc.getString("C"),
+                               doc.getString("D"),
+                               Integer.valueOf(doc.getString("Answer"))
+                               ));
+                   }
+                    setQuestion();
+                } else {
+                    Toasty.error(QuestionsActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT, true).show();
+                }
+
+                loadingDialog.cancel();
+            }
+        });
+//        questionsList.add(new Question("Who is the smartest guy i know?", "A", "Samuel Wahome", "C", "D", 2));
+//        questionsList.add(new Question("Who is the smartest guy i know?(1)", "A", "Samuel Wahome", "C", "D", 2));
+//        questionsList.add(new Question("Who is the smartest guy i know?(2)", "A", "Samuel Wahome", "C", "D", 2));
+//        questionsList.add(new Question("Who is the smartest guy i know?(3)", "A", "Samuel Wahome", "C", "D", 2));
+//        questionsList.add(new Question("Which is the best school in Kenya?", "Mang'u High", "Alliance High", "C", "D", 1));
     }
 
     private void setQuestion() {
@@ -194,7 +243,8 @@ public class QuestionsActivity extends AppCompatActivity implements View.OnClick
         }else{
             // Go to score activity
             Intent intent = new Intent(QuestionsActivity.this, ScoreActivity.class);
-            intent.putExtra("SCORE", String.valueOf(score) + "/" + String.valueOf(questionsList.size()));
+            intent.putExtra("SCORE", String.valueOf(score) + " / " + String.valueOf(questionsList.size()));
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             QuestionsActivity.this.finish();
         }
@@ -255,4 +305,9 @@ public class QuestionsActivity extends AppCompatActivity implements View.OnClick
                 });
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        countDownTimer.cancel();
+    }
 }
