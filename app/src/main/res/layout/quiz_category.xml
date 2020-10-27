@@ -1,38 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/category_quiz_design"
-    android:clickable="true"
-    android:foreground="?android:attr/selectableItemBackground"
-    android:layout_width="120dp"
-    android:layout_height="190dp"
-    xmlns:cardView="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="5dp"
-    cardView:cardCornerRadius="4dp">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:background="@color/card3"
+    android:layout_weight="1"
+    android:orientation="vertical"
+    android:gravity="center"
+    >
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageView
-            android:id="@+id/quiz_category_image"
-            android:layout_width="match_parent"
-            android:layout_height="160dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/food2"/>
 
         <TextView
             android:id="@+id/quiz_category_text"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Food"
-            android:gravity="center"
-            android:textSize="15sp"
+            android:textSize="25sp"
             android:textColor="@color/intro_title_color"
             android:fontFamily="@font/baloo"/>
 
 
     </LinearLayout>
-
-</androidx.cardview.widget.CardView>

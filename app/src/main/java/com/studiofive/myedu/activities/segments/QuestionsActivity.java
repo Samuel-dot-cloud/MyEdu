@@ -194,7 +194,8 @@ public class QuestionsActivity extends AppCompatActivity implements View.OnClick
         }else{
             // Go to score activity
             Intent intent = new Intent(QuestionsActivity.this, ScoreActivity.class);
-            intent.putExtra("SCORE", String.valueOf(score) + "/" + String.valueOf(questionsList.size()));
+            intent.putExtra("SCORE", String.valueOf(score) + " / " + String.valueOf(questionsList.size()));
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             QuestionsActivity.this.finish();
         }
@@ -255,4 +256,9 @@ public class QuestionsActivity extends AppCompatActivity implements View.OnClick
                 });
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        countDownTimer.cancel();
+    }
 }

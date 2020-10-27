@@ -30,28 +30,19 @@ public class PreschoolFragment extends Fragment {
     TabLayout tabIndicator;
 
     private OptionsViewPagerAdapter optionsViewPagerAdapter;
-    int position = 0;
     private Unbinder unbinder;
     private Context mContext;
+
 
 
     public PreschoolFragment() {
         // Required empty public constructor
     }
 
-
-    public static PreschoolFragment newInstance(String param1, String param2) {
-        PreschoolFragment fragment = new PreschoolFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
+
     }
 
     @Override
@@ -95,6 +86,7 @@ public class PreschoolFragment extends Fragment {
 
         return view;
     }
+
 
     @Override
     public void onDestroyView() {

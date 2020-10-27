@@ -3,7 +3,6 @@ package com.studiofive.myedu.activities.segments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,8 +14,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class SetsActivity extends AppCompatActivity {
-    @BindView(R.id.category_expanded_image)
-    ImageView expandedImage;
+//    @BindView(R.id.category_expanded_image)
+//    ImageView expandedImage;
     @BindView(R.id.category_expanded_title)
     TextView expandedTitle;
     @BindView(R.id.sets_grid_view)
@@ -30,11 +29,10 @@ public class SetsActivity extends AppCompatActivity {
 
         // Recieve data
         Intent intent = getIntent();
-        String Title = intent.getExtras().getString("Title");
-        int image = intent.getExtras().getInt("Image") ;
+        String Title = intent.getExtras().getString("Category");
 
         expandedTitle.setText(Title);
-        expandedImage.setImageResource(image);
+//        expandedImage.setImageResource(image);
 
         SetsAdapter setsAdapter = new SetsAdapter(6);
         setsView.setAdapter(setsAdapter);
