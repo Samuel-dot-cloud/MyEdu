@@ -84,7 +84,7 @@ public class SplashActivity extends AppCompatActivity {
                         finish();
 
                     }else {
-                        Toasty.error(SplashActivity.this, "Something went wrong", Toast.LENGTH_SHORT, true).show();
+                        Toasty.error(SplashActivity.this, "Something went wrong loading categories!!!", Toast.LENGTH_SHORT, true).show();
                         finish();
                     }
                 }else {
