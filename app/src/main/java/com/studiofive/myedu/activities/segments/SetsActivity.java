@@ -1,7 +1,9 @@
 package com.studiofive.myedu.activities.segments;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,6 +32,7 @@ public class SetsActivity extends AppCompatActivity {
 
     private FirebaseFirestore mFirestore;
     private int categoryId;
+    private Dialog loadingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,13 @@ public class SetsActivity extends AppCompatActivity {
 
         expandedTitle.setText(Title);
 //        expandedImage.setImageResource(image);
+
+        loadingDialog = new Dialog(SetsActivity.this);
+        loadingDialog.setContentView(R.layout.loading_progressbar);
+        loadingDialog.setCancelable(false);
+        loadingDialog.getWindow().setBackgroundDrawableResource(R.drawable.progress_background);
+        loadingDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        loadingDialog.show();
 
         mFirestore = FirebaseFirestore.getInstance();
 
@@ -62,6 +72,8 @@ public class SetsActivity extends AppCompatActivity {
 
                         SetsAdapter setsAdapter = new SetsAdapter((int) sets);
                         setsView.setAdapter(setsAdapter);
+
+                        loadingDialog.cancel();
                     }else {
                         Toasty.error(SetsActivity.this, "Something went wrong loading sets!!!", Toast.LENGTH_SHORT, true).show();
                         finish();
