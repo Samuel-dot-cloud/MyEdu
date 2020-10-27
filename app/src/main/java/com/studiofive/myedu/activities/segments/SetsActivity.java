@@ -23,7 +23,7 @@ import butterknife.ButterKnife;
 import es.dmoral.toasty.Toasty;
 
 public class SetsActivity extends AppCompatActivity {
-//    @BindView(R.id.category_expanded_image)
+    //    @BindView(R.id.category_expanded_image)
 //    ImageView expandedImage;
     @BindView(R.id.category_expanded_title)
     TextView expandedTitle;
@@ -31,7 +31,7 @@ public class SetsActivity extends AppCompatActivity {
     GridView setsView;
 
     private FirebaseFirestore mFirestore;
-    private int categoryId;
+    public static int categoryId;
     private Dialog loadingDialog;
 
     @Override
@@ -43,7 +43,7 @@ public class SetsActivity extends AppCompatActivity {
         // Recieve data
         Intent intent = getIntent();
         String Title = intent.getExtras().getString("Category");
-         categoryId = intent.getExtras().getInt("category_ID", 1);
+        categoryId = intent.getExtras().getInt("category_ID", 1);
 
         expandedTitle.setText(Title);
 //        expandedImage.setImageResource(image);
@@ -65,22 +65,22 @@ public class SetsActivity extends AppCompatActivity {
                 .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()){
+                if (task.isSuccessful()) {
                     DocumentSnapshot documentSnapshot = task.getResult();
-                    if (documentSnapshot.exists()){
+                    if (documentSnapshot.exists()) {
                         long sets = (long) documentSnapshot.get("Sets");
 
                         SetsAdapter setsAdapter = new SetsAdapter((int) sets);
                         setsView.setAdapter(setsAdapter);
-
-                        loadingDialog.cancel();
-                    }else {
+                    } else {
                         Toasty.error(SetsActivity.this, "Something went wrong loading sets!!!", Toast.LENGTH_SHORT, true).show();
                         finish();
                     }
-                }else {
+                } else {
                     Toasty.error(SetsActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT, true).show();
                 }
+
+                loadingDialog.cancel();
             }
         });
     }
