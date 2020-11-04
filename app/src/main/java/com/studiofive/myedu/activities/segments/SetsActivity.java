@@ -1,7 +1,6 @@
 package com.studiofive.myedu.activities.segments;
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.ViewGroup;
 import android.widget.GridView;
@@ -11,16 +10,22 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.studiofive.myedu.R;
 import com.studiofive.myedu.adapters.SetsAdapter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import es.dmoral.toasty.Toasty;
+
+import static com.studiofive.myedu.intro.SplashActivity.categoryList;
+import static com.studiofive.myedu.intro.SplashActivity.selected_category_index;
 
 public class SetsActivity extends AppCompatActivity {
     //    @BindView(R.id.category_expanded_image)
@@ -31,8 +36,8 @@ public class SetsActivity extends AppCompatActivity {
     GridView setsView;
 
     private FirebaseFirestore mFirestore;
-    public static int categoryId;
     private Dialog loadingDialog;
+    public static List<String> setsIDs = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +45,7 @@ public class SetsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sets);
         ButterKnife.bind(this);
 
-        // Recieve data
-        Intent intent = getIntent();
-        String Title = intent.getExtras().getString("Category");
-        categoryId = intent.getExtras().getInt("category_ID", 1);
-
-        expandedTitle.setText(Title);
+        expandedTitle.setText(categoryList.get(selected_category_index).getName());
 //        expandedImage.setImageResource(image);
 
         loadingDialog = new Dialog(SetsActivity.this);
@@ -61,27 +61,32 @@ public class SetsActivity extends AppCompatActivity {
     }
 
     private void loadSets() {
-        mFirestore.collection("PreQuiz").document("Cat" + String.valueOf(categoryId))
-                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot documentSnapshot = task.getResult();
-                    if (documentSnapshot.exists()) {
-                        long sets = (long) documentSnapshot.get("Sets");
 
-                        SetsAdapter setsAdapter = new SetsAdapter((int) sets);
-                        setsView.setAdapter(setsAdapter);
-                    } else {
-                        Toasty.error(SetsActivity.this, "Something went wrong loading sets!!!", Toast.LENGTH_SHORT, true).show();
-                        finish();
-                    }
-                } else {
-                    Toasty.error(SetsActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT, true).show();
+        setsIDs.clear();
+        mFirestore.collection("PreQuiz").document(categoryList.get(selected_category_index).getId())
+                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                long noOfSets = (long) documentSnapshot.get("Sets");
+                for (int i = 0; i < noOfSets; i++) {
+                    setsIDs.add(documentSnapshot.getString("Set" + String.valueOf(i) + "_ID"));
                 }
 
-                loadingDialog.cancel();
+                SetsAdapter setsAdapter = new SetsAdapter(setsIDs.size());
+                setsView.setAdapter(setsAdapter);
+
+                loadingDialog.dismiss();
+
             }
-        });
+        })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        loadingDialog.dismiss();
+                        Toasty.error(SetsActivity.this, e.getMessage(), Toast.LENGTH_SHORT, true).show();
+                    }
+                });
+
+
     }
 }

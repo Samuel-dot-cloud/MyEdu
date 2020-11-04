@@ -45,7 +45,7 @@ public class SetsAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(parent.getContext(), QuestionsActivity.class);
-                intent.putExtra("SetNo", position + 1);
+                intent.putExtra("SetNo", position );
                 parent.getContext().startActivity(intent);
             }
         });

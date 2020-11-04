@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.util.ArrayMap;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
@@ -20,8 +21,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -30,12 +31,15 @@ import com.studiofive.myedu.classes.Question;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import es.dmoral.toasty.Toasty;
 
-import static com.studiofive.myedu.activities.segments.SetsActivity.categoryId;
+import static com.studiofive.myedu.activities.segments.SetsActivity.setsIDs;
+import static com.studiofive.myedu.intro.SplashActivity.categoryList;
+import static com.studiofive.myedu.intro.SplashActivity.selected_category_index;
 
 public class QuestionsActivity extends AppCompatActivity implements View.OnClickListener{
     @BindView(R.id.quiz_questions_number)
@@ -58,7 +62,7 @@ public class QuestionsActivity extends AppCompatActivity implements View.OnClick
     private List<Question> questionsList;
     private int questionNum = 0;
     private int score;
-    private FirebaseFirestore mFireStore;
+    private FirebaseFirestore mFirestore;
     private int setNum;
     private Dialog loadingDialog;
 
@@ -77,7 +81,9 @@ public class QuestionsActivity extends AppCompatActivity implements View.OnClick
         loadingDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         loadingDialog.show();
 
-        mFireStore = FirebaseFirestore.getInstance();
+        questionsList = new ArrayList<>();
+
+        mFirestore = FirebaseFirestore.getInstance();
 
         initActionClick();
         getQuestionsList();
@@ -93,37 +99,54 @@ public class QuestionsActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void getQuestionsList() {
-        questionsList = new ArrayList<>();
+        questionsList.clear();
 
-        mFireStore.collection("PreQuiz").document("Cat" + String.valueOf(categoryId))
-                .collection("Set" + String.valueOf(setNum))
-                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    QuerySnapshot questions = task.getResult();
-                   for (QueryDocumentSnapshot doc: questions){
-                       questionsList.add(new Question(doc.getString("Question"),
-                               doc.getString("A"),
-                               doc.getString("B"),
-                               doc.getString("C"),
-                               doc.getString("D"),
-                               Integer.valueOf(doc.getString("Answer"))
-                               ));
-                   }
-                    setQuestion();
-                } else {
-                    Toasty.error(QuestionsActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT, true).show();
-                }
+        mFirestore.collection("PreQuiz").document(categoryList.get(selected_category_index).getId())
+                .collection(setsIDs.get(setNum)).get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
 
-                loadingDialog.cancel();
-            }
-        });
-//        questionsList.add(new Question("Who is the smartest guy i know?", "A", "Samuel Wahome", "C", "D", 2));
-//        questionsList.add(new Question("Who is the smartest guy i know?(1)", "A", "Samuel Wahome", "C", "D", 2));
-//        questionsList.add(new Question("Who is the smartest guy i know?(2)", "A", "Samuel Wahome", "C", "D", 2));
-//        questionsList.add(new Question("Who is the smartest guy i know?(3)", "A", "Samuel Wahome", "C", "D", 2));
-//        questionsList.add(new Question("Which is the best school in Kenya?", "Mang'u High", "Alliance High", "C", "D", 1));
+                        Map<String, QueryDocumentSnapshot> docList = new ArrayMap<>();
+
+                        for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
+                            docList.put(doc.getId(), doc);
+                        }
+
+                        QueryDocumentSnapshot questionListDoc = docList.get("Questions_List");
+
+                        String count = questionListDoc.getString("Count");
+
+                        for (int i = 0; i < Integer.valueOf(count); i++) {
+                            String questionID = questionListDoc.getString("Question" + String.valueOf(i + 1) + "_ID");
+
+                            QueryDocumentSnapshot quesDoc = docList.get(questionID);
+
+                            questionsList.add(new Question(
+                                    quesDoc.getString("Question"),
+                                    quesDoc.getString("A"),
+                                    quesDoc.getString("B"),
+                                    quesDoc.getString("C"),
+                                    quesDoc.getString("D"),
+                                    Integer.valueOf(quesDoc.getString("Answer"))
+                            ));
+
+                        }
+                        setQuestion();
+
+                        loadingDialog.dismiss();
+
+                    }
+                })
+
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        loadingDialog.dismiss();
+                        Toasty.error(QuestionsActivity.this, e.getMessage(), Toast.LENGTH_SHORT, true).show();
+                    }
+                });
     }
 
     private void setQuestion() {

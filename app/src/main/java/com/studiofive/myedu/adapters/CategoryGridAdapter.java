@@ -10,15 +10,17 @@ import android.widget.TextView;
 
 import com.studiofive.myedu.R;
 import com.studiofive.myedu.activities.segments.SetsActivity;
+import com.studiofive.myedu.classes.Category;
+import com.studiofive.myedu.intro.SplashActivity;
 
 import java.util.List;
 import java.util.Random;
 
 public class CategoryGridAdapter extends BaseAdapter {
 
-    private List<String> categoryList;
+    private List<Category> categoryList;
 
-    public CategoryGridAdapter(List<String> categoryList) {
+    public CategoryGridAdapter(List<Category> categoryList) {
         this.categoryList = categoryList;
     }
 
@@ -50,14 +52,13 @@ public class CategoryGridAdapter extends BaseAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SplashActivity.selected_category_index = position;
                 Intent intent = new Intent(parent.getContext(), SetsActivity.class);
-                intent.putExtra("Category", categoryList.get(position));
-                intent.putExtra("category_ID", position + 1);
                 parent.getContext().startActivity(intent);
             }
         });
 
-        ((TextView)view.findViewById(R.id.quiz_category_text)).setText(categoryList.get(position));
+        ((TextView)view.findViewById(R.id.quiz_category_text)).setText(categoryList.get(position).getName());
 
         Random rnd = new Random();
         int color = Color.argb(255, rnd.nextInt(255), rnd.nextInt(255), rnd.nextInt(255));

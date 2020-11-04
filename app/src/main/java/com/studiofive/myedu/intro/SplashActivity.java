@@ -18,6 +18,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.studiofive.myedu.MainActivity;
 import com.studiofive.myedu.R;
+import com.studiofive.myedu.classes.Category;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +36,8 @@ public class SplashActivity extends AppCompatActivity {
     @BindView(R.id.powered_by_line)
     TextView mPoweredBy;
 
-    public static List<String> categoryList = new ArrayList<>();
+    public static List<Category> categoryList = new ArrayList<>();
+    public static int selected_category_index = 0;
     private FirebaseFirestore mFirestore;
     Animation sideAnim, bottomAnim;
 
@@ -73,20 +75,20 @@ public class SplashActivity extends AppCompatActivity {
                     if (documentSnapshot.exists()){
                         long count = (long) documentSnapshot.get("Count");
 
-                        for (int i = 1; i< count; i++){
-                            String categoryName = documentSnapshot.getString("Cat" + String.valueOf(i));
-                            categoryList.add(categoryName);
+                        for (int i = 1; i< count + 1; i++){
+                            String categoryName = documentSnapshot.getString("Cat" + String.valueOf(i) + "_Name");
+                            String categoryID = documentSnapshot.getString("Cat" + String.valueOf(i) + "_ID");
+                            categoryList.add(new Category(categoryID, categoryName));
 
                         }
 
                         Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                         startActivity(intent);
-                        finish();
 
                     }else {
                         Toasty.error(SplashActivity.this, "Something went wrong loading categories!!!", Toast.LENGTH_SHORT, true).show();
-                        finish();
                     }
+                    finish();
                 }else {
                     Toasty.error(SplashActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT, true).show();
                 }
