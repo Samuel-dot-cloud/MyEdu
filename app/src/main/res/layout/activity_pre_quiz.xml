@@ -23,7 +23,6 @@
         android:gravity="center"
         android:columnWidth="100dp"
         android:numColumns="2"
-        android:background="@drawable/category_border"
         tools:ignore="Suspicious0dp">
 
     </GridView>
