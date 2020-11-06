@@ -270,7 +270,9 @@ public class QuestionsActivity extends AppCompatActivity implements View.OnClick
         }else{
             // Go to score activity
             Intent intent = new Intent(QuestionsActivity.this, ScoreActivity.class);
-            intent.putExtra("SCORE", String.valueOf(correctAns) + " / " + String.valueOf(questionsList.size()));
+            intent.putExtra("correct", Long.valueOf(correctAns));
+            intent.putExtra("wrong", Long.valueOf(wrongAns));
+            intent.putExtra("missed", Long.valueOf(notAnswered));
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             QuestionsActivity.this.finish();
