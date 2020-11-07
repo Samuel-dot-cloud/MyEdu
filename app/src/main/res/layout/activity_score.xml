@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/baloo"
         android:text="100%"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/card3"
         android:textSize="26sp"
         app:layout_constraintBottom_toBottomOf="@+id/results_progress"
         app:layout_constraintEnd_toEndOf="@+id/results_progress"

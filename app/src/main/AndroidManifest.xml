@@ -13,9 +13,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.segments.ScoreActivity"></activity>
-        <activity android:name=".activities.segments.QuestionsActivity" />
-        <activity android:name=".activities.segments.SetsActivity" />
+        <activity android:name=".activities.segments.ScoreActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".activities.segments.QuestionsActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".activities.segments.SetsActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".activities.segments.PreQuizActivity" />
         <activity
             android:name=".activities.segments.SoundGameActivity"

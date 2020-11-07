@@ -20,7 +20,7 @@
     <!--    Dashboard Colors-->
 
     <!--    Body and background colors-->
-    <color name="home_background">#f2f5f8</color>
+    <color name="home_background">#F8F2F2</color>
     <color name="banner_background">#F1E9CE</color>
     <color name="banner_background_light">#56F1E9CE</color>
 
