@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,6 +57,8 @@ public class QuestionsActivity extends AppCompatActivity implements View.OnClick
     Button option3;
     @BindView(R.id.option4)
     Button option4;
+    @BindView(R.id.quiz_question_progress)
+    ProgressBar questionProgress;
 
     private CountDownTimer countDownTimer;
 
@@ -92,6 +95,7 @@ public class QuestionsActivity extends AppCompatActivity implements View.OnClick
 
         correctAns = 0;
         wrongAns = 0;
+        notAnswered = 0;
     }
 
     private void initActionClick() {
@@ -161,7 +165,7 @@ public class QuestionsActivity extends AppCompatActivity implements View.OnClick
         option3.setText(questionsList.get(0).getOptionC());
         option4.setText(questionsList.get(0).getOptionD());
 
-        questionCount.setText(String.valueOf(1) + "/" + String.valueOf(questionsList.size()));
+        questionCount.setText(String.valueOf(1) + " / " + String.valueOf(questionsList.size()));
 
         startTimer();
         questionNum = 0;
@@ -173,10 +177,15 @@ public class QuestionsActivity extends AppCompatActivity implements View.OnClick
             public void onTick(long millisUntilFinished) {
                 if (millisUntilFinished< 10000)
                 countdownTimer.setText(String.valueOf(millisUntilFinished / 1000));
+
+                //Progress in percent
+                Long percent = millisUntilFinished/(11 * 10);
+                questionProgress.setProgress(percent.intValue());
             }
 
             @Override
             public void onFinish() {
+                notAnswered++;
                 changeQuestion();
             }
         };
