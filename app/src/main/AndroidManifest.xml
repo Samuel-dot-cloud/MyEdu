@@ -19,7 +19,8 @@
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".activities.segments.SetsActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".activities.segments.PreQuizActivity" />
+        <activity android:name=".activities.segments.PreQuizActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".activities.segments.SoundGameActivity"
             android:theme="@style/AppTheme.NoActionBar" />

@@ -9,13 +9,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
@@ -24,6 +24,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.studiofive.myedu.activities.SettingsActivity;
+import com.studiofive.myedu.adapters.GlideApp;
 import com.studiofive.myedu.authentication.LoginActivity;
 import com.studiofive.myedu.fragments.HighSchoolFragment;
 import com.studiofive.myedu.fragments.HomeFragment;
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private FirebaseUser mFirebaseUser;
     private FirebaseFirestore mFirestore;
+    private ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +64,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //Toolbar
         setSupportActionBar(toolbar);
+        actionBar = getSupportActionBar();
+        actionBar.setTitle("Home");
+
         //Navigation Drawer Menu
         navigationView.bringToFront();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -109,18 +114,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if(id == R.id.nav_home){
             HomeFragment homeFragment = new HomeFragment();
             Functions.changeMainFragment(MainActivity.this, homeFragment);
+            actionBar = getSupportActionBar();
+            actionBar.setTitle("Home");
         } else if (id == R.id.nav_profile){
             ProfileFragment profileFragment = new ProfileFragment();
             Functions.changeMainFragment(MainActivity.this, profileFragment);
+            actionBar = getSupportActionBar();
+            actionBar.setTitle("Profile");
         } else if(id == R.id.preschool){
             PreschoolFragment preschoolFragment = new PreschoolFragment();
             Functions.changeMainFragment(MainActivity.this, preschoolFragment);
+            actionBar = getSupportActionBar();
+            actionBar.setTitle("PreSchool");
         }else if(id == R.id.highSchool){
             HighSchoolFragment highSchoolFragment = new HighSchoolFragment();
             Functions.changeMainFragment(MainActivity.this, highSchoolFragment);
+            actionBar = getSupportActionBar();
+            actionBar.setTitle("High School");
         }else if(id == R.id.nav_saved_course){
             SavedCoursesFragment savedCoursesFragment = new SavedCoursesFragment();
             Functions.changeMainFragment(MainActivity.this, savedCoursesFragment);
+            actionBar = getSupportActionBar();
+            actionBar.setTitle("Saved Courses");
         }else if(id == R.id.nav_logout){
             Toasty.info(this, "Signing out", Toast.LENGTH_SHORT, true).show();
             FirebaseAuth.getInstance().signOut();
@@ -155,7 +170,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 String personalMantra = Objects.requireNonNull(documentSnapshot.get("personalMantra")).toString();
                 navUserName.setText(userName);
                 navMantra.setText(personalMantra);
-                Glide.with(MainActivity.this).load(profileImage).into(navProfilePhoto);
+                GlideApp.with(MainActivity.this).load(profileImage).placeholder(R.drawable.logo).into(navProfilePhoto);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
