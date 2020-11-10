@@ -111,6 +111,7 @@ public class ProfileFragment extends Fragment {
         return view;
     }
 
+
     private void initActionClick() {
         circlePhoto.setOnClickListener(new View.OnClickListener() {
             @Override

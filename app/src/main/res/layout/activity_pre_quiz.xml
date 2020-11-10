@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activities.segments.PreQuizActivity"
-    android:padding="8dp">
+    tools:context=".activities.segments.PreQuizActivity">
 
 <!--    <androidx.recyclerview.widget.RecyclerView-->
 <!--        android:id="@+id/quiz_categories"-->
@@ -14,6 +13,10 @@
 <!--        android:layout_height="match_parent">-->
 
 <!--    </androidx.recyclerview.widget.RecyclerView>-->
+    <include
+        android:id="@+id/quiz_toolbar"
+        layout="@layout/app_bar_layout">
+    </include>
 
     <GridView
         android:id="@+id/categoryGridView"

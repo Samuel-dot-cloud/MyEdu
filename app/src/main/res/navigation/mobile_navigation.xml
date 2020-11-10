@@ -14,7 +14,7 @@
     <fragment
         android:id="@+id/nav_profile"
         android:name="com.studiofive.myedu.fragments.ProfileFragment"
-        android:label="Profile"
+        android:label="Profile section"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/preschool"
