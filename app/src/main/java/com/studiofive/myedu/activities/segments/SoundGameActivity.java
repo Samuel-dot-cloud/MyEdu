@@ -26,7 +26,6 @@ import com.glide.slider.library.tricks.ViewPagerEx;
 import com.studiofive.myedu.R;
 import com.studiofive.myedu.fragments.categories.AnimalsFragment;
 import com.studiofive.myedu.fragments.categories.ClothingFragment;
-import com.studiofive.myedu.fragments.categories.DrinksFragment;
 import com.studiofive.myedu.fragments.categories.ElectronicsFragment;
 import com.studiofive.myedu.fragments.categories.FoodsFragment;
 import com.studiofive.myedu.fragments.categories.FruitsFragment;
@@ -109,7 +108,7 @@ public class SoundGameActivity extends AppCompatActivity implements BaseSliderVi
 
         //Page Layouts
         if (view.getId() == R.id.drinksBtn) {
-            intent = new Intent(mActivity, DrinksFragment.class);
+            intent = new Intent(mActivity, SoundCategoryActivity.class);
             mContext.startActivity(intent);
         } else if (view.getId() == R.id.foodsBtn) {
             intent = new Intent(SoundGameActivity.this, FoodsFragment.class);

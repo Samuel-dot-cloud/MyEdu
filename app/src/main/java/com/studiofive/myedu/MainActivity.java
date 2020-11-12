@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             PreschoolFragment preschoolFragment = new PreschoolFragment();
             Functions.changeMainFragment(MainActivity.this, preschoolFragment);
             actionBar = getSupportActionBar();
-            actionBar.setTitle("PreSchool");
+            actionBar.setTitle("Preschool");
         }else if(id == R.id.highSchool){
             HighSchoolFragment highSchoolFragment = new HighSchoolFragment();
             Functions.changeMainFragment(MainActivity.this, highSchoolFragment);
@@ -198,4 +198,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
         startActivity(intent);
     }
+
+
 }
