@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -37,6 +39,12 @@ public class HomeFragment extends Fragment {
     RecyclerView mostViewedRecycler;
     @BindView(R.id.categories_recyclerview)
     RecyclerView categoriesRecycler;
+    @BindView(R.id.profile_home)
+    RelativeLayout profile;
+    @BindView(R.id.preschool_home)
+    RelativeLayout preschool;
+    @BindView(R.id.highschool_home)
+    RelativeLayout highSchool;
 
     private Unbinder unbinder;
     private Context mContext;
@@ -81,8 +89,38 @@ public class HomeFragment extends Fragment {
         featuredRecyclerMethod();
         mostViewedRecyclerMethod();
         categoriesRecyclerMethod();
+        initActionClick();
 
         return view;
+    }
+
+    private void initActionClick() {
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = null;
+                fragment = new ProfileFragment();
+                replaceFragment(fragment);
+            }
+        });
+
+        highSchool.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = null;
+                fragment = new HighSchoolFragment();
+                replaceFragment(fragment);
+            }
+        });
+
+        preschool.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = null;
+                fragment = new PreschoolFragment();
+                replaceFragment(fragment);
+            }
+        });
     }
 
     private void featuredRecyclerMethod() {
@@ -127,6 +165,13 @@ public class HomeFragment extends Fragment {
 
         adapter = new CategoriesAdapter(categories);
         categoriesRecycler.setAdapter(adapter);
+    }
+
+    public void replaceFragment(Fragment someFragment) {
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.main_container, someFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
 

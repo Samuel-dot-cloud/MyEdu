@@ -70,6 +70,7 @@
                     android:orientation="vertical">
 
                     <RelativeLayout
+                        android:id="@+id/profile_home"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:background="@drawable/card1"
@@ -96,6 +97,7 @@
                     android:orientation="vertical">
 
                     <RelativeLayout
+                        android:id="@+id/preschool_home"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:background="@drawable/card2"
@@ -122,6 +124,7 @@
                     android:orientation="vertical">
 
                     <RelativeLayout
+                        android:id="@+id/highschool_home"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:background="@drawable/card3"
