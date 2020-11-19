@@ -109,26 +109,33 @@ public class SoundGameActivity extends AppCompatActivity implements BaseSliderVi
         //Page Layouts
         if (view.getId() == R.id.drinksBtn) {
             intent = new Intent(mActivity, SoundCategoryActivity.class);
+            intent.putExtra("drinks", "drinks");
             mContext.startActivity(intent);
         } else if (view.getId() == R.id.foodsBtn) {
-            intent = new Intent(SoundGameActivity.this, FoodsFragment.class);
+            intent = new Intent(SoundGameActivity.this, SoundCategoryActivity.class);
+            intent.putExtra("foods", "foods");
             mContext.startActivity(intent);
         } else if (view.getId() == R.id.fruitsBtn) {
-            intent = new Intent(SoundGameActivity.this, FruitsFragment.class);
+            intent = new Intent(SoundGameActivity.this, SoundCategoryActivity.class);
+            intent.putExtra("fruits", "fruits");
             startActivity(intent);
         } else if (view.getId() == R.id.animalsBtn) {
-            intent = new Intent(SoundGameActivity.this, AnimalsFragment.class);
+            intent = new Intent(SoundGameActivity.this, SoundCategoryActivity.class);
+            intent.putExtra("animals", "animals");
             startActivity(intent);
         } else if (view.getId() == R.id.placesBtn) {
-            intent = new Intent(SoundGameActivity.this, PlacesFragment.class);
+            intent = new Intent(SoundGameActivity.this, SoundCategoryActivity.class);
+            intent.putExtra("places", "places");
             startActivity(intent);
         } else if (view.getId() == R.id.commonBtn) {
             Toasty.info(SoundGameActivity.this, "Coming soon", Toast.LENGTH_SHORT, true).show();
         } else if (view.getId() == R.id.electronicsBtn) {
-            intent = new Intent(SoundGameActivity.this, ElectronicsFragment.class);
+            intent = new Intent(SoundGameActivity.this, SoundCategoryActivity.class);
+            intent.putExtra("elec", "elec");
             startActivity(intent);
         } else if (view.getId() == R.id.clothingBtn) {
-            intent = new Intent(SoundGameActivity.this, ClothingFragment.class);
+            intent = new Intent(SoundGameActivity.this, SoundCategoryActivity.class);
+            intent.putExtra("clothing", "clothing");
             startActivity(intent);
         }
     }
