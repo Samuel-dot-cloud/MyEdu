@@ -2,18 +2,28 @@ package com.studiofive.myedu.activities.segments;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentActivity;
 
 import com.studiofive.myedu.R;
+import com.studiofive.myedu.fragments.categories.AnimalsFragment;
+import com.studiofive.myedu.fragments.categories.ClothingFragment;
 import com.studiofive.myedu.fragments.categories.DrinksFragment;
+import com.studiofive.myedu.fragments.categories.ElectronicsFragment;
+import com.studiofive.myedu.fragments.categories.FoodsFragment;
+import com.studiofive.myedu.fragments.categories.FruitsFragment;
+import com.studiofive.myedu.fragments.categories.PlacesFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SoundCategoryActivity extends FragmentActivity {
+public class SoundCategoryActivity extends AppCompatActivity {
     @BindView(R.id.sound_category_toolbar)
     Toolbar toolbar;
+    
+    private String action;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,35 +31,71 @@ public class SoundCategoryActivity extends FragmentActivity {
         setContentView(R.layout.activity_sound_category);
         ButterKnife.bind(this);
 
-        String drinks = getIntent().getStringExtra("drinks");
-        String foods = getIntent().getStringExtra("drinks");
-        String fruits = getIntent().getStringExtra("fruits");
-        String animals = getIntent().getStringExtra("animals");
-        String places = getIntent().getStringExtra("places");
-        String electronics = getIntent().getStringExtra("elec");
-        String clothing = getIntent().getStringExtra("clothing");
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        // Check that the activity is using the layout version with
-        // the fragment_container FrameLayout
+        action = getIntent().getStringExtra("category");
+
         if (findViewById(R.id.sound_fragment_container) != null) {
-
-            // However, if we're being restored from a previous state,
-            // then we don't need to do anything and should return or else
-            // we could end up with overlapping fragments.
             if (savedInstanceState != null) {
                 return;
             }
+            
+            navigationContext();
+        }
+    }
 
-            // Create a new Fragment to be placed in the activity layout
-            DrinksFragment firstFragment = new DrinksFragment();
-
-            // In case this activity was started with special instructions from an
-            // Intent, pass the Intent's extras to the fragment as arguments
-            firstFragment.setArguments(getIntent().getExtras());
-
-            // Add the fragment to the 'fragment_container' FrameLayout
+    private void navigationContext() {
+        if (action.compareTo("drinks") == 0){
+            DrinksFragment drinksFragment = new DrinksFragment();
+            drinksFragment.setArguments(getIntent().getExtras());
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.sound_fragment_container, firstFragment).commit();
+                    .add(R.id.sound_fragment_container, drinksFragment).commit();
+
+            getSupportActionBar().setTitle("Drinks");
+        }else if (action.compareTo("foods") == 0){
+            FoodsFragment foodsFragment = new FoodsFragment();
+            foodsFragment.setArguments(getIntent().getExtras());
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.sound_fragment_container, foodsFragment).commit();
+
+            getSupportActionBar().setTitle("Foods");
+        }else if (action.compareTo("fruits") == 0){
+            FruitsFragment fruitsFragment = new FruitsFragment();
+            fruitsFragment.setArguments(getIntent().getExtras());
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.sound_fragment_container, fruitsFragment).commit();
+
+            getSupportActionBar().setTitle("Fruits");
+        }else if (action.compareTo("animals") == 0){
+            AnimalsFragment animalsFragment = new AnimalsFragment();
+            animalsFragment.setArguments(getIntent().getExtras());
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.sound_fragment_container, animalsFragment).commit();
+
+            getSupportActionBar().setTitle("Animals");
+        }else if (action.compareTo("places") == 0){
+            PlacesFragment placesFragment = new PlacesFragment();
+            placesFragment.setArguments(getIntent().getExtras());
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.sound_fragment_container, placesFragment).commit();
+
+            getSupportActionBar().setTitle("Places");
+        }else if (action.compareTo("electronics") == 0){
+            ElectronicsFragment electronicsFragment = new ElectronicsFragment();
+            electronicsFragment.setArguments(getIntent().getExtras());
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.sound_fragment_container, electronicsFragment).commit();
+
+            getSupportActionBar().setTitle("Electronics");
+        }else if (action.compareTo("clothing") == 0){
+            ClothingFragment clothingFragment = new ClothingFragment();
+            clothingFragment.setArguments(getIntent().getExtras());
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.sound_fragment_container, clothingFragment).commit();
+
+            getSupportActionBar().setTitle("Clothing");
         }
     }
 }
