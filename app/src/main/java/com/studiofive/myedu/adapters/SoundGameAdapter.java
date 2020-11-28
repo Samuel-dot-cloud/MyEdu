@@ -53,7 +53,7 @@ public class SoundGameAdapter extends RecyclerView.Adapter<SoundGameAdapter.Soun
                     imageStateVolume = false;
                 }else {
                     mPlayer = MediaPlayer.create(mContext, object.getSound());
-                    mPlayer.setLooping(true);
+                    mPlayer.setLooping(false);
                     mPlayer.start();
                     imageStateVolume = true;
                     Toasty.info(mContext.getApplicationContext(), object.getText(), Toast.LENGTH_SHORT, true).show();
