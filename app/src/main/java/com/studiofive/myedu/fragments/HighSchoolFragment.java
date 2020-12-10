@@ -10,6 +10,11 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 
 import com.studiofive.myedu.R;
+import com.studiofive.myedu.adapters.ExamCategoryAdapter;
+import com.studiofive.myedu.classes.ExamCategory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,6 +25,7 @@ public class HighSchoolFragment extends Fragment {
     @BindView(R.id.category_grid_high_school)
     GridView categoryView;
     private Unbinder unbinder;
+    private List<ExamCategory> categoryList = new ArrayList<>();
 
 
 
@@ -41,7 +47,21 @@ public class HighSchoolFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_high_school, container, false);
         unbinder = ButterKnife.bind(this, view);
+        loadCategories();
+
+        ExamCategoryAdapter adapter = new ExamCategoryAdapter(categoryList);
+        categoryView.setAdapter(adapter);
          return view;
+    }
+
+    private void loadCategories() {
+        categoryList.clear();
+        categoryList.add(new ExamCategory("1", "Calculus", 20));
+        categoryList.add(new ExamCategory("2", "Geometry", 30));
+        categoryList.add(new ExamCategory("3", "Algebra", 5));
+        categoryList.add(new ExamCategory("4", "Chemistry", 10));
+        categoryList.add(new ExamCategory("5", "Physics", 7));
+        categoryList.add(new ExamCategory("6", "Drawing", 9));
     }
 
     @Override
