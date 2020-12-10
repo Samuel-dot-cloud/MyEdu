@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.studiofive.myedu.MainActivity;
 import com.studiofive.myedu.R;
 import com.studiofive.myedu.adapters.GlideApp;
 
@@ -52,8 +53,9 @@ public class SettingsActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayShowHomeEnabled(true);
+//        getSupportActionBar().setDisplayShowCustomEnabled(true);
         getSupportActionBar().setTitle("Settings");
 
         mFirestore = FirebaseFirestore.getInstance();
@@ -123,11 +125,13 @@ public class SettingsActivity extends AppCompatActivity {
         startActivity(Intent.createChooser(sharingIntent,getResources().getString(R.string.msg_invite2)));
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == android.R.id.home){
-            finish();
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//        if (item.getItemId() == android.R.id.home){
+//            Intent intent = new Intent(SettingsActivity.this, MainActivity.class);
+//            startActivity(intent);
+//            finish();
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 }
