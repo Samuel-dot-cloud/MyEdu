@@ -7,53 +7,37 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 
 import com.studiofive.myedu.R;
+import com.studiofive.myedu.adapters.ExamCategoryAdapter;
+import com.studiofive.myedu.classes.ExamCategory;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link HighSchoolFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
+
 public class HighSchoolFragment extends Fragment {
+    @BindView(R.id.category_grid_high_school)
+    GridView categoryView;
+    private Unbinder unbinder;
+    private List<ExamCategory> categoryList = new ArrayList<>();
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public HighSchoolFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment HighSchoolFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static HighSchoolFragment newInstance(String param1, String param2) {
-        HighSchoolFragment fragment = new HighSchoolFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -61,6 +45,28 @@ public class HighSchoolFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_high_school, container, false);
+        View view = inflater.inflate(R.layout.fragment_high_school, container, false);
+        unbinder = ButterKnife.bind(this, view);
+        loadCategories();
+
+        ExamCategoryAdapter adapter = new ExamCategoryAdapter(categoryList);
+        categoryView.setAdapter(adapter);
+         return view;
+    }
+
+    private void loadCategories() {
+        categoryList.clear();
+        categoryList.add(new ExamCategory("1", "Calculus", 20));
+        categoryList.add(new ExamCategory("2", "Geometry", 30));
+        categoryList.add(new ExamCategory("3", "Algebra", 5));
+        categoryList.add(new ExamCategory("4", "Chemistry", 10));
+        categoryList.add(new ExamCategory("5", "Physics", 7));
+        categoryList.add(new ExamCategory("6", "Drawing", 9));
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 }
