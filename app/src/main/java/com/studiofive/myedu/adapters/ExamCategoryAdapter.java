@@ -1,5 +1,6 @@
 package com.studiofive.myedu.adapters;
 
+import android.content.Intent;
 import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.studiofive.myedu.R;
+import com.studiofive.myedu.activities.segments.TestsActivity;
 import com.studiofive.myedu.classes.ExamCategory;
 
 import java.util.List;
@@ -35,7 +37,7 @@ public class ExamCategoryAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         View view;
         if (convertView == null){
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.exam_category_layout, parent, false);
@@ -43,11 +45,20 @@ public class ExamCategoryAdapter extends BaseAdapter {
             view = convertView;
         }
 
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(view.getContext(), TestsActivity.class);
+                intent.putExtra("category_index", position);
+                view.getContext().startActivity(intent);
+            }
+        });
+
         TextView categoryName = view.findViewById(R.id.exam_category_name);
         TextView noOfTests = view.findViewById(R.id.no_of_tests);
 
         categoryName.setText(categoryList.get(position).getName());
-        noOfTests.setText(String.valueOf(categoryList.get(position).getNoOfTests()));
+        noOfTests.setText(String.valueOf(categoryList.get(position).getNoOfTests()) + " tests");
 
         return view;
     }

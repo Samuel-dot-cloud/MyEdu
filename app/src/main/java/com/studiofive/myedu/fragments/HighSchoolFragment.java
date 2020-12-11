@@ -25,7 +25,7 @@ public class HighSchoolFragment extends Fragment {
     @BindView(R.id.category_grid_high_school)
     GridView categoryView;
     private Unbinder unbinder;
-    private List<ExamCategory> categoryList = new ArrayList<>();
+    public static List<ExamCategory> categoryList = new ArrayList<>();
 
 
 
@@ -61,7 +61,8 @@ public class HighSchoolFragment extends Fragment {
         categoryList.add(new ExamCategory("3", "Algebra", 5));
         categoryList.add(new ExamCategory("4", "Chemistry", 10));
         categoryList.add(new ExamCategory("5", "Physics", 7));
-        categoryList.add(new ExamCategory("6", "Drawing", 9));
+        categoryList.add(new ExamCategory("6", "Engineering Drawing", 9));
+        categoryList.add(new ExamCategory("7", "Development Studies", 15));
     }
 
     @Override
