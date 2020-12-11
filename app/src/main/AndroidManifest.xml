@@ -13,8 +13,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.segments.SoundCategoryActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".activities.segments.TestsActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".activities.segments.SoundCategoryActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.segments.ScoreActivity"
             android:theme="@style/AppTheme.NoActionBar" />
