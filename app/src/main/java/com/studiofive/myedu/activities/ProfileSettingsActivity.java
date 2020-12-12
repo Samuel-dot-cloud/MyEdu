@@ -22,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityOptionsCompat;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -36,7 +37,6 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.studiofive.myedu.R;
 import com.studiofive.myedu.activities.views.FullScreenActivity;
-import com.studiofive.myedu.adapters.GlideApp;
 import com.studiofive.myedu.classes.Common;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
@@ -142,7 +142,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
 
                 mUserName.setText(userName);
                 mPersonalMantra.setText(personalMantra);
-                GlideApp.with(ProfileSettingsActivity.this).load(imageProfile).placeholder(R.drawable.profile_pic).into(mProfileImage);
+                Glide.with(ProfileSettingsActivity.this).load(imageProfile).placeholder(R.drawable.profile_pic).into(mProfileImage);
 
             }
         }).addOnFailureListener(new OnFailureListener() {

@@ -16,6 +16,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
@@ -24,7 +25,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.studiofive.myedu.activities.SettingsActivity;
-import com.studiofive.myedu.adapters.GlideApp;
 import com.studiofive.myedu.authentication.LoginActivity;
 import com.studiofive.myedu.fragments.HighSchoolFragment;
 import com.studiofive.myedu.fragments.HomeFragment;
@@ -170,7 +170,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 String personalMantra = Objects.requireNonNull(documentSnapshot.get("personalMantra")).toString();
                 navUserName.setText(userName);
                 navMantra.setText(personalMantra);
-                GlideApp.with(MainActivity.this).load(profileImage).placeholder(R.drawable.logo).into(navProfilePhoto);
+                Glide.with(MainActivity.this).load(profileImage).placeholder(R.drawable.logo).into(navProfilePhoto);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
