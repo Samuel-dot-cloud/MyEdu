@@ -55,12 +55,14 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.2'
     //Toasty
     implementation 'com.github.GrenderG:Toasty:1.4.2'
-    // Rx-Java
-    implementation "io.reactivex.rxjava3:rxjava:3.0.4"
-    //Rx-Android
-    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
-    //RxBinding
-    implementation 'com.jakewharton.rxbinding4:rxbinding:4.0.0'
+
+//    // Rx-Java
+//    implementation "io.reactivex.rxjava3:rxjava:3.0.4"
+//    //Rx-Android
+//    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
+//    //RxBinding
+//    implementation 'com.jakewharton.rxbinding4:rxbinding:4.0.0'
+
     //Image cropper
     api 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
     // Circle image view
@@ -76,6 +78,8 @@ dependencies {
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'
     //Image Slider
     implementation "com.github.firdausmaulan:GlideSlider:1.5.1"
+    //PhotoEditor
+    implementation 'ja.burhanrashid52:photoeditor:1.1.0'
 
 
 

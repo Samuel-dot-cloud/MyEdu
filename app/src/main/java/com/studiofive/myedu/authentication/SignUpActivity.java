@@ -22,7 +22,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.WriteBatch;
 import com.studiofive.myedu.MainActivity;
 import com.studiofive.myedu.R;
 import com.studiofive.myedu.classes.Users;
@@ -32,6 +35,8 @@ import butterknife.ButterKnife;
 import es.dmoral.toasty.Toasty;
 
 public class SignUpActivity extends AppCompatActivity {
+    @BindView(R.id.inputName)
+    EditText mInputName;
     @BindView(R.id.inputEmail)
     EditText mInputEmail;
     @BindView(R.id.inputPassword)
@@ -84,9 +89,10 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void createNewUserDefault() {
+        String name = mInputName.getText().toString();
         String email = mInputEmail.getText().toString();
         String password = mInputPassword.getText().toString();
-        if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
+        if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(name)) {
             Toasty.warning(this, "Please enter valid details!!", Toast.LENGTH_SHORT, true).show();
         } else {
             mProgressDialog.setTitle("Creating New Account");
@@ -102,20 +108,35 @@ public class SignUpActivity extends AppCompatActivity {
                                 FirebaseUser firebaseUser = mAuth.getCurrentUser();
                                 if (firebaseUser != null) {
                                     String userID = firebaseUser.getUid();
-                                    users = new Users(userID, "nil", "nil", "nil", "nil", mInputEmail.getText().toString());
+                                    users = new Users(userID, name, "Never give up!", "nil", "default", email, 0);
                                     mFirestore.collection("Users").document(firebaseUser.getUid()).set(users)
                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void aVoid) {
-                                                    mProgressDialog.dismiss();
-                                                    Toasty.success(SignUpActivity.this, "Account created successfully.", Toast.LENGTH_SHORT, true).show();
-                                                    sendUserToMainActivity();
+                                                   DocumentReference countDoc =  mFirestore.collection("Users").document("Total_users");
+                                                    WriteBatch batch = mFirestore.batch();
+                                                    batch.update(countDoc, "Count", FieldValue.increment(1));
+                                                    batch.commit()
+                                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                @Override
+                                                                public void onSuccess(Void aVoid) {
+                                                                    mProgressDialog.dismiss();
+                                                                    Toasty.success(SignUpActivity.this, "Account created successfully.", Toast.LENGTH_SHORT, true).show();
+                                                                    sendUserToMainActivity();
+                                                                }
+                                                            })
+                                                            .addOnFailureListener(new OnFailureListener() {
+                                                                @Override
+                                                                public void onFailure(@NonNull Exception e) {
+                                                                    String message = task.getException().toString();
+                                                                    Toasty.error(SignUpActivity.this, "Error: " + message, Toast.LENGTH_SHORT, true).show();
+                                                                }
+                                                            });
                                                 }
                                             }).addOnFailureListener(new OnFailureListener() {
                                         @Override
                                         public void onFailure(@NonNull Exception e) {
-                                            String message = task.getException().toString();
-                                            Toasty.error(SignUpActivity.this, "Error: " + message, Toast.LENGTH_SHORT, true).show();
+                                            Toasty.error(SignUpActivity.this, "Something went wrong", Toasty.LENGTH_SHORT, true).show();
                                         }
                                     });
                                     mProgressDialog.dismiss();
