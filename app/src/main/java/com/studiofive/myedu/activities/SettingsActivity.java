@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -20,7 +21,6 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.studiofive.myedu.MainActivity;
 import com.studiofive.myedu.R;
-import com.studiofive.myedu.adapters.GlideApp;
 
 import java.util.Objects;
 
@@ -99,7 +99,7 @@ public class SettingsActivity extends AppCompatActivity {
                 String personalMantra = Objects.requireNonNull(documentSnapshot.get("personalMantra")).toString();
                 mUserName.setText(userName);
                 mPersonalMantra.setText(personalMantra);
-                GlideApp.with(SettingsActivity.this).load(profileImage).placeholder(R.drawable.profile_pic).into(mImageProfile);
+                Glide.with(SettingsActivity.this).load(profileImage).placeholder(R.drawable.profile_pic).into(mImageProfile);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
