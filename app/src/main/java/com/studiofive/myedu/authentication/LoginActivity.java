@@ -2,8 +2,10 @@ package com.studiofive.myedu.authentication;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.ArrayMap;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -13,14 +15,25 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.studiofive.myedu.R;
+import com.studiofive.myedu.classes.ExamCategory;
 import com.studiofive.myedu.intro.SplashActivity;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -44,6 +57,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private ProgressDialog mProgressDialog;
+    private static FirebaseFirestore mFirestore;
+    public static List<ExamCategory> categoryList = new ArrayList<>();
 
 
     @Override
@@ -55,6 +70,7 @@ public class LoginActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         mAuth = FirebaseAuth.getInstance();
+        mFirestore = FirebaseFirestore.getInstance();
         mProgressDialog = new ProgressDialog(this);
 
 
@@ -95,6 +111,7 @@ public class LoginActivity extends AppCompatActivity {
             mProgressDialog.setMessage("Please wait...");
             mProgressDialog.setCanceledOnTouchOutside(true);
             mProgressDialog.show();
+            loadCategories();
 
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -104,6 +121,7 @@ public class LoginActivity extends AppCompatActivity {
                                 mProgressDialog.dismiss();
                                 Toasty.success(LoginActivity.this, "Logged in Successfully!!", Toast.LENGTH_SHORT, true).show();
                                 sendUserToSplashActivity();
+
                             } else {
                                 String message = task.getException().toString();
                                 Toasty.error(LoginActivity.this, "Error: " + message, Toast.LENGTH_SHORT, true).show();
@@ -131,4 +149,37 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    private void loadCategories(){
+        categoryList.clear();
+        mFirestore.collection("Exams").get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        Map<String, QueryDocumentSnapshot> documentList = new ArrayMap<>();
+                        for (QueryDocumentSnapshot doc : queryDocumentSnapshots){
+                            documentList.put(doc.getId(), doc);
+                        }
+
+                        QueryDocumentSnapshot categoryListDoc = documentList.get("Categories");
+                        long catCount = categoryListDoc.getLong("Count");
+
+                        for (int i = 1; i <= catCount; i++){
+                            String catID = categoryListDoc.getString("Cat" + String.valueOf(i) + "_ID");
+                            QueryDocumentSnapshot catDoc = documentList.get(catID);
+                            int noOfTests = catDoc.getLong("No_Of_Tests").intValue();
+                            String catName = catDoc.getString("Name");
+                            categoryList.add(new ExamCategory(catID, catName, noOfTests));
+
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toasty.error( LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT,true).show();
+                    }
+                });
+    }
 }
+
