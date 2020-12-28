@@ -10,6 +10,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import android.util.ArrayMap;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +43,8 @@ public class HighSchoolFragment extends Fragment {
     private Unbinder unbinder;
     private Context mContext;
     private FirebaseFirestore mFirestore;
-    public static List<ExamCategory> categoryList = new ArrayList<>();
+    public static List<ExamCategory> examCategoryList = new ArrayList<>();
+    private static String TAG = "High School Fragment";
 
 
     public HighSchoolFragment() {
@@ -65,55 +67,57 @@ public class HighSchoolFragment extends Fragment {
         unbinder = ButterKnife.bind(this, view);
         mFirestore = FirebaseFirestore.getInstance();
 
-        ExamCategoryAdapter adapter = new ExamCategoryAdapter(categoryList);
+        ExamCategoryAdapter adapter = new ExamCategoryAdapter(examCategoryList);
         categoryView.setAdapter(adapter);
-        loadCategories();
+        //loadCategories();
+//        loadExamCategories();
          return view;
     }
 
 //    private void loadCategories() {
-//        categoryList.clear();
-//        categoryList.add(new ExamCategory("1", "Calculus", 20));
-//        categoryList.add(new ExamCategory("2", "Geometry", 30));
-//        categoryList.add(new ExamCategory("3", "Algebra", 5));
-//        categoryList.add(new ExamCategory("4", "Chemistry", 10));
-//        categoryList.add(new ExamCategory("5", "Physics", 7));
-//        categoryList.add(new ExamCategory("6", "Engineering Drawing", 9));
-//        categoryList.add(new ExamCategory("7", "Development Studies", 15));
+//        examCategoryList.clear();
+//        examCategoryList.add(new ExamCategory("1", "Calculus", 20));
+//        examCategoryList.add(new ExamCategory("2", "Geometry", 30));
+//        examCategoryList.add(new ExamCategory("3", "Algebra", 5));
+//        examCategoryList.add(new ExamCategory("4", "Chemistry", 10));
+//        examCategoryList.add(new ExamCategory("5", "Physics", 7));
+//        examCategoryList.add(new ExamCategory("6", "Engineering Drawing", 9));
+//        examCategoryList.add(new ExamCategory("7", "Development Studies", 15));
 //    }
 
-    private void loadCategories(){
-        categoryList.clear();
-        mFirestore.collection("Exams").get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        Map<String, QueryDocumentSnapshot> documentList = new ArrayMap<>();
-                        for (QueryDocumentSnapshot doc : queryDocumentSnapshots){
-                            documentList.put(doc.getId(), doc);
-                        }
-
-                        QueryDocumentSnapshot categoryListDoc = documentList.get("Categories");
-                        long catCount = categoryListDoc.getLong("Count");
-
-                        for (int i = 1; i <= catCount; i++){
-                            String catID = categoryListDoc.getString("Cat" + String.valueOf(i) + "_ID");
-                            QueryDocumentSnapshot catDoc = documentList.get(catID);
-                            int noOfTests = catDoc.getLong("No_Of_Tests").intValue();
-                            String catName = catDoc.getString("Name");
-                            categoryList.add(new ExamCategory(catID, catName, noOfTests));
-
-                        }
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toasty.error(mContext.getApplicationContext() , e.getMessage(), Toast.LENGTH_SHORT,true).show();
-                    }
-                });
-    }
+//    private void loadExamCategories(){
+//        examCategoryList.clear();
+//        mFirestore.collection("Exams").get()
+//                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+//                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+//                    @Override
+//                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+//                        Map<String, QueryDocumentSnapshot> documentList = new ArrayMap<>();
+//                        for (QueryDocumentSnapshot doc : queryDocumentSnapshots){
+//                            documentList.put(doc.getId(), doc);
+//                        }
+//
+//                        QueryDocumentSnapshot categoryListDoc = documentList.get("Categories");
+//                        long catCount = categoryListDoc.getLong("Count");
+//
+//                        for (int i = 1; i <= catCount; i++){
+//                            String catID = categoryListDoc.getString("Cat" + String.valueOf(i) + "_ID");
+//                            QueryDocumentSnapshot catDoc = documentList.get(catID);
+//                            int noOfTests = catDoc.getLong("No_Of_Tests").intValue();
+//                            String catName = catDoc.getString("Name");
+//                            examCategoryList.add(new ExamCategory(catID, catName, noOfTests));
+//                            Log.d(TAG, "Display");
+//                        }
+//                    }
+//                })
+//                .addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        Log.d(TAG, "An error");
+//                        Toasty.error(mContext.getApplicationContext() , e.getMessage(), Toast.LENGTH_SHORT,true).show();
+//                    }
+//                });
+//    }
 
     @Override
     public void onDestroyView() {

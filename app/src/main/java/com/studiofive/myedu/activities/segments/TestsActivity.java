@@ -38,7 +38,7 @@ public class TestsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(true);
 
         int category_index = getIntent().getIntExtra("category_index", 0);
-        getSupportActionBar().setTitle(HighSchoolFragment.categoryList.get(category_index).getName());
+        getSupportActionBar().setTitle(HighSchoolFragment.examCategoryList.get(category_index).getName());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
