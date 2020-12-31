@@ -11,6 +11,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,9 +49,9 @@ public class LoginActivity extends AppCompatActivity {
     Button mBtnLogin;
     @BindView(R.id.forgotPassword)
     TextView mForgotPassword;
-    //    @BindView(R.id.googleLogin)
-//    ImageView mGoogleLogin;
-//    @BindView(R.id.facebookLogin)
+    @BindView(R.id.googleLogin)
+    RelativeLayout mGoogleLogin;
+    //    @BindView(R.id.facebookLogin)
 //    ImageView mFacebookLogin;
     @BindView(R.id.goToSignUp)
     TextView mGoToSignUp;
