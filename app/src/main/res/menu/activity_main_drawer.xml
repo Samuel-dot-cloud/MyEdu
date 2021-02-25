@@ -20,9 +20,9 @@
         <menu>
             <group android:checkableBehavior="single">
                 <item
-                    android:id="@+id/preschool"
+                    android:id="@+id/funQuiz"
                     android:icon="@drawable/ic_child"
-                    android:title="@string/preschool" />
+                    android:title="@string/funQuiz" />
                 <item
                     android:id="@+id/highSchool"
                     android:icon="@drawable/ic_school"

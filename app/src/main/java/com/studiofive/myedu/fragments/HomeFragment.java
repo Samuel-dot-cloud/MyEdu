@@ -1,19 +1,23 @@
 package com.studiofive.myedu.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.studiofive.myedu.R;
+import com.studiofive.myedu.activities.segments.PreQuizActivity;
 import com.studiofive.myedu.adapters.CategoriesAdapter;
 import com.studiofive.myedu.adapters.FeaturedAdapter;
 import com.studiofive.myedu.adapters.MostViewedAdapter;
@@ -41,10 +45,12 @@ public class HomeFragment extends Fragment {
     RecyclerView categoriesRecycler;
     @BindView(R.id.profile_home)
     RelativeLayout profile;
-    @BindView(R.id.preschool_home)
-    RelativeLayout preschool;
+    @BindView(R.id.funQuiz_home)
+    RelativeLayout funQuiz;
     @BindView(R.id.highschool_home)
     RelativeLayout highSchool;
+    @BindView(R.id.all_quiz_view)
+    TextView quizView;
 
     private Unbinder unbinder;
     private Context mContext;
@@ -113,12 +119,17 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        preschool.setOnClickListener(new View.OnClickListener() {
+        funQuiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = null;
-                fragment = new PreschoolFragment();
-                replaceFragment(fragment);
+                quizActivity();
+            }
+        });
+
+        quizView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                quizActivity();
             }
         });
     }
@@ -172,6 +183,11 @@ public class HomeFragment extends Fragment {
         transaction.replace(R.id.main_container, someFragment);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    private void quizActivity(){
+        Intent intent = new Intent(this.mContext, PreQuizActivity.class);
+        startActivity(intent);
     }
 
 

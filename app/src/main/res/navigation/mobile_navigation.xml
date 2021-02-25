@@ -16,11 +16,11 @@
         android:name="com.studiofive.myedu.fragments.ProfileFragment"
         android:label="Profile section"
         tools:layout="@layout/fragment_profile" />
-    <fragment
-        android:id="@+id/preschool"
-        android:name="com.studiofive.myedu.fragments.PreschoolFragment"
-        android:label="Preschool"
-        tools:layout="@layout/fragment_preschool" />
+    <activity
+        android:id="@+id/funQuiz"
+        android:name="com.studiofive.myedu.activities.segments.PreQuizActivity"
+        android:label="Fun Quiz"
+        tools:layout="@layout/activity_pre_quiz" />
     <fragment
         android:id="@+id/highSchool"
         android:name="com.studiofive.myedu.fragments.HighSchoolFragment"

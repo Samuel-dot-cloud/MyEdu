@@ -18,7 +18,7 @@
     <string name="menu_home">Profile</string>
     <string name="menu_gallery">Classes</string>
     <string name="menu_slideshow">Saved Courses</string>
-    <string name="preschool">Preschool</string>
+    <string name="funQuiz">Fun Quiz</string>
     <string name="high_school">High School</string>
     <string name="top_icon">top icon</string>
     <string name="email">Email</string>
@@ -58,7 +58,7 @@
     <string name="featured_topics_desc">These are the featured topics that are in demand!</string>
     <string name="most_viewed_topics">Most Viewed</string>
     <string name="view_all">View All</string>
-    <string name="categories">Categories</string>
+    <string name="quiz_categories">Quiz Categories</string>
     <string name="dummy_text_calculus">Calculus</string>
     <string name="dummy_desc_calculus">The wonderful world of calculus, with functions, mappings and all.</string>
     <string name="sound_game">Sound Game</string>

@@ -39,6 +39,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.studiofive.myedu.MainActivity;
 import com.studiofive.myedu.R;
 import com.studiofive.myedu.classes.ExamCategory;
 import com.studiofive.myedu.intro.SplashActivity;
@@ -225,7 +226,7 @@ public class LoginActivity extends AppCompatActivity {
             try {
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = task.getResult(ApiException.class);
-                firebaseAuthWithGoogle(account.getIdToken());
+                firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
                 Toasty.error(LoginActivity.this, e.getMessage(), Toasty.LENGTH_SHORT, true).show();
@@ -235,9 +236,9 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void firebaseAuthWithGoogle(String idToken) {
+    private void firebaseAuthWithGoogle(GoogleSignInAccount account) {
         mProgressDialog.show();
-        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
+        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -248,7 +249,7 @@ public class LoginActivity extends AppCompatActivity {
                             Toasty.success(LoginActivity.this, "Google Sign In successful", Toasty.LENGTH_SHORT, true).show();
                             FirebaseUser user = mAuth.getCurrentUser();
                             sendUserToSplashActivity();
-//                            updateUI(user);
+                            updateUI(user);
                         } else {
                             mProgressDialog.dismiss();
                             // If sign in fails, display a message to the user.
@@ -259,6 +260,11 @@ public class LoginActivity extends AppCompatActivity {
                         // ...
                     }
                 });
+    }
+
+    private void updateUI(FirebaseUser user) {
+       Toasty.success(LoginActivity.this, user.getDisplayName(), Toasty.LENGTH_SHORT, true).show();
+        
     }
 }
 

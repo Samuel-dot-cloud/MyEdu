@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/home_background"
     android:orientation="vertical"
     tools:context=".fragments.HomeFragment">
-    
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -73,9 +74,9 @@
                         android:id="@+id/profile_home"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
+                        android:layout_margin="10dp"
                         android:background="@drawable/card1"
-                        android:elevation="8dp"
-                        android:layout_margin="10dp">
+                        android:elevation="8dp">
 
                         <ImageView
                             android:layout_width="30dp"
@@ -84,11 +85,12 @@
                             android:src="@drawable/ic_profile" />
 
                     </RelativeLayout>
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/profile_section"
-                        android:textAlignment="center"/>
+                        android:textAlignment="center" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -97,12 +99,12 @@
                     android:orientation="vertical">
 
                     <RelativeLayout
-                        android:id="@+id/preschool_home"
+                        android:id="@+id/funQuiz_home"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
+                        android:layout_margin="10dp"
                         android:background="@drawable/card2"
-                        android:elevation="8dp"
-                        android:layout_margin="10dp">
+                        android:elevation="8dp">
 
                         <ImageView
                             android:layout_width="30dp"
@@ -111,11 +113,12 @@
                             android:src="@drawable/ic_child" />
 
                     </RelativeLayout>
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/preschool"
-                        android:textAlignment="center"/>
+                        android:text="@string/funQuiz"
+                        android:textAlignment="center" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -127,9 +130,9 @@
                         android:id="@+id/highschool_home"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
+                        android:layout_margin="10dp"
                         android:background="@drawable/card3"
-                        android:elevation="8dp"
-                        android:layout_margin="10dp">
+                        android:elevation="8dp">
 
                         <ImageView
                             android:layout_width="30dp"
@@ -138,11 +141,12 @@
                             android:src="@drawable/ic_school" />
 
                     </RelativeLayout>
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/high_school"
-                        android:textAlignment="center"/>
+                        android:textAlignment="center" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -153,23 +157,24 @@
                     <RelativeLayout
                         android:layout_width="60dp"
                         android:layout_height="60dp"
+                        android:layout_margin="10dp"
                         android:background="@drawable/card4"
-                        android:elevation="8dp"
-                        android:layout_margin="10dp">
+                        android:elevation="8dp">
 
                         <ImageView
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_centerInParent="true"
                             android:src="@drawable/ic_notes"
-                            android:tint="@android:color/black"/>
+                            app:tint="@android:color/black" />
 
                     </RelativeLayout>
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/notes_section"
-                        android:textAlignment="center"/>
+                        android:textAlignment="center" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -177,33 +182,33 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
                 android:background="@color/banner_background_light">
 
                 <LinearLayout
                     android:id="@+id/featured_topics"
                     android:layout_width="140dp"
                     android:layout_height="280dp"
-                    android:background="@color/banner_background"
                     android:layout_margin="10dp"
+                    android:background="@color/banner_background"
                     android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/featured_topics"
-                        android:textSize="25sp"
-                        android:textColor="@color/colorAccent"
+                        android:layout_marginLeft="10dp"
                         android:layout_marginTop="50dp"
+                        android:text="@string/featured_topics"
                         android:textAllCaps="true"
-                        android:layout_marginLeft="10dp"/>
+                        android:textColor="@color/colorAccent"
+                        android:textSize="25sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
-                        android:text="@string/featured_topics_desc"/>
+                        android:text="@string/featured_topics_desc" />
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -218,8 +223,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_marginTop="30dp"
+                android:orientation="vertical"
                 android:padding="20dp">
 
                 <RelativeLayout
@@ -229,31 +234,31 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/most_viewed_topics"
-                        android:textSize="20sp"
-                        android:textColor="@color/colorAccent"
                         android:fontFamily="@font/bangers"
-                        android:textAllCaps="true"/>
+                        android:text="@string/most_viewed_topics"
+                        android:textAllCaps="true"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="20sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:text="@string/view_all"/>
+                        android:text="@string/view_all" />
                 </RelativeLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/most_viewed_recyclerview"
                     android:layout_width="match_parent"
-                    android:layout_height="180dp"/>
+                    android:layout_height="180dp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_marginTop="30dp"
+                android:orientation="vertical"
                 android:padding="20dp">
 
                 <RelativeLayout
@@ -263,24 +268,25 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/categories"
-                        android:textSize="20sp"
-                        android:textColor="@color/colorAccent"
                         android:fontFamily="@font/bangers"
-                        android:textAllCaps="true"/>
+                        android:text="@string/quiz_categories"
+                        android:textAllCaps="true"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="20sp" />
 
                     <TextView
+                        android:id="@+id/all_quiz_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:text="@string/view_all"/>
+                        android:text="@string/view_all" />
                 </RelativeLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/categories_recyclerview"
                     android:layout_width="match_parent"
-                    android:layout_height="180dp"/>
+                    android:layout_height="180dp" />
             </LinearLayout>
         </LinearLayout>
 

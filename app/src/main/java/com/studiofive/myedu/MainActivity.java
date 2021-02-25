@@ -25,6 +25,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.studiofive.myedu.activities.SettingsActivity;
+import com.studiofive.myedu.activities.segments.PreQuizActivity;
 import com.studiofive.myedu.authentication.LoginActivity;
 import com.studiofive.myedu.fragments.HighSchoolFragment;
 import com.studiofive.myedu.fragments.HomeFragment;
@@ -100,43 +101,41 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-         super.onOptionsItemSelected(item);
-        if (item.getItemId() == R.id.profile_settings){
+        super.onOptionsItemSelected(item);
+        if (item.getItemId() == R.id.profile_settings) {
             sendUserToSettingsActivity();
+            finish();
         }
-         return true;
+        return true;
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if(id == R.id.nav_home){
+        if (id == R.id.nav_home) {
             HomeFragment homeFragment = new HomeFragment();
             Functions.changeMainFragment(MainActivity.this, homeFragment);
             actionBar = getSupportActionBar();
             actionBar.setTitle("Home");
-        } else if (id == R.id.nav_profile){
+        } else if (id == R.id.nav_profile) {
             ProfileFragment profileFragment = new ProfileFragment();
             Functions.changeMainFragment(MainActivity.this, profileFragment);
             actionBar = getSupportActionBar();
             actionBar.setTitle("Profile");
-        } else if(id == R.id.preschool){
-            PreschoolFragment preschoolFragment = new PreschoolFragment();
-            Functions.changeMainFragment(MainActivity.this, preschoolFragment);
-            actionBar = getSupportActionBar();
-            actionBar.setTitle("Preschool");
-        }else if(id == R.id.highSchool){
+        } else if (id == R.id.funQuiz) {
+            sendUserToQuizActivity();
+        } else if (id == R.id.highSchool) {
             HighSchoolFragment highSchoolFragment = new HighSchoolFragment();
             Functions.changeMainFragment(MainActivity.this, highSchoolFragment);
             actionBar = getSupportActionBar();
             actionBar.setTitle("High School");
-        }else if(id == R.id.nav_saved_course){
+        } else if (id == R.id.nav_saved_course) {
             SavedCoursesFragment savedCoursesFragment = new SavedCoursesFragment();
             Functions.changeMainFragment(MainActivity.this, savedCoursesFragment);
             actionBar = getSupportActionBar();
             actionBar.setTitle("Saved Courses");
-        }else if(id == R.id.nav_logout){
+        } else if (id == R.id.nav_logout) {
             Toasty.info(this, "Signing out", Toast.LENGTH_SHORT, true).show();
             FirebaseAuth.getInstance().signOut();
             sendUserToLoginActivity();
@@ -149,9 +148,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onStart() {
         super.onStart();
-        if (mFirebaseUser == null){
+        if (mFirebaseUser == null) {
             sendUserToIntroActivity();
-        }else{
+        } else {
             getNavInfo();
         }
     }
@@ -196,6 +195,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void sendUserToSettingsActivity() {
         Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+        startActivity(intent);
+    }
+
+    private void sendUserToQuizActivity() {
+        Intent intent = new Intent(this, PreQuizActivity.class);
         startActivity(intent);
     }
 
